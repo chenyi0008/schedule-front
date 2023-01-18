@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -16,13 +15,25 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="less">
+*{
+  margin: 0px;
 }
+.centerFlex(@dirc: column){ 
+  display: flex;
+  flex-direction: @dirc;
+  justify-content: center;
+  align-items: center;
+}
+.mainBox{
+  width: 100vw;
+  height: 100vh;
+  .centerFlex(row)
+}
+.halfVBox{
+  width: 50vw;
+  height: 100vh;
+  .centerFlex
+}
+
 </style>
