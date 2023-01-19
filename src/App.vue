@@ -19,6 +19,10 @@ export default {
 *{
   margin: 0px;
 }
+.fullScreen{
+  min-width: 100vw;
+  min-height: 100vh;
+}
 .centerFlex(@dirc: column){ 
   display: flex;
   flex-direction: @dirc;
