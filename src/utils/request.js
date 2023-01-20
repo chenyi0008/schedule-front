@@ -1,8 +1,27 @@
 import axios from "axios";
+import storage from "@/storage";
+
 const service = axios.create({
   baseURL: "http://113.125.103.168:8085/", // url = base url + request url
   timeout: 5000, // request timeout
 });
+
+// 添加请求拦截器，若token存在则在请求头中加token，不存在也继续请求
+service.interceptors.request.use(
+  (config) => {
+    let tokenInfo = storage.get("token");
+    const token = tokenInfo ? tokenInfo : null;
+    //   const tokenType = token ? tokenInfo.tokenType.substring(0, 1).toUpperCase() + tokenInfo.tokenType.substring(1) + ' ' : null
+    if (token) {
+      config.headers.Authorization = token;
+    }
+    return config;
+  },
+  (error) => {
+    console.log("在request拦截器检查到错误：", error.response);
+    return Promise.reject(error);
+  }
+);
 
 // respone拦截器
 service.interceptors.response.use(
