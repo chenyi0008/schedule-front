@@ -1,7 +1,6 @@
 import VueRouter from 'vue-router'
-
-import Home from '../pages/Home'
-import Login from '../pages/Login'
+import RegisterView from '../pages/RegisterView'
+import LoginView from '../pages/LoginView'
 import MainVue from '../pages/MainVue';
 import StoreInformation from '../pages/StoreInformation'
 import EmployeeProferences from '../pages/EmployeeProferences'
@@ -16,8 +15,19 @@ export default new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: 'main'   
-    },{
+      redirect: '/login'   
+    },
+    {
+      path: '/login',
+      name: 'loginView',
+      component: LoginView
+    },
+    {
+      path:'/register',
+      name:'RegisterView',
+      component:RegisterView
+    },
+    {
       path: '/main',
       component: MainVue,
       redirect: 'main/store',
@@ -44,12 +54,7 @@ export default new VueRouter({
           component: ScheduleRule,
         }
       ]
-    },{
-      path: '/login',
-      component: Login,
-    // },{
-    //   path: '/employee',
-    //   component: EmployeeProferences,
-    }
+    }, 
+    
   ]
 })
