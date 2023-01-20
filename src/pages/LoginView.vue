@@ -9,7 +9,7 @@
         <div class="LoginBox">
             <!-- 图片 -->
             <div class="LoginLogo">
-                <img src="../assets/loginLogo.png" alt="">
+                <img src="../assets/img/loginLogo.png" alt="">
             </div>
             <!-- 登录框 -->
             <div class="LoginForm">
@@ -47,8 +47,8 @@ export default {
     data() {
         return {
             LoginForm: {
-                username: 'admin',
-                password: 'admin'
+                username: '',
+                password: ''
             },
             rules: {
                 username: [
@@ -72,7 +72,7 @@ export default {
                 if(result.status != 200) this.$message.error("登陆失败");
                 else if(result.data.msg == "登录成功"){
                     this.$message.success(result.data.msg);
-                    this.$router.push('/home');
+                    this.$router.push('/main');
                     }
                 else this.$message(result.data.msg);
                 
@@ -87,7 +87,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .LoginContainer {
-    background-image: url(../assets/bg.png);
+    background-image: url(../assets/img/bg.png);
     background-size: 100%;
     height: 100%;
 }

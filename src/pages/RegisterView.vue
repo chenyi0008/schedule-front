@@ -5,7 +5,7 @@
         <div class="LoginBox">
             <!-- 图片 -->
             <div class="LoginLogo">
-                <img src="../assets/registerLogo.png" alt="">
+                <img src="../assets/img/registerLogo.png" alt="">
             </div>
             <!-- 登录框 -->
             <div class="LoginForm">
@@ -65,6 +65,7 @@ export default {
                 const result  = await this.$axios.put('user',this.RegisterForm);
                 console.log(result);
                 if(result.status != 200) this.$message.error("注册失败");
+                else if(result.data.msg == "注册成功") this.$router.push("/login");
                 this.$message(result.data.msg);
             });
         },
@@ -76,7 +77,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .LoginContainer {
-    background-image: url(../assets/bg.png);
+    background-image: url(../assets/img/bg.png);
     background-size: 100%;
     height: 100%;
 }
