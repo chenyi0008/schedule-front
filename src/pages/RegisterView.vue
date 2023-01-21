@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { putRegister } from "@/apis/login";
+import { putRegister } from "@/apis/user";
 export default {
   data() {
     return {

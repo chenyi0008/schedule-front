@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { postLogin } from "@/apis/login";
+import { postLogin } from "@/apis/user";
 import storage from "@/storage";
 export default {
   data() {

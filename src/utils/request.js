@@ -13,7 +13,9 @@ service.interceptors.request.use(
     const token = tokenInfo ? tokenInfo : null;
     //   const tokenType = token ? tokenInfo.tokenType.substring(0, 1).toUpperCase() + tokenInfo.tokenType.substring(1) + ' ' : null
     if (token) {
-      config.headers.Authorization = token;
+      config.headers.token = token;
+      // config.headers["Access-Control-Allow-Origin"] = "*";
+      // console.log(config);
     }
     return config;
   },
