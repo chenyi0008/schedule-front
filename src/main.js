@@ -15,6 +15,15 @@ Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
 axios.defaults.baseURL = "http://113.125.103.168:8085/";
 Vue.prototype.$storage = storage;
+const  store = {
+  get store(){
+    storage.get("store");
+  },
+  set store(value){
+    storage.set("store", value)
+  }
+}
+Vue.prototype.$store = store.store; 
 
 new Vue({
   render: (h) => h(App),
