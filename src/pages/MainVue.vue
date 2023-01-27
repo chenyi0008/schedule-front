@@ -1,9 +1,13 @@
 <template>
   <div class="mainBox">
     <el-container class="fullScreen">
-     <el-header>智能排班</el-header>
+     <el-header>
+        智能排班--
+        {{activePage}}
+
+      </el-header>
       <el-container>
-        <el-aside width="200px"><div><leftAside/></div></el-aside>
+        <el-aside width="100px"><leftAside @changeNav="changeLabel"/></el-aside>
         <el-container>
           <el-main>
             <router-view/>
@@ -28,13 +32,24 @@ import leftAside from '../components/leftAside.vue'
 
 export default {
   name: 'mainVue',
+  data(){
+    return{
+      activePage: "门店信息",
+    }
+  },
   components: {
     leftAside,
     // tableView: tableView,
     // paginAtion:paginAtion,
     // shopSearchbutton: shopSearchbutton,
     // shopButton: shopButton
-  }
+  },
+  methods: {
+    changeLabel(label){
+      // console.log(label);
+      this.activePage = label;
+    }
+  },
 
 
 
