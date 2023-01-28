@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-tabs v-model="activeTab" :tab-position="tabPosition" @tab-click="changeNav" :value="name" style="height: 665px">
+    <el-tabs :tab-position="tabPosition" @tab-click="changeNav" :value="activeTab" style="height: 665px">
       <el-tab-pane label="门店信息" name="store">门店信息</el-tab-pane>
       <el-tab-pane label="员工数据" name="employee">员工数据</el-tab-pane>
       <el-tab-pane label="预测数据" name="forecastData">预测数据</el-tab-pane>
@@ -25,8 +25,7 @@
   
   data() {
     return {
-        name: '',
-        activeTab: "门店信息",
+        activeTab: 'store',
         tabPosition: "left",
     };
   },
