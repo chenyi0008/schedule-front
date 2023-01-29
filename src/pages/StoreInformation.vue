@@ -8,9 +8,9 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"> </el-table-column>
-      <el-table-column label="商店id" width="120">
-        <template v-slot="scope">{{ scope.row.id}}</template>
-      </el-table-column>
+      <!-- <el-table-column label="商店id" width="120"> -->
+      <!--   <template v-slot="scope">{{ scope.row.id}}</template> -->
+      <!-- </el-table-column> -->
       <el-table-column prop="name" label="名称" width="120"> </el-table-column>
       <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
       <el-table-column prop="size" label="面积" show-overflow-tooltip></el-table-column>

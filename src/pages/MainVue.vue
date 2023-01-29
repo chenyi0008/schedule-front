@@ -4,8 +4,8 @@
      <el-header>
         智能排班--
         {{activePage}}
-
-      </el-header>
+    </el-header>
+      <ChoiceStore ref="store"/>  
       <el-container>
         <el-aside width="100px"><leftAside @changeNav="changeLabel"/></el-aside>
         <el-container>
@@ -25,6 +25,7 @@
 
 <script>
 import leftAside from '../components/leftAside.vue'
+import ChoiceStore from '../components/ChoiceStore'
 // import tableView from '../components/tableView.vue'
 // import paginAtion from '../components/paginAtion.vue'
 // import shopSearchbutton from '../components/shopSearchbutton.vue'
@@ -37,8 +38,15 @@ export default {
       activePage: "门店信息",
     }
   },
+  computed: {
+    storeId(){
+      // console.log(this.$refs.store.storeId)
+      return this.$refs.store.storeId;
+    }
+  },
   components: {
     leftAside,
+    ChoiceStore,
     // tableView: tableView,
     // paginAtion:paginAtion,
     // shopSearchbutton: shopSearchbutton,
