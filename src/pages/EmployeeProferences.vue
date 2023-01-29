@@ -33,9 +33,9 @@ import storage from '@/storage/index.vue'
         this.storeId = this.$store.state.store;
         // console.log(this.$store)
         getAllStaff().then(res=>{
-          console.log(res.data.data.filter((item) => {
+          res.data.data.filter((item) => {
             return item.storeId == this.storeId;
-          }));
+          });
           this.staffList = res.data.data;
         })
       },
@@ -57,7 +57,7 @@ import storage from '@/storage/index.vue'
       },
       watch: {
         "$store.state.storeId"(newV){
-          console.log(213);
+          // console.log(213);
           this.storeId = newV;
         }
       }
