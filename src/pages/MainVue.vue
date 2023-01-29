@@ -1,11 +1,13 @@
 <template>
   <div class="mainBox">
     <el-container class="fullScreen">
-     <el-header>
-        智能排班--
-        {{activePage}}
-    </el-header>
-      <ChoiceStore ref="store"/>  
+      <el-header>
+        <div>
+          智能排班--
+          {{activePage}}
+          </div>
+        <ChoiceStore ref="store"/>  
+      </el-header>
       <el-container>
         <el-aside width="100px"><leftAside @changeNav="changeLabel"/></el-aside>
         <el-container>

@@ -31,6 +31,7 @@
           storage.get('storeId') ? 
           this.isExist(storage.get('storeId')) :
           res.data.data[0].id;
+        this.$store.state.storeId = this.storeId;
         // this.storeId = res.data.data[0].id;
         })
       },
@@ -47,6 +48,7 @@
     watch:{
       storeId(newId){
         storage.set('storeId', newId);
+        this.$store.state.storeId = newId;
       }
     },
   }

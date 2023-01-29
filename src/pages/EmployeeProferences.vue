@@ -19,16 +19,19 @@
     </template>
     <script>
     import {getAllStaff} from '@/apis/staff'
+import storage from '@/storage/index.vue'
     export default {
-        name:'employeePreferences',
-        data() {
+      name:'employeePreferences',
+      data() {
             return {
               storeId: 1,
               staffList: [],
               multipleTable: [],
             }
-        },
+      },
       mounted() {
+        this.storeId = this.$store.state.store;
+        // console.log(this.$store)
         getAllStaff().then(res=>{
           console.log(res.data.data.filter((item) => {
             return item.storeId == this.storeId;
@@ -42,10 +45,20 @@
         },
       },
       computed: {
+        // ...mapState('storeId'),
         showStaff(){
           return this.staffList.filter(item=>{
             return item.storeId == this.storeId;
           })
+        }, 
+        // storeId(){
+        //   return this.$store.state['storeId'];
+        // }
+      },
+      watch: {
+        "$store.state.storeId"(newV){
+          console.log(213);
+          this.storeId = newV;
         }
       }
     }
