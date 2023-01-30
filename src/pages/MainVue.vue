@@ -1,9 +1,15 @@
 <template>
   <div class="mainBox">
     <el-container class="fullScreen">
-     <el-header>智能排班</el-header>
+      <el-header>
+        <div>
+          智能排班--
+          {{activePage}}
+          </div>
+        <ChoiceStore ref="store"/>  
+      </el-header>
       <el-container>
-        <el-aside width="200px"><div><leftAside/></div></el-aside>
+        <el-aside width="100px"><leftAside @changeNav="changeLabel"/></el-aside>
         <el-container>
           <el-main>
             <router-view/>
@@ -21,6 +27,7 @@
 
 <script>
 import leftAside from '../components/leftAside.vue'
+import ChoiceStore from '../components/ChoiceStore'
 // import tableView from '../components/tableView.vue'
 // import paginAtion from '../components/paginAtion.vue'
 // import shopSearchbutton from '../components/shopSearchbutton.vue'
@@ -28,13 +35,31 @@ import leftAside from '../components/leftAside.vue'
 
 export default {
   name: 'mainVue',
+  data(){
+    return{
+      activePage: "门店信息",
+    }
+  },
+  computed: {
+    storeId(){
+      // console.log(this.$refs.store.storeId)
+      return this.$refs.store.storeId;
+    }
+  },
   components: {
     leftAside,
+    ChoiceStore,
     // tableView: tableView,
     // paginAtion:paginAtion,
     // shopSearchbutton: shopSearchbutton,
     // shopButton: shopButton
-  }
+  },
+  methods: {
+    changeLabel(label){
+      // console.log(label);
+      this.activePage = label;
+    }
+  },
 
 
 
