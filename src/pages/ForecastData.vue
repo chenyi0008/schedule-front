@@ -15,20 +15,30 @@
         </p>
       </template>
     </el-calendar>
+    <DataInputFormVue :visible="inputVisible" :date="currentDate" :data="currentDayData"/>
   </div>
 </template>
 <script>
+import DataInputFormVue from '@/components/DataInputForm.vue';
 export default {
   name: "forecastData",
   data() {
     return {
       showData: [],
+      inputVisible: false,
+      currentDate: null,
+      currentDayData: [],
     };
   },
   methods: {
     selectDate(date) {
-      alert(date);
+      // alert(date);
+      this.inputVisible = true;
+      this.currentDate = date;
     },
+  },
+  components: {
+    DataInputFormVue,
   },
 };
 </script>
