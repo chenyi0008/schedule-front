@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { getAllStore } from "@/apis/store";
 export default {
   name: "tableView",
   data() {
@@ -68,6 +69,11 @@ export default {
       ],
       multipleSelection: [],
     };
+  },
+  mounted() {
+    getAllStore().then((res) => {
+      console.log(res);
+    });
   },
   methods: {
     toggleSelection(rows) {
