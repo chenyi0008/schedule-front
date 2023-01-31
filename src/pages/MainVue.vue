@@ -2,11 +2,12 @@
   <div class="mainBox">
     <el-container class="fullScreen">
       <el-header>
+        <ChoiceStore class="index"  ref="store"/>
         <div>
           智能排班--
-          {{activePage}}
+          {{activePage}}       
           </div>
-        <ChoiceStore ref="store"/>  
+ 
       </el-header>
       <el-container>
         <el-aside width="100px"><leftAside @changeNav="changeLabel"/></el-aside>
@@ -96,6 +97,9 @@ export default {
   line-height: 75px;
 }
 
+.index {
+  float: right;
+}
 </style> 
 
 

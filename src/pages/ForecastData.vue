@@ -1,29 +1,62 @@
 <template>
-<div>
-    <h1>我是预测数据</h1>
-    <el-table
-      ref="multipleTable"
-      :data="showData"
-      tooltip-effect="dark"
-      style="width: 100%"
-    >
-      <!-- <el-table-column type="selection" width="55"/> -->
-      <el-table-column prop="id" label="门店id" width="120"/>
-      <el-table-column prop="date" label="日期" width="240"/>
-      <el-table-column prop="startTime" label="开始时间" width="200"/>
-      <el-table-column prop="endTime" label="结束时间" width="200"/>
-      <el-table-column prop="data" label="预测客流量" width="200"/>
-    </el-table>
-    </div>
-   
+  <div>
+    <!-- <h1>我是预测数据</h1> -->
+    <el-calendar>
+      <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
+      <template slot="dateCell" slot-scope="{ date, data }">
+        <p
+          @click="selectDate(date)"
+          :class="data.isSelected ? 'is-selected' : ''"
+        >
+          <!-- <el-button>粘贴</el-button>
+          <el-button>复制</el-button> -->
+          {{ data.day.split("-").slice(1).join("-") }}
+          {{ data.isSelected ? "✔️" : "" }}
+        </p>
+      </template>
+    </el-calendar>
+    <DataInputFormVue :visible="inputVisible" :date="currentDate" :data="currentDayData"/>
+  </div>
 </template>
-    <script>
-    export default {
-        name:'forecastData',
-        data() {
-            return {
-          showData: [],
-            }
-        }
-    }
-    </script> 
+<script>
+import DataInputFormVue from '@/components/DataInputForm.vue';
+export default {
+  name: "forecastData",
+  data() {
+    return {
+      showData: [],
+      inputVisible: false,
+      currentDate: null,
+      currentDayData: [],
+    };
+  },
+  methods: {
+    selectDate(date) {
+      // alert(date);
+      this.inputVisible = true;
+      this.currentDate = date;
+    },
+  },
+  components: {
+    DataInputFormVue,
+  },
+};
+</script>
+
+<style scoped>
+.is-selected {
+  color: #1989fa;
+}
+::v-deep .el-calendar {
+  /* max-height: 1000px; */
+  width: 100%;
+}
+::v-deep .el-calendar-table .el-calendar-day {
+        height: 70px;
+ }
+/* 
+/deep/ .el-calendar-table .el-calendar-day {
+  width: 60px;
+  height: 240px;
+} */
+</style>
