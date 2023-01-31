@@ -1,56 +1,115 @@
 <template>
-    <div>
-      <el-card class="box-card" style="float: left">
-        <div slot="header" class="clearfix">
-          <span>固定规则</span>
-          <el-button style="float: right; padding: 3px 0" type="text">增加</el-button>
-          <el-button style="float: right; padding: 3px 0" type="text">删除</el-button>
-          <el-button style="float: right; padding: 3px 0" type="text">修改</el-button>
-        </div>
-        <div v-for="o in 4" :key="o" class="text item">{{'列表内容 ' + o }}</div>
-      </el-card>
-      <el-card class="box-card" style="float: right">
-        <div slot="header" class="clearfix">
-          <span>用户自定义规则</span>
-          <el-button style="float: right; padding: 3px 0" type="text">增加</el-button>
-          <el-button style="float: right; padding: 3px 0" type="text">删除</el-button>
-          <el-button style="float: right; padding: 3px 0" type="text">修改</el-button>
-        </div>
-        <div v-for="o in 4" :key="o" class="text item">{{'列表内容 ' + o }}</div>
-      </el-card>
-    </div>
-  </template>
-    <script>
-    export default {name:'shiftschedulingRule',
-        data() {
-            return {
-                
-            }
-        }
-    }
-    </script> 
+  <div>
 
-<style>
-.text {
-  font-size: 14px;
-}
+    <el-table
+      ref="multipleTable"
+      :data="tableData"
+      tooltip-effect="dark"
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection" width="55"> </el-table-column>
+      <el-table-column label="日期" width="120">
+        <template slot-scope="scope">{{ scope.row.date }}</template>
+      </el-table-column>
 
-.item {
-  margin-bottom: 18px;
-}
+      <el-table-column prop="address" label="地址" show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope" float="right">
+          <el-button
+            style="padding: 3px 0"
+            type="text"
+            @click="editRow(scope.row)"
+            >编辑</el-button
+          >
+          <el-button style="padding: 3px 0" type="text" @click="addRow"
+            >添加</el-button
+          >
+          <el-button
+            style="padding: 3px 0"
+            type="text"
+            @click="deleteRow(scope.row)"
+            >删除</el-button
+          >
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
 
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-.clearfix:after {
-  clear: both
-}
 
-.box-card {
+<script>
 
-  width: 550px;
-  height: 550px;
-}
-</style> 
+export default {
+
+  data() {
+    return {
+      tableData: [
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-08",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-06",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-07",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+      ],
+      multipleSelection: [],
+    };
+  },
+
+  methods: {
+    addRow() {
+      console.log('添加操作');
+    },
+    editRow() {
+      console.log('编辑操作');
+    },
+    deleteRow() {
+      console.log('删除操作');
+    },
+  },
+
+
+    toggleSelection(rows) {
+      if (rows) {
+        rows.forEach((row) => {
+          this.$refs.multipleTable.toggleRowSelection(row);
+        });
+      } else {
+        this.$refs.multipleTable.clearSelection();
+      }
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+};
+</script>

@@ -2,7 +2,7 @@
   <div class="mainBox">
     <el-container class="fullScreen">
       <el-header>
-        <ChoiceStore class="index"  ref="store"/>
+          <ChoiceStore class="index"  ref="store"/>
         <div>
           智能排班--
           {{activePage}}       
@@ -13,8 +13,9 @@
         <el-aside width="100px"><leftAside @changeNav="changeLabel"/></el-aside>
         <el-container>
           <el-main>
+            <div style="float: left"><shopSearchbutton></shopSearchbutton></div><div style="float: right"><shopButton></shopButton></div>
             <router-view/>
-            <!-- <div><shopSearchbutton></shopSearchbutton><shopButton></shopButton></div> -->
+
             <!-- <div><tableView></tableview></div>   -->
           </el-main>
           <!-- <el-footer>地址</el-footer> -->
@@ -32,7 +33,8 @@ import ChoiceStore from '../components/ChoiceStore'
 // import tableView from '../components/tableView.vue'
 // import paginAtion from '../components/paginAtion.vue'
 // import shopSearchbutton from '../components/shopSearchbutton.vue'
-// import shopButton from '../components/shopButton.vue'
+import shopButton from '../components/shopButton.vue'
+import shopSearchbutton from '@/components/shopSearchbutton';
 
 export default {
   name: 'mainVue',
@@ -52,8 +54,8 @@ export default {
     ChoiceStore,
     // tableView: tableView,
     // paginAtion:paginAtion,
-    // shopSearchbutton: shopSearchbutton,
-    // shopButton: shopButton
+    shopSearchbutton: shopSearchbutton,
+    shopButton: shopButton
   },
   methods: {
     changeLabel(label){
@@ -100,7 +102,6 @@ export default {
 .index {
   float: right;
 }
+
 </style> 
 
-
- 
