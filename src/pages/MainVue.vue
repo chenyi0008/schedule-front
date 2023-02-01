@@ -14,8 +14,8 @@
         <el-container>
           <el-main>
             <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div>
-            <router-view/>
-
+            <router-view/> 
+ 
             <!-- <div><tableView></tableview></div>   -->
               <div><paginAtion style="margin-top:30px" ></paginAtion></div>
           </el-main>
