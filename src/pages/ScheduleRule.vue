@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -16,22 +15,15 @@
       <el-table-column prop="address" label="地址" show-overflow-tooltip>
       </el-table-column>
       <el-table-column label="操作">
-        <template slot-scope="scope" float="right">
-          <el-button
-            style="padding: 3px 0"
-            type="text"
-            @click="editRow(scope.row)"
-            >编辑</el-button
-          >
-          <el-button style="padding: 3px 0" type="text" @click="addRow"
-            >添加</el-button
-          >
-          <el-button
-            style="padding: 3px 0"
-            type="text"
-            @click="deleteRow(scope.row)"
-            >删除</el-button
-          >
+        <template slot:scope float="right">
+          <template>
+            <div>
+              <el-button type="primary" class="add">添加</el-button>
+              <el-button type="info" class="edit">编辑</el-button>
+              <el-button type="success" class="delete">删除</el-button>
+              <el-button type="warning" class="search">查询</el-button>
+            </div>
+          </template>
         </template>
       </el-table-column>
     </el-table>
@@ -40,9 +32,7 @@
 
 
 <script>
-
 export default {
-
   data() {
     return {
       tableData: [
@@ -88,28 +78,37 @@ export default {
 
   methods: {
     addRow() {
-      console.log('添加操作');
+      console.log("添加操作");
     },
     editRow() {
-      console.log('编辑操作');
+      console.log("编辑操作");
     },
     deleteRow() {
-      console.log('删除操作');
+      console.log("删除操作");
     },
   },
 
-
-    toggleSelection(rows) {
-      if (rows) {
-        rows.forEach((row) => {
-          this.$refs.multipleTable.toggleRowSelection(row);
-        });
-      } else {
-        this.$refs.multipleTable.clearSelection();
-      }
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-    },
+  toggleSelection(rows) {
+    if (rows) {
+      rows.forEach((row) => {
+        this.$refs.multipleTable.toggleRowSelection(row);
+      });
+    } else {
+      this.$refs.multipleTable.clearSelection();
+    }
+  },
+  handleSelectionChange(val) {
+    this.multipleSelection = val;
+  },
 };
 </script>
+
+<style>
+.delete {
+  background-color: rgb(166, 11, 11);
+}
+
+.add {
+  background-color: green;
+}
+</style>

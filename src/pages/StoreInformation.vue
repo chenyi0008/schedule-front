@@ -17,10 +17,10 @@
       <el-table-column prop="control" label="操作" show-overflow-tooltip>
       <template>
         <div>
-          <el-button type="primary" class="">增加</el-button>
-  <el-button type="success">删除</el-button>
-  <el-button type="info">编辑</el-button>
-  <el-button type="warning">查询</el-button>
+          <el-button type="primary" class="add">添加</el-button>
+  <el-button type="info" class="edit">编辑</el-button>
+  <el-button type="success" class="delete">删除</el-button>
+  <el-button type="warning" class="search">查询</el-button>
         </div>
         </template>
 
@@ -64,4 +64,13 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.delete{
+  background-color: rgb(166, 11, 11);
+}
+
+.add{
+ background-color:green
+}
+
+</style>
