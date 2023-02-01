@@ -21,7 +21,7 @@
               <el-button type="danger"  class="delete" plain>删除</el-button>
         </div>
         </template>
- 
+
       </el-table-column>
       </el-table>
 
