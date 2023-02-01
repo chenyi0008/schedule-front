@@ -4,17 +4,17 @@
       ref="multipleTable"
       :data="tableData"
       tooltip-effect="dark"
-      style="width: 100%"
+      style="max-height: 480px"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" width="55"> </el-table-column>
+      <el-table-column type="selection" width="200px"> </el-table-column>
       <!-- <el-table-column label="商店id" width="120"> -->
       <!--   <template v-slot="scope">{{ scope.row.id}}</template> -->
       <!-- </el-table-column> -->
-      <el-table-column prop="name" label="名称" width="120"> </el-table-column>
-      <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="size" label="面积" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="control" label="操作" show-overflow-tooltip>
+      <el-table-column prop="name" label="名称" width="200px"> </el-table-column>
+      <el-table-column prop="address" label="地址" width="200px"></el-table-column>
+      <el-table-column prop="size" label="面积" width="200px"></el-table-column>
+      <el-table-column prop="control" label="操作" width="200px">
       <template>
         <div>
           <el-button type="primary" class="edit" plain>编辑</el-button>
