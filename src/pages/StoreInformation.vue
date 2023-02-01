@@ -14,13 +14,19 @@
       <el-table-column prop="name" label="名称" width="120"> </el-table-column>
       <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
       <el-table-column prop="size" label="面积" show-overflow-tooltip></el-table-column>
-    </el-table>
-    <div style="margin-top: 20px">
-      <el-button @click="toggleSelection([tableData[1], tableData[2]])"
-        >切换第二、第三行的选中状态</el-button
-      >
-      <el-button @click="toggleSelection()">取消选择</el-button>
-    </div>
+      <el-table-column prop="control" label="操作" show-overflow-tooltip>
+      <template>
+        <div>
+          <el-button type="primary" class="">增加</el-button>
+  <el-button type="success">删除</el-button>
+  <el-button type="info">编辑</el-button>
+  <el-button type="warning">查询</el-button>
+        </div>
+        </template>
+
+      </el-table-column>
+      </el-table>
+
   </div>
 </template>
 
