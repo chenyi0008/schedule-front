@@ -18,10 +18,8 @@
         <template slot:scope float="right">
           <template>
             <div>
-              <el-button type="primary" class="add">添加</el-button>
-              <el-button type="info" class="edit">编辑</el-button>
-              <el-button type="success" class="delete">删除</el-button>
-              <el-button type="warning" class="search">查询</el-button>
+              <el-button type="primary" class="edit" plain>编辑</el-button>
+              <el-button type="danger"  class="delete" plain>删除</el-button>
             </div>
           </template>
         </template>
@@ -104,11 +102,5 @@ export default {
 </script>
 
 <style>
-.delete {
-  background-color: rgb(166, 11, 11);
-}
 
-.add {
-  background-color: green;
-}
 </style>
