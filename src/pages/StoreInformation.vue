@@ -16,7 +16,7 @@
       <el-table-column prop="name" label="名称" width="200px"> </el-table-column>
       <el-table-column prop="address" label="地址" width="200px"></el-table-column>
       <el-table-column prop="size" label="面积" width="200px"></el-table-column>
-      <el-table-column prop="control" label="操作" width="200px">
+      <el-table-column prop="control" label="操作" width="400px">
       <template>
         <div>
           <el-button type="primary" class="edit" plain>编辑</el-button>
@@ -79,5 +79,4 @@ shopSearchbutton2
 </script>
 
 <style lang="less" scoped>
-
 </style>
