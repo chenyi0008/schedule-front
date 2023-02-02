@@ -43,10 +43,6 @@ shopSearchbutton
   data() {
     return {
       tableData: [
-        "id",
-        "name",
-        "address",
-        "size"
       ],
       multipleSelection: [],
     };
