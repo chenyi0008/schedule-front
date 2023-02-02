@@ -5,7 +5,7 @@
     filterable
     remote
     reserve-keyword
-    placeholder="搜索关键词"
+    placeholder="搜索商店｜地址"
     :remote-method="remoteMethod"
     :loading="loading"
   >
