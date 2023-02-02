@@ -9,11 +9,11 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="200px"> </el-table-column>
-      <el-table-column label="日期" width="200px">
-        <template slot-scope="scope">{{ scope.row.date }}</template>
+ 
+      <el-table-column prop="ruleType" label="规则类型" width="230px">
       </el-table-column>
 
-      <el-table-column prop="address" label="地址" width="400px">
+      <el-table-column prop="value" label="数据" width="230px">
       </el-table-column>
       <el-table-column label="操作" width="400px">
         <template slot:scope float="right">
@@ -33,6 +33,7 @@
 <script>
 import shopButton from '../components/shopButton.vue'
 import shopSearchbutton from '@/components/shopSearchbutton';
+
 import {getAllRule} from '@/apis/rule'
 export default {
 
@@ -45,9 +46,12 @@ export default {
   },
   components:{
 shopSearchbutton,
-shopButton
+shopButton,
+
   },
   methods: {
+
+
     addRow() {
       console.log("添加操作");
     },

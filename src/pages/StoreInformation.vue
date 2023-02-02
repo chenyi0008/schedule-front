@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="float: left"><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div>
+    <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton2></shopSearchbutton2><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div>
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -9,7 +9,7 @@
       @selection-change="handleSelectionChange"
     >
    
-      <el-table-column type="selection" width="200px"> </el-table-column>
+      <el-table-column type="selection" width="100px"> </el-table-column>
       <!-- <el-table-column label="商店id" width="120"> -->
       <!--   <template v-slot="scope">{{ scope.row.id}}</template> -->
       <!-- </el-table-column> -->
@@ -29,16 +29,18 @@
 
   </div> 
 </template>
- 
+
 <script>
 import shopButton from '../components/shopButton.vue'
 import shopSearchbutton from '@/components/shopSearchbutton';
+import shopSearchbutton2 from '@/components/shopSearchbutton2';
 import {getAllStore} from '@/apis/store'
 export default {
   name: "tableView",
   components: {
 shopButton,
-shopSearchbutton
+shopSearchbutton,
+shopSearchbutton2
   },
   data() {
     return {
@@ -54,6 +56,7 @@ shopSearchbutton
     })
   },
   methods: {
+
     toggleSelection(rows) {
       if (rows) {
         rows.forEach((row) => {
@@ -62,6 +65,7 @@ shopSearchbutton
       } else {
         this.$refs.multipleTable.clearSelection();
       }
+      
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
