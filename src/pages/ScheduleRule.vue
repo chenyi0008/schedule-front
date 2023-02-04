@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div style="float: left"><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div>
+    <div style="float: left"><shopSearchbutton></shopSearchbutton>
+      <el-button type="primary" icon="el-icon-search">搜索</el-button></div>
+      <div style="float: right"><newRulebutton></newRulebutton></div>
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -26,14 +28,16 @@
         </template>
       </el-table-column>
     </el-table>
+    <div><paginAtion style="margin-top: 30px"></paginAtion></div>
   </div>
+  
 </template>
 
  
 <script>
-import shopButton from '../components/shopButton.vue'
+import newRulebutton from '../components/newRulebutton.vue'
 import shopSearchbutton from '@/components/shopSearchbutton';
-
+import paginAtion from '../components/paginAtion.vue'
 import {getAllRule} from '@/apis/rule'
 export default {
 
@@ -46,7 +50,8 @@ export default {
   },
   components:{
 shopSearchbutton,
-shopButton,
+newRulebutton,
+paginAtion
 
   },
   methods: {

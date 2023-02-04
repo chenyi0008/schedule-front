@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton2></shopSearchbutton2><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div>
+    <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton2></shopSearchbutton2>
+      <el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div>
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -8,7 +9,6 @@
       style="max-height: 480px"
       @selection-change="handleSelectionChange"
     >
-   
       <el-table-column type="selection" width="100px"> </el-table-column>
       <!-- <el-table-column label="商店id" width="120"> -->
       <!--   <template v-slot="scope">{{ scope.row.id}}</template> -->
@@ -19,28 +19,33 @@
       <el-table-column prop="control" label="操作" width="400px">
       <template>
         <div>
-          <el-button type="primary" class="edit" plain>编辑</el-button>
-              <el-button type="danger"  class="delete" plain>删除</el-button>
+          <el-button type="primary" class="edit" plain @click="edit">编辑</el-button>
+              <el-button type="danger"  class="delete" plain >删除</el-button>
         </div>
+        
         </template>
 
       </el-table-column>
+      
       </el-table>
-
+      <div><paginAtion style="margin-top: 30px"></paginAtion></div>
   </div> 
+  
 </template>
 
 <script>
 import shopButton from '../components/shopButton.vue'
 import shopSearchbutton from '@/components/shopSearchbutton';
 import shopSearchbutton2 from '@/components/shopSearchbutton2';
+import paginAtion from "../components/paginAtion.vue";
 import {getAllStore} from '@/apis/store'
 export default {
   name: "tableView",
   components: {
 shopButton,
 shopSearchbutton,
-shopSearchbutton2
+shopSearchbutton2,
+paginAtion
   },
   data() {
     return {

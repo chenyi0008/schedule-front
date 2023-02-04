@@ -2,82 +2,77 @@
   <div class="mainBox">
     <el-container class="fullScreen">
       <el-header>
-          <ChoiceStore class="index"  ref="store"/>
+        <ChoiceStore class="index" ref="store" />
         <div>
           智能排班--
-          {{activePage}}       
-          </div>
-
+          {{ activePage }}
+        </div>
       </el-header>
       <el-container>
-        <el-aside width="100px"><leftAside @changeNav="changeLabel"/></el-aside>
+        <el-aside width="100px"
+          ><leftAside @changeNav="changeLabel"
+        /></el-aside>
         <el-container>
           <el-main>
             <!-- <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div> -->
-            <router-view/> 
+            <router-view />
 
             <!-- <div><tableView></tableview></div>   -->
-              <div><paginAtion style="margin-top:30px" ></paginAtion></div>
+            <!-- <div><paginAtion style="margin-top: 30px"></paginAtion></div> -->
           </el-main>
           <!-- <el-footer>地址</el-footer> -->
-
         </el-container>
       </el-container>
     </el-container>
   </div>
-
 </template>
 
 <script>
-import leftAside from '../components/leftAside.vue'
-import ChoiceStore from '../components/ChoiceStore'
+import leftAside from "../components/leftAside.vue";
+import ChoiceStore from "../components/ChoiceStore";
 // import tableView from '../components/tableView.vue'
-import paginAtion from '../components/paginAtion.vue'
+
 // import shopSearchbutton from '../components/shopSearchbutton.vue'
 // import shopButton from '../components/shopButton.vue'
 // import shopSearchbutton from '@/components/shopSearchbutton';
 
 export default {
-  name: 'mainVue',
-  data(){
-    return{
+  name: "mainVue",
+  data() {
+    return {
       activePage: "门店信息",
-    }
+    };
   },
   computed: {
-    storeId(){
+    storeId() {
       // console.log(this.$refs.store.storeId)
       return this.$refs.store.storeId;
-    }
+    },
   },
   components: {
     leftAside,
     ChoiceStore,
     // tableView: tableView,
-    paginAtion:paginAtion,
+    // paginAtion: paginAtion,
     // shopSearchbutton: shopSearchbutton,
     // shopButton: shopButton
   },
   methods: {
-    changeLabel(label){
+    changeLabel(label) {
       // console.log(label);
       this.activePage = label;
-    }
+    },
   },
-
-
-
 };
 </script>
 
 <style lang="less">
- .el-header{
+.el-header {
   background-color: #b3c0d1;
   color: #333;
   text-align: left;
   line-height: 60px;
 }
-
 
 .el-footer {
   background-color: #b3c0d1;
@@ -104,5 +99,7 @@ export default {
   float: right;
 }
 
-</style> 
-
+main {
+  height: 100%;
+}
+</style>

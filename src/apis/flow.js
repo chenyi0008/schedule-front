@@ -26,7 +26,7 @@ export function deleteSchedule(params) {
 
 export function getSchedule(params) {
   return request({
-    url: "schedule/page",
+    url: "schedule",
     method: "get",
     params,
   });
@@ -39,10 +39,10 @@ export function delScheduleByDate(params) {
     params,
   });
 }
-export function getSchedule(params) {
-  return request({
-    url: "schedule/schedule",
-    method: "get",
-    params,
-  });
-}
+// export function getSchedule(params) {
+//   return request({
+//     url: "schedule/schedule",
+//     method: "get",
+//     params,
+//   });
+// }
