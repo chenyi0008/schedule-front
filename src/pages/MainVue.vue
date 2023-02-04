@@ -31,7 +31,7 @@
 import leftAside from "../components/leftAside.vue";
 import ChoiceStore from "../components/ChoiceStore";
 // import tableView from '../components/tableView.vue'
-import paginAtion from "../components/paginAtion.vue";
+
 // import shopSearchbutton from '../components/shopSearchbutton.vue'
 // import shopButton from '../components/shopButton.vue'
 // import shopSearchbutton from '@/components/shopSearchbutton';

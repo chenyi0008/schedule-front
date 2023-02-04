@@ -17,13 +17,18 @@
       <el-table-column prop="mailbox" label="邮箱" width="300" />
       <!-- <el-table-column prop="storeId" label="门店编号" width="120" /> -->
     </el-table>
+    <div><paginAtion style="margin-top: 30px"></paginAtion></div>
   </div>
 </template>
 <script>
 import { getAllStaff } from "@/apis/staff";
 // import storage from "@/storage/index.vue";
+import paginAtion from "../components/paginAtion.vue"
 export default {
   name: "employeePreferences",
+  components :{ paginAtion },
+
+
   data() {
     return {
       storeId: -1,
