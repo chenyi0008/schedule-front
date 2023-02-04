@@ -10,51 +10,108 @@
         >
           <!-- <el-button>粘贴</el-button>
           <el-button>复制</el-button> -->
-          <input
+          <!-- <input
             type="checkbox"
             @click.stop="data.isSelected = true"
             name="c"
             id="d"
-          />
+          /> -->
           {{ data.day.split("-").slice(1).join("-") }}
-          {{ data.isSelected ? "✔️" : "" }}
+          <!-- {{ data.isSelected ? "✔️" : "" }} -->
         </p>
       </template>
     </el-calendar>
-    <DataInputFormVue ref="dialog" :date="currentDate" :data="currentDayData" />
+    <DataInputFormVue
+      ref="dialog"
+      :date="currentDate"
+      :dataString="currentDayData"
+      :save="save"
+    />
   </div>
 </template>
 <script>
 import DataInputFormVue from "@/components/DataInputForm.vue";
-import { getSchedule } from "@/apis/flow";
+import { getSchedule, putSchedule } from "@/apis/flow";
 export default {
   name: "forecastData",
   data() {
     return {
       calendarValue: "",
       showData: [],
-      inputVisible: false,
       currentDate: new Date(Date.now()),
-      currentDayData: [],
-      data: {},
+      currentDayData: "",
+      data: [],
     };
   },
   mounted() {
     // console.log(this, this.calendarValue);
     getSchedule({
       storeId: "1",
-      startDate: "2000-01-01",
-      endDate: "2001-01-30",
+      startDate: this.dateFormart(new Date(), false, true),
+      endDate: this.dateFormart(new Date(), true, true),
     }).then((res) => {
-      console.log(res.data);
+      console.log("get", res.data.data);
+      this.data = res.data.data;
     });
   },
   methods: {
     selectDate(date) {
       // alert(date);
-      this.inputVisible = true;
       this.currentDate = date;
+      this.currentDayData = this.findData();
       this.$refs.dialog.show();
+    },
+    findData() {
+      for (var i = 0; i < this.data.length; i++) {
+        var item = this.data[i];
+        console.log("compare", item.date, this.dateFormart(this.currentDate));
+        if (item.date == this.dateFormart(this.currentDate)) {
+          console.log("finding!!", item.value);
+          return item.value;
+        }
+      }
+      var defaultValue = [];
+      for (i = 0; i < 48; i++) {
+        defaultValue.push("0.0");
+      }
+      console.log("new value", defaultValue.join(","));
+      return defaultValue.join(",");
+    },
+    getData(date) {
+      getSchedule({
+        storeId: "1",
+        startDate: this.dateFormart(date, false, true),
+        endDate: this.dateFormart(date, true, true),
+      }).then((res) => {
+        console.log("get", res.data.data);
+        this.data = res.data.data;
+      });
+    },
+    timeFormat(num) {
+      return num < 10 ? "0" + num : num.toString();
+    },
+    dateFormart(date, nextMonth = false, first = false) {
+      return (
+        date.getFullYear() +
+        "-" +
+        this.timeFormat(date.getMonth() + (nextMonth ? 2 : 1)) +
+        "-" +
+        (first ? "01" : this.timeFormat(date.getDate()))
+      );
+    },
+    save(date, string) {
+      this.currentDayData = string;
+      putSchedule([
+        {
+          storeId: this.$store.state.storeId,
+          date: this.dateFormart(date),
+          value: string,
+          id: null,
+        },
+      ]).then((res) => {
+        console.log(res.data);
+      });
+      // console.log(this.dateFormart(date), string);
     },
   },
   components: {
@@ -68,11 +125,9 @@ export default {
     },
   },
   watch: {
-    // calendarValue(n) {
-    //   console.log(n);
-    // },
-    month(p, n) {
-      console.log(p, n);
+    month(n) {
+      console.log(n);
+      this.getData(n);
     },
   },
 };
