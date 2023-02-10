@@ -93,7 +93,7 @@ export default {
       createtime:"",
       },
 
-      editItem:{//正在编辑的对象          
+      tempItem:{//正在编辑的对象          
         title:"",
         author:'',
         createtime:''
