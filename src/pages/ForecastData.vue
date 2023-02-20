@@ -18,6 +18,7 @@
           /> -->
           {{ data.day.split("-").slice(1).join("-") }}
           <!-- {{ data.isSelected ? "✔️" : "" }} -->
+          {{ isExist(data.day) ? "💾" : "" }}
         </p>
       </template>
     </el-calendar>
@@ -111,7 +112,23 @@ export default {
       ]).then((res) => {
         console.log(res.data);
       });
+      this.data.unshift({
+        storeId: this.$store.state.storeId,
+        date: this.dateFormart(date),
+        value: string,
+        id: null,
+      });
       // console.log(this.dateFormart(date), string);
+    },
+    isExist(date) {
+      for (var i = 0; i < this.data.length; i++) {
+        var item = this.data[i];
+        console.log(date);
+        if (item.date == date) {
+          return true;
+        }
+      }
+      return false;
     },
   },
   components: {
