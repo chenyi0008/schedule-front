@@ -40,20 +40,16 @@
       ></el-table-column>
       <el-table-column prop="size" label="面积" width="200px"></el-table-column>
       <template slot:scope float="right">
-          <template>
-            <div>
-              <el-button type="primary" class="edit" plain>编辑</el-button>
-              <el-button type="danger"  class="delete" plain>删除</el-button>
-            </div>
-          </template>
-        </template><el-table-column prop="control" label="操作" width="400px">
+        <el-table-column prop="control" label="操作" width="400px">
           <template>
             <div>
               <el-button type="primary" class="edit" plain @click="editItem(item,index)">编辑</el-button>
               <el-button type="danger"  class="delete" plain @click="deleteItem(item)">删除</el-button>
             </div>
         </template>
+
       </el-table-column>
+    </template>
     </el-table>
     
 
