@@ -66,7 +66,7 @@ export default {
         var item = this.data[i];
         console.log("compare", item.date, this.dateFormart(this.currentDate));
         if (item.date == this.dateFormart(this.currentDate)) {
-          console.log("finding!!", item.value);
+          // console.log("finding!!", item.value);
           return item.value;
         }
       }

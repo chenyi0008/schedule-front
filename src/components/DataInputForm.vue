@@ -7,28 +7,6 @@
     center
   >
     <div class="container">
-      <!-- <el-table
-        :data="data.slice(0, 24)"
-        height="400"
-        border
-        style="width: 100%"
-      >
-        <el-table-column prop="time" label="时间" width="180">
-        </el-table-column>
-        <el-table-column prop="data" label="数据" width="180">
-        </el-table-column>
-      </el-table>
-      <el-table
-        :data="data.slice(24, 48)"
-        height="400"
-        border
-        style="width: 100%"
-      >
-        <el-table-column prop="time" label="时间" width="180">
-        </el-table-column>
-        <el-table-column prop="data" label="数据" width="180">
-        </el-table-column>
-      </el-table> -->
       <el-table
         border
         :data="data"
@@ -86,20 +64,13 @@ export default {
     dataString: String,
     save: Function,
   },
-  mounted() {
-    this.string = this.dataString;
-  },
   methods: {
-    // rowClassName({ row, index }) {
-    //   row.time = index;
-    // },
     submit() {
       this.visible = false;
       this.save(this.date, this.string);
     },
     rowClass({ row, rowIndex }) {
       if (rowIndex >= 12) return "null";
-      // console.log(row, rowIndex);
       return;
     },
     show() {
@@ -111,6 +82,12 @@ export default {
     changeData(e, t) {
       console.log(e.target.value, t);
       this.data = [t, e.target.value];
+    },
+  },
+  watch: {
+    dataString() {
+      this.string = this.dataString;
+      console.log(">>>>", this.string);
     },
   },
   computed: {
@@ -147,11 +124,9 @@ export default {
             s = 0;
           } else s = 30;
         }
-        // console.log("data[][]", data);
         return data;
       },
       set(val) {
-        // console.log(val);
         var dataArr = [];
         this.data.forEach((item) => {
           if (item.time == val[0]) item.data = val[1];
