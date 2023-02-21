@@ -1,7 +1,6 @@
 <template>
   <el-row>
-    <el-button type="primary" round>新增商店</el-button>
-
+    <el-button type="primary" round>新增规则</el-button>
   </el-row>
 </template>
   

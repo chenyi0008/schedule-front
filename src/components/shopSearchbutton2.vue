@@ -5,7 +5,7 @@
     filterable
     remote
     reserve-keyword
-    placeholder="搜索商店"
+    placeholder="搜索地址"
     :remote-method="remoteMethod"
     :loading="loading"
   >
@@ -18,14 +18,14 @@
     </el-option>
   </el-select>
 </template>
-  
-<style>
+    
+  <style>
 .el-select {
   float: left;
 }
 </style>
-
-  <script>
+  
+    <script>
 export default {
   name: "shopSearchbutton",
   data() {
@@ -109,4 +109,4 @@ export default {
     },
   },
 };
-</script> 
+</script>  
