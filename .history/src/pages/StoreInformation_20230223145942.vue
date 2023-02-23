@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div style="float:right">
-    <el-input  placeholder="请输入规则类型" v-model="ruletype"></el-input><el-input  placeholder="请输入数据" v-model="data"></el-input>
+  <div style="float:right">
+    <el-input  placeholder="请输入名称" v-model="name"></el-input><el-input  placeholder="请输入地址" v-model="address"></el-input><el-input placeholder="请输入面积" v-model="area"></el-input>
   <shopButton @click="add()" style="margin-left:20px;"></shopButton>
   </div>
+    
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -11,77 +12,77 @@
       style="max-height: 480px"
       @selection-change="handleSelectionChange"
     >
+
       <el-table-column
         type="selection"
 
       > </el-table-column>
 
       <el-table-column
-        prop="ruleType"
-        label="规则类型"
+        prop="name"
+        label="名称"
 
       >
       </el-table-column>
+
       <el-table-column
-        prop="value"
-        label="数据"
+        prop="address"
+        label="地址"
 
       >
       </el-table-column>
+
       <el-table-column
+        prop="size"
+        label="面积"
+
+      ></el-table-column>
+
+      <el-table-column
+        prop="control"
         label="操作"
 
       >
-        <template
-          slot:scope
-          float="right"
-        >
-          <template>
-            <div>
-              <el-button
-                type="primary"
-                class="edit"
-                plain
-              >编辑</el-button>
-              <el-button
-                type="danger"
-                class="delete"
-                plain
-              >删除</el-button>
-            </div>
-          </template>
-        </template>
+        <el-button
+          type="primary"
+          class="edit"
+          plain
+        >编辑</el-button>
+        <el-button
+          type="danger"
+          class="delete"
+          plain
+        >删除</el-button>
       </el-table-column>
     </el-table>
   </div>
 </template>
 
- 
 <script>
 import shopButton from "../components/shopButton.vue";
-
-import { getAllRule } from "@/apis/rule";
+import { getAllStore } from "@/apis/store";
 export default {
+  name: "tableView",
+  components: {
+    shopButton,
+  },
   data() {
     return {
       tableData: [],
       multipleSelection: [],
-      ruletype:'',
-      data:'',
-      
+      name:'',
+      address:'',
+      area:''
     };
+
   },
-  components: {
-    shopButton,
+  mounted() {
+    getAllStore().then((res) => {
+      console.log(res.data.data);
+      this.tableData = res.data.data;
+    });
   },
   methods: {
-    add:function() {
-    this.tableData.push({
-      ruletype:this.ruletype,
-      data:this.data
-    })
-    },
-
     toggleSelection(rows) {
       if (rows) {
         rows.forEach((row) => {
@@ -94,22 +95,22 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-  },
-
-  mounted() {
-    getAllRule().then((res) => {
-      console.log(res.data.data);
-      this.tableData = res.data.data;
-    });
+    add:function(){
+    this.tableData.push({
+      name:this.name,
+      address:this.address,
+      area:this.area
+    })
+    }
   },
 };
 </script>
 
 <style lang="less" scoped>
 .el-input{
-  width: 150px;
+  width: 120px;
   margin-bottom:20px;
   margin-top:20px;
   margin-left:20px
 }
-</style>
+</style> 
