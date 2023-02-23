@@ -1,9 +1,36 @@
 <template>
   <div>
-    <div style="float:right">
-    <el-input  placeholder="请输入规则类型" v-model="ruletype"></el-input><el-input  placeholder="请输入数据" v-model="data"></el-input>
-  <shopButton @click="add()" style="margin-left:20px;"></shopButton>
-  </div>
+    <el-form
+      :inline="true"
+      :model="formInline"
+      class="demo-form-inline"
+    >
+      <el-form-item label="请输入名称">
+        <el-input
+          v-model="formInline.user"
+          placeholder="名称"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="请输入地址">
+        <el-input
+          v-model="formInline.user"
+          placeholder="地址"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="请输入面积">
+        <el-input
+          v-model="formInline.user"
+          placeholder="面积"
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+         class="el-button1"
+          type="primary"
+          @click="onSubmit"
+        >查询</el-button>
+      </el-form-item>
+    </el-form>
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -68,19 +95,20 @@ export default {
       multipleSelection: [],
       ruletype:'',
       data:'',
-      
+            //搜索表单数据
+            formInline: {
+          user: '',
+          region: ''
+        }
     };
   },
   components: {
     shopButton,
   },
   methods: {
-    add:function() {
-    this.tableData.push({
-      ruletype:this.ruletype,
-      data:this.data
-    })
-    },
+    onSubmit() {
+        console.log('submit!');
+      },
 
     toggleSelection(rows) {
       if (rows) {
@@ -107,6 +135,12 @@ export default {
 
 <style lang="less" scoped>
 .el-input{
+  width: 150px;
+  margin-bottom:20px;
+  margin-top:20px;
+  margin-left:20px
+}
+.el-button1{
   width: 150px;
   margin-bottom:20px;
   margin-top:20px;

@@ -1,10 +1,36 @@
 <template>
   <div>
-  <div style="float:right">
-    <el-input  placeholder="请输入名称" v-model="name"></el-input><el-input  placeholder="请输入地址" v-model="address"></el-input><el-input placeholder="请输入面积" v-model="area"></el-input>
-  <shopButton @click="add()" style="margin-left:20px;"></shopButton>
-  </div>
-    
+    <el-form
+      :inline="true"
+      :model="formInline"
+      class="demo-form-inline"
+    >
+      <el-form-item label="请输入名称">
+        <el-input
+          v-model="formInline.user"
+          placeholder="名称"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="请输入地址">
+        <el-input
+          v-model="formInline.user"
+          placeholder="地址"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="请输入面积">
+        <el-input
+          v-model="formInline.user"
+          placeholder="面积"
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+         class="el-button1"
+          type="primary"
+          @click="onSubmit"
+        >查询</el-button>
+      </el-form-item>
+    </el-form>
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -15,7 +41,7 @@
 
       <el-table-column
         type="selection"
-      align="center"
+        align="center"
       > </el-table-column>
 
       <el-table-column
@@ -68,13 +94,19 @@ export default {
   },
   data() {
     return {
+      //表格数据
       tableData: [],
+      //复选框选中数据集合
       multipleSelection: [],
-      name:'',
-      address:'',
-      area:''
+      name: "",
+      address: "",
+      area: "",
+      //搜索表单数据
+      formInline: {
+          user: '',
+          region: ''
+        }
     };
-
   },
   mounted() {
     getAllStore().then((res) => {
@@ -95,13 +127,9 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-    add:function(){
-    this.tableData.push({
-      name:this.name,
-      address:this.address,
-      area:this.area
-    })
-    }
+    onSubmit() {
+        console.log('submit!');
+      }
   },
 };
 </script>
@@ -109,8 +137,14 @@ export default {
 <style lang="less" scoped>
 .el-input{
   width: 120px;
-  margin-bottom:20px;
-  margin-top:20px;
-  margin-left:20px
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.el-button1{
+  width: 120px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 </style> 
