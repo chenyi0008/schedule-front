@@ -2,30 +2,24 @@
   <div>
     <el-form
       :inline="true"
-      :model="formInline"
+      :model="searchData"
       class="demo-form-inline"
     >
-      <el-form-item label="请输入名称">
+      <el-form-item label="请输入排班规则">
         <el-input
-          v-model="formInline.user"
-          placeholder="名称"
+          v-model="searchData.ruleType"
+          placeholder="排班规则"
         ></el-input>
       </el-form-item>
-      <el-form-item label="请输入地址">
+      <el-form-item label="请输入数据">
         <el-input
-          v-model="formInline.user"
-          placeholder="地址"
-        ></el-input>
-      </el-form-item>
-      <el-form-item label="请输入面积">
-        <el-input
-          v-model="formInline.user"
-          placeholder="面积"
+          v-model="searchData.value"
+          placeholder="数据"
         ></el-input>
       </el-form-item>
       <el-form-item>
         <el-button
-         class="el-button1"
+          class="el-button1"
           type="primary"
           @click="onSubmit"
         >查询</el-button>
@@ -86,20 +80,19 @@
  
 <script>
 import shopButton from "../components/shopButton.vue";
-
 import { getAllRule } from "@/apis/rule";
 export default {
   data() {
     return {
       tableData: [],
       multipleSelection: [],
-      ruletype:'',
-      data:'',
-            //搜索表单数据
-            formInline: {
-          user: '',
-          region: ''
-        }
+      ruletype: "",
+      data: "",
+      //搜索表单数据
+      searchData: {
+        ruleType: "",
+        data: "",
+      },
     };
   },
   components: {
@@ -107,8 +100,8 @@ export default {
   },
   methods: {
     onSubmit() {
-        console.log('submit!');
-      },
+      console.log(this.searchData);
+    },
 
     toggleSelection(rows) {
       if (rows) {
@@ -128,22 +121,23 @@ export default {
     getAllRule().then((res) => {
       console.log(res.data.data);
       this.tableData = res.data.data;
+      this.searchData = res.data;
     });
   },
 };
 </script>
 
 <style lang="less" scoped>
-.el-input{
+.el-input {
   width: 150px;
-  margin-bottom:20px;
-  margin-top:20px;
-  margin-left:20px
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
-.el-button1{
+.el-button1 {
   width: 150px;
-  margin-bottom:20px;
-  margin-top:20px;
-  margin-left:20px
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 </style>

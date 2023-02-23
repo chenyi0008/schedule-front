@@ -2,24 +2,24 @@
   <div>
     <el-form
       :inline="true"
-      :model="formInline"
+      :model="searchData"
       class="demo-form-inline"
     >
       <el-form-item label="请输入名称">
         <el-input
-          v-model="formInline.user"
+          v-model="searchData.name"
           placeholder="名称"
         ></el-input>
       </el-form-item>
       <el-form-item label="请输入地址">
         <el-input
-          v-model="formInline.user"
+          v-model="searchData.address"
           placeholder="地址"
         ></el-input>
       </el-form-item>
       <el-form-item label="请输入面积">
         <el-input
-          v-model="formInline.user"
+          v-model="searchData.size"
           placeholder="面积"
         ></el-input>
       </el-form-item>
@@ -102,9 +102,10 @@ export default {
       address: "",
       area: "",
       //搜索表单数据
-      formInline: {
-          user: '',
-          region: ''
+      searchData: {
+          name: '',
+          address: '',
+          size: '',
         }
     };
   },
@@ -112,6 +113,7 @@ export default {
     getAllStore().then((res) => {
       console.log(res.data.data);
       this.tableData = res.data.data;
+      this.searchData=res.data;
     });
   },
   methods: {
@@ -127,8 +129,9 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
+    //查询方法
     onSubmit() {
-        console.log('submit!');
+        console.log(this.searchData);
       }
   },
 };
