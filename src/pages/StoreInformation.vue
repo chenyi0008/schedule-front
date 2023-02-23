@@ -15,33 +15,33 @@
 
       <el-table-column
         type="selection"
-        width="100px"
+      align="center"
       > </el-table-column>
 
       <el-table-column
         prop="name"
         label="名称"
-        width="200px"
+        align="center"
       >
       </el-table-column>
 
       <el-table-column
         prop="address"
         label="地址"
-        width="200px"
+        align="center"
       >
       </el-table-column>
 
       <el-table-column
         prop="size"
         label="面积"
-        width="200px"
+        align="center"
       ></el-table-column>
 
       <el-table-column
         prop="control"
         label="操作"
-        width="400px"
+        align="center"
       >
         <el-button
           type="primary"

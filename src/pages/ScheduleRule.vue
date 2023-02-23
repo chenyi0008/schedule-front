@@ -13,24 +13,24 @@
     >
       <el-table-column
         type="selection"
-
+        align="center"
       > </el-table-column>
 
       <el-table-column
         prop="ruleType"
         label="规则类型"
-
+        align="center"
       >
       </el-table-column>
       <el-table-column
         prop="value"
         label="数据"
-
+        align="center"
       >
       </el-table-column>
       <el-table-column
         label="操作"
-
+        align="center"
       >
         <template
           slot:scope
