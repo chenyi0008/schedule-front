@@ -24,7 +24,7 @@ export function deleteGroup(params) {
   });
 }
 
-export function geGroup(params) {
+export function getGroupByStoreId(params) {
   return request({
     url: "group",
     method: "get",
@@ -32,7 +32,7 @@ export function geGroup(params) {
   });
 }
 
-export function getGroupByStaff(params) {
+export function staffJoinGroup(params) {
   return request({
     url: "group/join",
     method: "get",
