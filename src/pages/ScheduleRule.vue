@@ -93,15 +93,10 @@
       >
       </el-table-column>
       <el-table-column
+        prop="control"
         label="操作"
         align="center"
       >
-        <template
-          slot:scope
-          float="right"
-        >
-          <template>
-            <div>
               <el-button
                 type="primary"
                 class="edit"
@@ -112,10 +107,7 @@
                 class="delete"
                 plain
               >删除</el-button>
-            </div>
-          </template>
-        </template>
-      </el-table-column>
+           </el-table-column>
     </el-table>
 
     <!-- 分页工具条 -->
@@ -137,18 +129,18 @@
 <script>
 import shopButton from "../components/shopButton.vue";
 import { getAllRule , postRule } from "@/apis/rule";
-
 export default {
   data() {
     return {
       tableData: [],
+      //复选框选中的数据集合
       multipleSelection: [],
       ruletype: "",
-      data: "",
+      value: "",
       //搜索表单数据
       searchData: {
         ruleType: "",
-        data: "",
+        value: "",
       },
       //添加数据的对话框是否展示的标记
       dialogVisible: false,
@@ -204,12 +196,14 @@ export default {
       });
   },
 
+
   // 挂载初始化
   mounted() {
+    var _this = this;
     getAllRule().then((res) => {
       console.log(res.data.data);
-      this.tableData = res.data.data;
-      this.searchData = res.data;
+      _this.tableData = res.data.data;
+      _this.searchData = res.data;
     });
   },
 }};

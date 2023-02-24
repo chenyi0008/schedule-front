@@ -77,18 +77,6 @@
       style="max-height: 490px"
       @selection-change="handleSelectionChange"
     >
-
-      <el-row>
-        <el-button
-          type="primary"
-          plain
-        >主要按钮</el-button>
-        <el-button
-          type="danger"
-          plain
-        >危险按钮</el-button>
-      </el-row>
-
       <el-table-column
         type="selection"
         align="center"
@@ -168,6 +156,7 @@ export default {
         name: "",
         address: "",
       },
+            //添加数据的对话框是否展示的标记
       dialogVisible: false,
       form: {
         name: "",
@@ -224,13 +213,6 @@ export default {
           //关闭窗口
         }
       });
-    },
-    //分页查询
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
     },
   },
 };
