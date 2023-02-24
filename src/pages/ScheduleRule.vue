@@ -23,10 +23,10 @@
         label-width="80px"
       >
         <el-form-item label="规则类型">
-          <el-input v-model="form.dataType"></el-input>
+          <el-input v-model="form.ruleType"></el-input>
         </el-form-item>
         <el-form-item label="数据">
-          <el-input v-model="form.data"></el-input>
+          <el-input v-model="form.value"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -136,7 +136,8 @@
  
 <script>
 import shopButton from "../components/shopButton.vue";
-import { getAllRule } from "@/apis/rule";
+import { getAllRule , postRule } from "@/apis/rule";
+
 export default {
   data() {
     return {
@@ -152,8 +153,10 @@ export default {
       //添加数据的对话框是否展示的标记
       dialogVisible: false,
       form: {
-        dataType: "",
-        data: "",
+        ruleType: "",
+        value: "",
+        id:null,
+        storeId:""
       },
       currentPage: 4,
     };
@@ -180,12 +183,25 @@ export default {
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
-    },
+    },      
+    handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      },
 
     //添加数据
     addTable() {
-      console.log(this.form);
-    },
+      // console.log(this.form)
+      // 发送ajax请求，添加数据
+
+      postRule(this.form).then((res) => {
+        if (res.data.code == 1) {
+          //添加成功
+          console.log(res.data);
+          this.$message.success(res.data.msg);
+          this.dialogVisible = false;
+          //关闭窗口
+        }
+      });
   },
 
   // 挂载初始化
@@ -196,7 +212,7 @@ export default {
       this.searchData = res.data;
     });
   },
-};
+}};
 </script>
 
 <style lang="less" scoped>
