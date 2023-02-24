@@ -7,6 +7,7 @@ import EmployeeProferences from "../pages/EmployeeProferences";
 import ForecastData from "../pages/ForecastData";
 import Schedule from "../pages/Schedule";
 import ScheduleRule from "../pages/ScheduleRule";
+import Group from "../pages/Group";
 
 import storage from "@/storage";
 
@@ -57,6 +58,11 @@ const routes = [
         name: "rule",
         path: "rule",
         component: ScheduleRule,
+      },
+      {
+        name: "group",
+        path: "group",
+        component: Group,
       },
     ],
   },
