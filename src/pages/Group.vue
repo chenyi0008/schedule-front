@@ -47,7 +47,7 @@
 
     <!-- 查看小组详情模态框 -->
     <el-dialog title="小组成员" :visible.sync="groupMenberDialogVisible">
-      <el-table :data="groupMenbers">
+      <el-table height="500px" :data="groupMenbers">
         <el-table-column property="id" label="员工编号"></el-table-column>
         <el-table-column property="name" label="姓名"></el-table-column>
         <el-table-column property="role" label="职位"></el-table-column>
@@ -118,6 +118,7 @@ import {
 export default {
   mounted() {
     this.storeId = this.$store.state.storeId;
+    this.getGroups(this.storeId);
   },
   data() {
     return {

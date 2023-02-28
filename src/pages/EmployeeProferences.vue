@@ -9,11 +9,11 @@
       @selection-change="handleSelectionChange"
     >
       <!-- <el-table-column type="selection" width="55" /> -->
-      <el-table-column sortable prop="id" label="员工id" width="120" />
-      <el-table-column :prop="name" label="姓名" width="120" />
-      <el-table-column prop="role" label="职位" width="120" />
-      <el-table-column prop="telephone" label="电话" width="200" />
-      <el-table-column prop="mailbox" label="邮箱" width="300" />
+      <!-- <el-table-column sortable prop="id" label="员工id" width="120" /> -->
+      <el-table-column prop="name" label="姓名" />
+      <el-table-column prop="role" label="职位" />
+      <el-table-column prop="telephone" label="电话" />
+      <el-table-column prop="mailbox" label="邮箱" />
       <el-table-column
         style="
            {
@@ -39,12 +39,105 @@
           </el-select>
         </template>
       </el-table-column>
-      <el-table-column prop="storeId" label="门店编号" width="120" />
+      <!-- <el-table-column prop="storeId" label="门店编号" width="120" /> -->
+      <el-table-column width="100px" label="编辑">
+        <template slot-scope="scope">
+          <el-button
+            type="primary"
+            circle
+            icon="el-icon-edit"
+            @click="openDialog(scope.row)"
+          ></el-button>
+        </template>
+      </el-table-column>
     </el-table>
+
+    <!-- 员工详情模态框 -->
+    <el-dialog
+      :title="infoDialogTitle"
+      :visible.sync="employeeInfoDialogVisible"
+    >
+      <el-form :model="curruntEmployee">
+        <el-form-item
+          v-if="infoDialogTitle != '新增员工'"
+          label="员工编号"
+          :label-width="formLabelWidth"
+        >
+          <el-input v-model="curruntEmployee.id" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="员工姓名" :label-width="formLabelWidth">
+          <el-input
+            v-model="curruntEmployee.name"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="职位" :label-width="formLabelWidth">
+          <el-input
+            v-model="curruntEmployee.role"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="电话" :label-width="formLabelWidth">
+          <el-input
+            v-model="curruntEmployee.telephone"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" :label-width="formLabelWidth">
+          <el-input
+            v-model="curruntEmployee.mailbox"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="小组" :label-width="formLabelWidth">
+          <!-- 
+            
+            
+            
+            
+            这里应该放小组的下拉框
+          
+          
+          
+          
+          -->
+          <el-input
+            v-model="curruntEmployee.groupName"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          v-if="infoDialogTitle != '新增员工'"
+          label="所属门店"
+          :label-width="formLabelWidth"
+        >
+          <el-input
+            v-model="curruntEmployee.storeId"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button
+          type="danger"
+          v-if="infoDialogTitle != '新增员工'"
+          @click="removeEmployee"
+        >
+          删 除
+        </el-button>
+        <el-button @click="employeeInfoDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitEmpioyeeInfo">
+          提 交
+        </el-button>
+      </div>
+    </el-dialog>
+    <el-button type="primary" @click="openDialog({ id: '' })">
+      新增员工
+    </el-button>
   </div>
 </template>
 <script>
-import { getStaffByPage } from "@/apis/staff";
+import { getStaffByPage, putStaff, postStaff, deleteStaff } from "@/apis/staff";
 import { getGroupByStoreId, staffJoinGroup } from "@/apis/group";
 // import storage from "@/storage/index.vue";
 export default {
@@ -56,10 +149,22 @@ export default {
       staffList: [],
       multipleTable: [],
       groups: [],
+      employeeInfoDialogVisible: false,
+      infoDialogTitle: "编辑员工信息",
+      formLabelWidth: "100",
+      curruntEmployee: {
+        id: "",
+        name: "",
+        role: "",
+        telephone: "",
+        mailbox: "",
+        group: "",
+      },
     };
   },
   mounted() {
     this.storeId = this.$store.state.storeId;
+    this.getGroupList(this.storeId);
     getStaffByPage({ page: 1, pageSize: 99999, storeId: this.storeId }).then(
       (res) => {
         // res.data.data.filter((item) => {
@@ -79,6 +184,47 @@ export default {
     changeStaffGroup(groupId, staffId) {
       staffJoinGroup({ groupId: groupId || -1, staffId });
     },
+    openDialog(curruntEmployee) {
+      this.infoDialogTitle = curruntEmployee.id ? "编辑员工信息" : "新增员工";
+      this.curruntEmployee = curruntEmployee;
+      this.employeeInfoDialogVisible = true;
+    },
+    updateEmployeeData() {
+      putStaff(this.curruntEmployee).then((res) => {
+        console.log(res.data);
+      });
+    },
+    addNewEmployee() {
+      postStaff({ ...this.curruntEmployee, storeId: this.storeId }).then(
+        (res) => {
+          console.log(res.data);
+        }
+      );
+      getStaffByPage({ page: 1, pageSize: 99999, storeId: this.storeId }).then(
+        (res) => {
+          this.staffList = res.data.data;
+        }
+      );
+    },
+    removeEmployee() {
+      deleteStaff({ ids: this.curruntEmployee.id }).then((res) => {
+        console.log(res.data);
+      });
+      this.employeeInfoDialogVisible = false;
+      getStaffByPage({ page: 1, pageSize: 99999, storeId: this.storeId }).then(
+        (res) => {
+          this.staffList = res.data.data;
+        }
+      );
+    },
+    submitEmpioyeeInfo() {
+      if (this.infoDialogTitle === "编辑员工信息") {
+        this.employeeInfoDialogVisible = false;
+        return this.updateEmployeeData();
+      }
+      this.addNewEmployee();
+      this.employeeInfoDialogVisible = false;
+    },
   },
   computed: {
     showStaff() {
@@ -90,7 +236,7 @@ export default {
   watch: {
     "$store.state.storeId"(newV) {
       this.storeId = newV;
-      this.getGroupList(this.storeId);
+      this.getGroupList(newV);
       getStaffByPage({ page: 1, pageSize: 99999, storeId: this.storeId }).then(
         (res) => {
           this.staffList = res.data.data;
