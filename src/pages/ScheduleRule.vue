@@ -1,10 +1,6 @@
 <template>
   <div>
-    <el-button
-      class="dangerButton"
-      type="danger"
-      plain
-    >批量删除</el-button>
+
     <el-button
       class="mainButton"
       type="primary"
@@ -36,6 +32,27 @@
           <el-button @click="dialogVisible=false">取消</el-button>
         </el-form-item>
       </el-form>
+    </el-dialog>
+
+        <!-- 编辑小组详情模态框 -->
+        <el-dialog :title="infoDialogTitle" :visible.sync="ruleInfoDialogVisible">
+      <el-form :model="curruntRule">
+        <el-form-item
+          v-if="infoDialogTitle != '新建小组'"
+          label="规则类型"
+          :label-width="formLabelWidth"
+
+        >
+          <el-input v-model="curruntRule.ruleType" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="数据" :label-width="formLabelWidth">
+          <el-input v-model="curruntRule.value" autocomplete="off"></el-input>
+          </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="ruleInfoDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitRuleInfo"> 提 交 </el-button>
+      </div>
     </el-dialog>
 
     <!-- 对话框表单 -->
@@ -75,10 +92,6 @@
       style="max-height: 490px"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column
-        type="selection"
-        align="center"
-      > </el-table-column>
 
       <el-table-column
         prop="ruleType"
@@ -97,16 +110,20 @@
         label="操作"
         align="center"
       >
+      <template slot-scope="scope">
               <el-button
+              @click="editRule(scope.row)"
                 type="primary"
                 class="edit"
                 plain
               >编辑</el-button>
-              <el-button
+              <el-button 
+              @click="deleteRule(scope.row.id)"
                 type="danger"
                 class="delete"
                 plain
               >删除</el-button>
+              </template>
            </el-table-column>
     </el-table>
 
@@ -128,10 +145,22 @@
  
 <script>
 import shopButton from "../components/shopButton.vue";
-import { getAllRule , postRule } from "@/apis/rule";
+import { getAllRule , postRule, deleteRule,putRule, } from "@/apis/rule";
 export default {
   data() {
     return {
+      storeId:-1,
+      Rules:[],
+      ruleMenbers:[],
+      curruntRuleId:"",
+      curruntRule:{
+        id:"",
+        name:"",
+      },
+      RuleMenberDialogVisible:false,
+      ruleInfoDialogVisible:false,
+      infoDialogTitle:"",
+      formLabelWidth:"",
       tableData: [],
       //复选框选中的数据集合
       multipleSelection: [],
@@ -141,6 +170,8 @@ export default {
       searchData: {
         ruleType: "",
         value: "",
+        storeId:"",
+        id:""
       },
       //添加数据的对话框是否展示的标记
       dialogVisible: false,
@@ -148,7 +179,7 @@ export default {
         ruleType: "",
         value: "",
         id:null,
-        storeId:""
+        storeId:"",
       },
       currentPage: 4,
     };
@@ -156,10 +187,16 @@ export default {
   components: {
     shopButton,
   },
+    // 挂载初始化
+    mounted() {
+    var _this = this;
+    getAllRule().then((res) => {
+      _this.tableData = res.data.data;
+      _this.searchData = res.data;
+    });
+  },
   methods: {
-    onSubmit() {
-      console.log(this.searchData);
-    },
+
     toggleSelection(rows) {
       if (rows) {
         rows.forEach((row) => {
@@ -179,6 +216,10 @@ export default {
     handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       },
+    //查询方法
+    onSubmit() {
+      console.log(this.searchData);
+    },
 
     //添加数据
     addTable() {
@@ -188,24 +229,85 @@ export default {
       postRule(this.form).then((res) => {
         if (res.data.code == 1) {
           //添加成功
-          console.log(res.data);
           this.$message.success(res.data.msg);
           this.dialogVisible = false;
           //关闭窗口
+          
         }
       });
   },
+    //完成删除
+    deleteRule(scheduleRuleid) {
+      this.$confirm("此操作将永久删除小组，是否继续？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          deleteRule({ ids: scheduleRuleid }).then((res) => {
+            if (res.data.msg == "删除成功") {
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+              });
+              this.tableData = res.data.data;
+            } else throw new Error(res.data.msg);
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "取消删除",
+          });
+        });
+    },
+    editRule(store){
+    this.infoDialohTitle="小组详情";
+    this.curruntRule = JSON.parse(JSON.stringify(store));
+    this.ruleInfoDialogVisible = true ;
+    },
+    submitRuleInfo(){
+      if (this.infoDialogTitle === "新建小组") {
+        postRule({ ...this.curruntRule, storeId: this.tableData })
+          .then((res) => {
+            this.$message({
+              showClose: true,
+              message: res.data.msg,
+              type: "success",
+            });
+            this.ruleInfoDialogVisible = false;
+            this.tableData;
+          })
+          .catch((err) => {
+            this.$message({
+              showClose: true,
+              message: err,
+              type: "error",
+            });
+          });
+      } else {
+        putRule({ ...this.curruntRule ,})
+          .then((res) => {
+            this.$message({
+              showClose: true,
+              message: res.data.msg,
+              type: "success",
+            });
+            this.ruleInfoDialogVisible = false;
+            this.tableData;
+          })
+          .catch((err) => {
+            this.$message({
+              showClose: true,
+              message: err,
+              type: "error",
+            });
+           });
+      }
+    },
 
 
-  // 挂载初始化
-  mounted() {
-    var _this = this;
-    getAllRule().then((res) => {
-      console.log(res.data.data);
-      _this.tableData = res.data.data;
-      _this.searchData = res.data;
-    });
-  },
+
 }};
 </script>
 
