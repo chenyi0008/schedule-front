@@ -40,10 +40,41 @@ export default {
 				fix(
 					now.getDate() - (now.getDay() === 0 ? 7 : now.getDay()) + 7
 				));
+
+		//挂载日期切换事件
+		this.$bus.$on("handleCalendarPage", (dirc, calendar) => {
+			if (dirc === "refresh") {
+				this.getSchedule(this.startDate, this.endDate);
+				return;
+			}
+			const isAWeak =
+				calendar.calendar.currentData.viewTitle.split(" – ")[1];
+			const relatDay = (isAWeak ? 7 : 1) * (dirc === "prev" ? -1 : 1);
+			let firstDay = new Date(
+				calendar.calendar.currentData.viewTitle
+					.split(" – ")[0]
+					.split("年")
+					.join("-")
+					.split("月")
+					.join("-")
+					.split("日")
+					.join("")
+			);
+			firstDay.setDate(firstDay.getDate() + relatDay);
+			const { startDate, endDate } = this.getCurrentWeak(firstDay);
+			this.startDate = startDate;
+			this.endDate = endDate;
+		});
 	},
 	methods: {
 		fixNum(num) {
 			return num < 10 ? "0" + num : num;
+		},
+		formatDate(now) {
+			var year = now.getFullYear();
+			var month = now.getMonth() + 1;
+			var date = now.getDate();
+			return year + "-" + month + "-" + date;
 		},
 		getSchedule(startDate, endDate) {
 			getPlan({ storeId: this.storeId, startDate, endDate })
@@ -59,10 +90,22 @@ export default {
 					console.log(err);
 				});
 		},
+		getCurrentWeak(firstDay) {
+			const formatDate = this.formatDate;
+			let lastDay = new Date();
+			lastDay.setDate(firstDay.getDate() + 7);
+			return {
+				startDate: formatDate(firstDay),
+				endDate: formatDate(lastDay),
+			};
+		},
 	},
 	watch: {
 		"$store.state.storeId"(newStoreId) {
 			this.storeId = newStoreId;
+			this.getSchedule(this.startDate, this.endDate);
+		},
+		startDate() {
 			this.getSchedule(this.startDate, this.endDate);
 		},
 	},

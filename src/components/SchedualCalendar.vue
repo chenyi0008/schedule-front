@@ -44,14 +44,22 @@ export default {
 					prec: {
 						text: "上一页",
 						click: () => {
-							// alert("上");
+							this.$bus.$emit(
+								"handleCalendarPage",
+								"prev",
+								this.$refs.calendar
+							);
 							this.$refs.calendar.getApi().prev();
 						},
 					},
 					nexc: {
 						text: "下一页",
 						click: () => {
-							// alert("上");
+							this.$bus.$emit(
+								"handleCalendarPage",
+								"next",
+								this.$refs.calendar
+							);
 							this.$refs.calendar.getApi().next();
 						},
 					},
