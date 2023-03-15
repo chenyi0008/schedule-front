@@ -44,13 +44,13 @@
       :model="searchData"
       class="demo-form-inline"
     >
-      <el-form-item label="请输入名称">
+      <el-form-item label="">
         <el-input
           v-model="searchData.name"
           placeholder="名称"
         ></el-input>
       </el-form-item>
-      <el-form-item label="请输入地址">
+      <el-form-item label="">
         <el-input
           v-model="searchData.address"
           placeholder="地址"
@@ -147,7 +147,7 @@
       </el-table-column>
     </el-table>
     
-
+    
     <!-- 分页查询 -->
     <el-pagination
       @size-change="handleSizeChange"
@@ -156,7 +156,7 @@
       :page-sizes="[2,4,6]"
       :page-size="50"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="100"
+      :total="totalCount"
     >
     </el-pagination>
   </div>
@@ -179,6 +179,10 @@ export default {
   },
   data() {
     return {
+      //每页显示的条数
+      pageSize:5,
+      //总记录数
+      totalCount:100,
       storeId:-1,
       stores:[],
       storeMenbers: [],
@@ -211,19 +215,22 @@ export default {
         area: "",
         id: null,
       },
-      currentPage: 4,
+      currentPage: 1,
     };
   },
   mounted() {
-    //当页面加载完成后，发送异步请求
-    var _this = this;
-    getAllStore().then((res) => {
-      //设置表格数据
-      this.tableData = res.data.data;
-      this.searchData = res.data;
-    });
+    this.fetchData(this.currentPage, this.pageSize);
   },
   methods: {
+    fetchData(page, pageSize) {
+    getStoreByPage({page, pageSize}).then((res) => {
+      //设置表格数据
+      this.tableData = res.data.data.records;
+      this.searchData = res.data;
+      //设置总记录数
+      this.totalCount = res.data.data.total
+    });
+  },
     toggleSelection(rows) {
       if (rows) {
         rows.forEach((row) => {
@@ -241,8 +248,10 @@ export default {
       console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
+    this.currentPage = val;
+    this.fetchData(val, this.pageSize);
+  },
+
     //查询方法
     onSubmit() {
       console.log(this.searchData);
