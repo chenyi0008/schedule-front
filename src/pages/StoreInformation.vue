@@ -219,11 +219,14 @@ export default {
     };
   },
   mounted() {
-    this.fetchData(this.currentPage, this.pageSize);
+    this.fetchData(this.currentPage, this.pageSize,this.storeName,this.address);
   },
+  
   methods: {
-    fetchData(page, pageSize) {
-    getStoreByPage({page, pageSize}).then((res) => {
+    fetchData(page, pageSize,storeName,address) {
+
+    getStoreByPage({page, pageSize,storeName,address}).then((res) => {
+      
       //设置表格数据
       this.tableData = res.data.data.records;
       this.searchData = res.data;
@@ -254,9 +257,24 @@ export default {
 
     //查询方法
     onSubmit() {
-      console.log(this.searchData);
-    },
+  const page = 1; // 第一页
+  const pageSize = 5; // 每页显示10条数据
+  const storeName = this.searchData.name; // 从表单中获取店铺名称
+  const address = this.searchData.address; // 从表单中获取地址
+  // 调用分页查询函数
+  getStoreByPage({ page, pageSize, storeName, address }).then((res) => {
+    // 设置表格数据
+    this.tableData = res.data.data.records;
+    // 将获取的数据赋值给一个新的变量
+    const searchData = res.data;
+    // 将新的变量赋值给页面显示的数据变量
+    this.searchData = searchData;
+    // 设置总记录数
+    this.totalCount = res.data.data.total;
+  });
+}
 
+,
     //提交新数据
     addTable() {
       // console.log(this.form)
