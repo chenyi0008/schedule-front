@@ -55,34 +55,7 @@
       </div>
     </el-dialog>
 
-    <!-- 对话框表单 -->
-    <el-form
-      :inline="true"
-      :model="searchData"
-      class="demo-form-inline"
-    >
-      <el-form-item label="">
-        <el-input
-          class="el-input1"
-          v-model="searchData.ruleType"
-          placeholder="排班规则"
-        ></el-input>
-      </el-form-item>
-      <el-form-item label="">
-        <el-input
-          class="el-input1"
-          v-model="searchData.value"
-          placeholder="数据"
-        ></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          class="el-button1"
-          type="primary"
-          @click="onSubmit"
-        >查询</el-button>
-      </el-form-item>
-    </el-form>
+
 
     <!-- 桌面表单 -->
     <el-table

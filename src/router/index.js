@@ -8,6 +8,7 @@ import ForecastData from "../pages/ForecastData";
 import Schedule from "../pages/Schedule_new";
 import ScheduleRule from "../pages/ScheduleRule";
 import Group from "../pages/Group";
+import Preference from "../pages/Preference";
 
 import storage from "@/storage";
 
@@ -63,6 +64,11 @@ const routes = [
 				name: "group",
 				path: "group",
 				component: Group,
+			},
+			{
+				name:"preference",
+				path:"preference",
+				component:Preference,
 			},
 		],
 	},

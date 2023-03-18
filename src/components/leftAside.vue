@@ -9,6 +9,7 @@
       <el-tab-pane label="门店信息" name="store">门店信息</el-tab-pane>
       <el-tab-pane label="员工数据" name="employee">员工数据</el-tab-pane>
       <el-tab-pane label="员工分组" name="group">员工分组</el-tab-pane>
+      <el-tab-pane label="员工偏好" name="preference">员工偏好</el-tab-pane>
       <el-tab-pane label="预测数据" name="forecastData">预测数据</el-tab-pane>
       <el-tab-pane label="排班" name="schedule">排班</el-tab-pane>
       <el-tab-pane label="排班规则" name="rule">排班规则</el-tab-pane>
