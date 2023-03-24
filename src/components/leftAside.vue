@@ -4,7 +4,8 @@
       :tab-position="tabPosition"
       @tab-click="changeNav"
       :value="activeTab"
-      style="height: 665px"
+      style="height: 665px
+             width:200px"
     >
       <el-tab-pane label="门店信息" name="store">门店信息</el-tab-pane>
       <el-tab-pane label="员工数据" name="employee">员工数据</el-tab-pane>
@@ -15,6 +16,7 @@
     </el-tabs>
   </div>
 </template>
+
 <script>
 export default {
   name: "leftAside",

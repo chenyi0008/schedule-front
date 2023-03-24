@@ -6,13 +6,14 @@
     <!-- 登录模块 -->
     <div class="LoginBox">
       <!-- 图片 -->
-      <div class="LoginLogo">
-        <img src="../assets/img/loginLogo.png" alt="" />
+      <div class="LoginPic">
+        <img class="loginPicture" src="../assets/img/loginPic.png" alt="" />
       </div>
       <!-- 登录框 -->
       <div class="LoginForm">
         <div class="LoginTitle">
-          <p>Welcome</p>
+          <img class="logo" src="../assets/img/circles.png" alt="">
+          <div>MyAdmin</div>
         </div>
         <!-- s输入框 -->
         <div class="InputArea">
@@ -55,8 +56,8 @@ export default {
   data() {
     return {
       LoginForm: {
-        username: "",
-        password: "",
+        username: "admin",
+        password: "admin",
       },
       rules: {
         username: [
@@ -118,12 +119,12 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
   opacity: 85%;
-  .LoginLogo {
+  .LoginPic {
     float: left;
     width: 490px;
     height: 450px;
 
-    img {
+    .loginPicture {
       width: 110%;
       height: 100%;
     }
@@ -132,19 +133,25 @@ export default {
     float: right;
     width: 390px;
     height: 450px;
-    margin-top: 80px;
+    margin-top: 50px;
 
     .LoginTitle {
       padding-left: 50px;
       font-size: 50px;
       font-weight: bolder;
-      font-style: oblique;
+      font-style: initial;
+      color:#10109b;
+      .logo{
+        padding-left: 90px;
+        margin-top: -30px;
+        margin-bottom: -20px;
+        width: 70px;
+      }
     }
 
     .InputArea {
       padding-right: 30px;
       margin-top: 30px;
-      
     }
 
     .LoginBtn {
