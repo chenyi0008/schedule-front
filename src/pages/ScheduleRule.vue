@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <el-button
       class="mainButton"
       type="primary"
@@ -18,9 +17,18 @@
         :model="form"
         label-width="80px"
       >
+      <template>
         <el-form-item label="规则类型">
-          <el-input v-model="form.ruleType"></el-input>
+          <el-select v-model="form.ruleType" placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
         </el-form-item>
+        </template>
         <el-form-item label="数据">
           <el-input v-model="form.value"></el-input>
         </el-form-item>
@@ -110,7 +118,6 @@ import { getAllRule , postRule, deleteRule,putRule, } from "@/apis/rule";
 export default {
   data() {
     return {
-      storeId:-1,
       Rules:[],
       ruleMenbers:[],
       curruntRuleId:"",
@@ -122,17 +129,18 @@ export default {
       ruleInfoDialogVisible:false,
       infoDialogTitle:"",
       formLabelWidth:"",
+      //表格数据
       tableData: [],
       //复选框选中的数据集合
       multipleSelection: [],
-      ruletype: "",
+      ruleType: "",
       value: "",
       //搜索表单数据
       searchData: {
         ruleType: "",
         value: "",
         storeId:"",
-        id:""
+        id:null,
       },
       //添加数据的对话框是否展示的标记
       dialogVisible: false,
@@ -142,8 +150,31 @@ export default {
         id:null,
         storeId:"",
       },
+      options: [{
+          value: '选项1',
+          label: '开店规则'
+        }, {
+          value: '选项2',
+          label: '关店规则'
+        }, {
+          value: '选项3',
+          label: '客流规则'
+        }, {
+          value: '选项4',
+          label: '值班规则'
+        }, {
+          value: '选项5',
+          label: '职位规则'
+        },{
+        value: '选项6',
+          label: '休息规则'
+        }, 
+      ],
+        value: '',
+
       currentPage: 4,
     };
+  
   },
   components: {
     shopButton,
@@ -186,7 +217,6 @@ export default {
     addTable() {
       // console.log(this.form)
       // 发送ajax请求，添加数据
-
       postRule(this.form).then((res) => {
         if (res.data.code == 1) {
           //添加成功
