@@ -1,7 +1,7 @@
 <template>
     <div class="calendar">
         <el-calendar>
-            <template slot="dateCell" slot-scope="{date, data}">
+            <template slot="dateCell" slot-scope="{data}">
                 <div style="height:100%" :class="data.isSelected ? 'is-selected' : ''" @click="handleclick(data.day)">
                     <div>{{ data.day.split('-').slice(1).join('-') }}</div>
                     <div class="state" v-if="schedule.find(v => v.date === data.day)">{{ "已分配" }}</div>
