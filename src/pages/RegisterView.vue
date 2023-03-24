@@ -113,7 +113,7 @@ export default {
     height: 450px;
 
     img {
-      width: 100%;
+      width: 110%;
       height: 100%;
     }
   }
@@ -122,6 +122,7 @@ export default {
     float: right;
     width: 390px;
     height: 450px;
+    margin-top: 80px;
 
     .LoginTitle {
       padding-left: 50px;
@@ -132,7 +133,7 @@ export default {
 
     .InputArea {
       padding-right: 30px;
-      margin-top: 50px;
+      margin-top: 30px;
     }
 
     .LoginBtn {

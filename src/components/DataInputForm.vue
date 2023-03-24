@@ -139,7 +139,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 ::v-deep .el-dialog {
   transform: scale(0.5);
 }

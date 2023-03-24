@@ -9,9 +9,9 @@
         </div>
       </el-header>
       <el-container>
-        <el-aside width="100px"
-          ><leftAside @changeNav="changeLabel"
-        /></el-aside>
+        <el-aside width="100px">
+          <leftAside @changeNav="changeLabel" />
+        </el-aside>
         <el-container>
           <el-main>
             <!-- <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div> -->
@@ -31,7 +31,6 @@
 import leftAside from "../components/leftAside.vue";
 import ChoiceStore from "../components/ChoiceStore";
 // import tableView from '../components/tableView.vue'
-
 // import shopSearchbutton from '../components/shopSearchbutton.vue'
 // import shopButton from '../components/shopButton.vue'
 // import shopSearchbutton from '@/components/shopSearchbutton';
