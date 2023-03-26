@@ -237,7 +237,7 @@ export default {
       this.pageSize,
       this.storeName,
       this.address
-    );
+    )
   },
 
   methods: {
@@ -342,7 +342,7 @@ export default {
               type: "success",
             });
             this.storeInfoDialogVisible = false;
-            this.tableData;
+            location.reload(); // Refresh the current page
           })
           .catch((err) => {
             this.$message({
@@ -360,7 +360,7 @@ export default {
               type: "success",
             });
             this.storeInfoDialogVisible = false;
-            this.tableData;
+            location.reload(); // Refresh the current page
           })
           .catch((err) => {
             this.$message({
