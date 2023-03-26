@@ -1,11 +1,11 @@
 <template>
   <div>
+    <el-button class="newGroup" type="primary" plain @click="createGroup">新 建 小 组</el-button>
     <el-table
       ref="multipleTable"
       :data="groups"
       tooltip-effect="dark"
       style="width: 100%"
-      height="80vh"
     >
       <!-- <el-table-column type="selection" width="55" /> -->
       <el-table-column sortable prop="id" label="小组编号" />
@@ -102,7 +102,7 @@
         <el-button type="primary" @click="submitGroupInfo"> 提 交 </el-button>
       </div>
     </el-dialog>
-    <el-button type="primary" @click="createGroup">新 建 小 组</el-button>
+    
   </div>
 </template>
 
@@ -256,4 +256,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.newGroup{
+  float: left;
+  width: 120px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+</style>

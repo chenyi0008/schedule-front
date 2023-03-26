@@ -1,11 +1,13 @@
 <template>
   <div>
+    <el-button class="addNew" type="primary" plain @click="openDialog({ id: '' })">
+      新增员工
+    </el-button>
     <el-table
       ref="multipleTable"
       :data="showStaff"
       tooltip-effect="dark"
       style="width: 100%"
-      height="80vh"
       @selection-change="handleSelectionChange"
     >
       <!-- <el-table-column type="selection" width="55" /> -->
@@ -131,9 +133,7 @@
         </el-button>
       </div>
     </el-dialog>
-    <el-button type="primary" @click="openDialog({ id: '' })">
-      新增员工
-    </el-button>
+    
   </div>
 </template>
 <script>
@@ -265,5 +265,12 @@ export default {
 }
 ::v-deep .el-input__inner {
   text-align: center;
+}
+.addNew {
+  float: left;
+  width: 120px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 </style>

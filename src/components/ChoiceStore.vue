@@ -1,6 +1,6 @@
 <template>
   <div>
-      <label>当前门店</label>
+      <label>当前门店   : </label>
       <el-select v-model="storeId" placeholder="请选择门店">
         <el-option
           v-for="item in storeList"

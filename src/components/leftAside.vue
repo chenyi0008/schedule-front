@@ -1,20 +1,18 @@
 <template>
   <div>
-    <el-menu
-      default-active="2"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      background-color="#01182e"
-      text-color="#a39e9e"
-      router>
-        <el-menu-item-group>
-          <el-menu-item index="store">门店信息</el-menu-item>
-          <el-menu-item index="employee">员工数据</el-menu-item>
-          <el-menu-item index="group">员工分组</el-menu-item>
-          <el-menu-item index="forecastData">预测数据</el-menu-item>
-          <el-menu-item index="schedule">排班</el-menu-item>
-          <el-menu-item index="rule">排班规则</el-menu-item>
-        </el-menu-item-group>
+    <div class="inPageLogo">
+      <img src="../assets/img/avatar.svg" alt="123"> MyAdmin
+    </div>
+    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" background-color="#01182e"
+      text-color="#a39e9e" router>
+      <el-menu-item-group>
+        <el-menu-item index="store">门店信息</el-menu-item>
+        <el-menu-item index="employee">员工数据</el-menu-item>
+        <el-menu-item index="group">员工分组</el-menu-item>
+        <el-menu-item index="forecastData">预测数据</el-menu-item>
+        <el-menu-item index="schedule">排班</el-menu-item>
+        <el-menu-item index="rule">排班规则</el-menu-item>
+      </el-menu-item-group>
     </el-menu>
 
     <!-- <el-tabs
@@ -34,7 +32,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 export default {
   name: "leftAside",
 
@@ -45,8 +43,8 @@ export default {
       this.$router.push({ name: pane.name });
     },
     handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
+      console.log(key, keyPath);
+    },
   },
 
   data() {
@@ -59,15 +57,20 @@ export default {
 </script>
 
 <style scoped>
-::v-deep .el-tabs__header.is-left {
-  width: 100%;
-}
-::v-deep .el-tabs__content {
-  display: none;
-  max-width: 0px;
-}
 .el-menu-item.is-active {
-      background-color: #409eff !important;
-      color: #fff;
-    }
+  background-color: #409eff !important;
+  color: #fff;
+}
+
+.inPageLogo {
+  line-height: 2em;
+  font-size: 23px;
+  color: #ffffff;
+  height: 60px;
+}
+
+img {
+  height: 36px;
+  margin-top: 10px;
+} 
 </style>

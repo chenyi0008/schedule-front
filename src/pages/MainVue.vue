@@ -1,21 +1,18 @@
 <template>
   <div class="mainBox">
     <el-container class="fullScreen">
-      <el-header>
-        <ChoiceStore class="index" ref="store" />
-        <div class="inPageLogo">
-          <img src="../assets/img/avatar.svg" alt=""> MyAdmin
-        </div>
-        <div class="nowPage">
-          智能排班--
-          {{ activePage }}
-        </div>
-      </el-header>
+      <el-aside width="180px"
+          ><leftAside/>
+        </el-aside>
+      
       <el-container>
-        <el-aside width="180px"
-          ><leftAside @changeNav="changeLabel"
-        /></el-aside>
+       
         <el-container>
+          <el-header>
+        <ChoiceStore class="index" ref="store" />
+
+        员工后台管理系统
+      </el-header>
           <el-main>
             <!-- <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div> -->
             <router-view />
@@ -33,6 +30,7 @@
 <script>
 import leftAside from "../components/leftAside.vue";
 import ChoiceStore from "../components/ChoiceStore";
+
 // import tableView from '../components/tableView.vue'
 // import shopSearchbutton from '../components/shopSearchbutton.vue'
 // import shopButton from '../components/shopButton.vue'
@@ -61,7 +59,7 @@ export default {
   },
   methods: {
     changeLabel(label) {
-      // console.log(label);
+       console.log(label);
       this.activePage = label;
     },
   },
@@ -104,21 +102,6 @@ export default {
 main {
   height: 100%;
 }
-.inPageLogo {
-  width: 179px;
-  margin-left: -20px;
-  background-color: #01182e;
-  font-size: 23px;
-  font-weight: bolder;
-  font-style: initial;
-  color:#ffffff;
-}
-img{
-  height: 36px;
-  margin-top: 10px;
-}
-.nowPage{
-  margin-left: 290px;
-  background-color: rgb(204, 21, 21);
-}
+
+
 </style>

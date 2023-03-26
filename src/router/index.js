@@ -37,31 +37,37 @@ const routes = [
 			{
 				name: "store",
 				path: "store",
+				meta:{title:"门店管理"},
 				component: StoreInformation,
 			},
 			{
 				name: "employee",
 				path: "employee",
+				meta:{title:"员工数据"},
 				component: EmployeeProferences,
 			},
 			{
 				name: "forecastData",
 				path: "forecastData",
+				meta:{title:"预测数据"},
 				component: ForecastData,
 			},
 			{
 				name: "schedule",
 				path: "schedule",
+				meta:{title:"排班"},
 				component: Schedule,
 			},
 			{
 				name: "rule",
 				path: "rule",
+				meta:{title:"排班规则"},
 				component: ScheduleRule,
 			},
 			{
 				name: "group",
 				path: "group",
+				meta:{title:"员工分组"},
 				component: Group,
 			},
 

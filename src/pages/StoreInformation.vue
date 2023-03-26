@@ -5,7 +5,7 @@
       type="primary"
       plain
       @click="dialogVisible=true"
-    >新增</el-button>
+    >新增门店</el-button>
     <!-- 添加数据对话框表单 -->
     <el-dialog
       title="新增门店"
@@ -364,6 +364,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.el-table{
+  margin-top: -20px;
+}
 .el-input {
   width: 120px;
   margin-bottom: 20px;
@@ -390,6 +393,9 @@ export default {
   margin-bottom: 20px;
   margin-top: 20px;
   margin-left: 20px;
+}
+.el-pagination{
+  padding: 20px 5px;
 }
 </style> 
 
