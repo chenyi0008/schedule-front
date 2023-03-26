@@ -6,10 +6,10 @@
         <div class="inPageLogo">
           <img src="../assets/img/avatar.svg" alt=""> MyAdmin
         </div>
-        <!-- <div class="title">
+        <div class="nowPage">
           智能排班--
           {{ activePage }}
-        </div> -->
+        </div>
       </el-header>
       <el-container>
         <el-aside width="180px"
@@ -116,5 +116,9 @@ main {
 img{
   height: 36px;
   margin-top: 10px;
+}
+.nowPage{
+  margin-left: 290px;
+  background-color: rgb(204, 21, 21);
 }
 </style>
