@@ -1,6 +1,23 @@
 <template>
   <div>
-    <el-tabs
+    <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      background-color="#01182e"
+      text-color="#a39e9e"
+      router>
+        <el-menu-item-group>
+          <el-menu-item index="store">门店信息</el-menu-item>
+          <el-menu-item index="employee">员工数据</el-menu-item>
+          <el-menu-item index="group">员工分组</el-menu-item>
+          <el-menu-item index="forecastData">预测数据</el-menu-item>
+          <el-menu-item index="schedule">排班</el-menu-item>
+          <el-menu-item index="rule">排班规则</el-menu-item>
+        </el-menu-item-group>
+    </el-menu>
+
+    <!-- <el-tabs
       :tab-position="tabPosition"
       @tab-click="changeNav"
       :value="activeTab"
@@ -13,7 +30,7 @@
       <el-tab-pane label="预测数据" name="forecastData">预测数据</el-tab-pane>
       <el-tab-pane label="排班" name="schedule">排班</el-tab-pane>
       <el-tab-pane label="排班规则" name="rule">排班规则</el-tab-pane>
-    </el-tabs>
+    </el-tabs> -->
   </div>
 </template>
 
@@ -27,6 +44,9 @@ export default {
       // console.log(pane.label)
       this.$router.push({ name: pane.name });
     },
+    handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
   },
 
   data() {
@@ -46,4 +66,8 @@ export default {
   display: none;
   max-width: 0px;
 }
+.el-menu-item.is-active {
+      background-color: #409eff !important;
+      color: #fff;
+    }
 </style>

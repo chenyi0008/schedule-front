@@ -3,15 +3,18 @@
     <el-container class="fullScreen">
       <el-header>
         <ChoiceStore class="index" ref="store" />
-        <div>
+        <div class="inPageLogo">
+          <img src="../assets/img/avatar.svg" alt=""> MyAdmin
+        </div>
+        <!-- <div class="title">
           智能排班--
           {{ activePage }}
-        </div>
+        </div> -->
       </el-header>
       <el-container>
-        <el-aside width="100px">
-          <leftAside @changeNav="changeLabel" />
-        </el-aside>
+        <el-aside width="180px"
+          ><leftAside @changeNav="changeLabel"
+        /></el-aside>
         <el-container>
           <el-main>
             <!-- <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div> -->
@@ -65,9 +68,9 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .el-header {
-  background-color: #b3c0d1;
+  background-color: #f9f9f9;
   color: #333;
   text-align: left;
   line-height: 60px;
@@ -81,7 +84,7 @@ export default {
 }
 
 .el-aside {
-  background-color: #d3dce6;
+  background-color: #01182e;
   color: #333;
   text-align: center;
   line-height: 650px;
@@ -100,5 +103,18 @@ export default {
 
 main {
   height: 100%;
+}
+.inPageLogo {
+  width: 179px;
+  margin-left: -20px;
+  background-color: #01182e;
+  font-size: 23px;
+  font-weight: bolder;
+  font-style: initial;
+  color:#ffffff;
+}
+img{
+  height: 36px;
+  margin-top: 10px;
 }
 </style>

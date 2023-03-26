@@ -12,7 +12,7 @@
       <!-- 登录框 -->
       <div class="LoginForm">
         <div class="LoginTitle">
-          <img class="logo" src="../assets/img/circles.png" alt="">
+          <img class="logo" src="../assets/img/avatar.svg" alt="">
           <div>MyAdmin</div>
         </div>
         <!-- s输入框 -->
