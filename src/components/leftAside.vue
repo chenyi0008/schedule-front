@@ -1,10 +1,14 @@
 <template>
   <div>
     <div class="inPageLogo">
-      <img src="../assets/img/avatar.svg" alt="123"> MyAdmin
+      <img src="../assets/img/avatar.svg" alt=""> MyAdmin
     </div>
-    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" background-color="#01182e"
-      text-color="#a39e9e" router>
+    <el-menu default-active="store" 
+    class="el-menu-vertical-demo" 
+    @open="handleOpen" 
+    background-color="#01182e"
+    text-color="#ffEeEf" 
+    router>
       <el-menu-item-group>
         <el-menu-item index="store">门店信息</el-menu-item>
         <el-menu-item index="employee">员工数据</el-menu-item>
@@ -59,7 +63,7 @@ export default {
 <style scoped>
 .el-menu-item.is-active {
   background-color: #409eff !important;
-  color: #fff;
+  color: #ffffff;
 }
 
 .inPageLogo {

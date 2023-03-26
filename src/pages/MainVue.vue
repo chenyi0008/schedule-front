@@ -1,18 +1,16 @@
 <template>
   <div class="mainBox">
     <el-container class="fullScreen">
-      <el-aside width="180px"
-          ><leftAside/>
-        </el-aside>
-      
+      <el-aside width="240px">
+        <leftAside />
+      </el-aside>
       <el-container>
-       
         <el-container>
           <el-header>
-        <ChoiceStore class="index" ref="store" />
+            <ChoiceStore class="index" ref="store" />
 
-        员工后台管理系统
-      </el-header>
+            员工后台管理系统
+          </el-header>
           <el-main>
             <!-- <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div> -->
             <router-view />
@@ -59,7 +57,7 @@ export default {
   },
   methods: {
     changeLabel(label) {
-       console.log(label);
+      console.log(label);
       this.activePage = label;
     },
   },
@@ -102,6 +100,4 @@ export default {
 main {
   height: 100%;
 }
-
-
 </style>

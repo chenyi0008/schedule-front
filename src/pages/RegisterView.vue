@@ -4,13 +4,14 @@
     <!-- 登录模块 -->
     <div class="LoginBox">
       <!-- 图片 -->
-      <div class="LoginPic">
+      <!-- <div class="LoginPic">
         <img class="registerPicture" src="../assets/img/registerLogo.png" alt="" />
-      </div>
+      </div> -->
       <!-- 登录框 -->
       <div class="LoginForm">
         <div class="LoginTitle">
           <img class="logo" src="../assets/img/avatar.svg" alt="">
+          <div class="title">Register for</div>
           <div>MyAdmin</div>
         </div>
         <!-- s输入框 -->
@@ -99,8 +100,8 @@ export default {
 }
 
 .LoginBox {
-  width: 880px;
-  height: 450px;
+  width: 420px;
+  height: 500px;
   background-color: aliceblue;
   border-radius: 5%;
   position: absolute;
@@ -147,6 +148,12 @@ export default {
       margin-top: 30px;
       margin-left: 100px;
     }
+  }
+  .title{
+    font-size: 20px;
+      font-weight: bolder;
+      font-style: initial;
+      color:#10109b;
   }
 }
 </style>

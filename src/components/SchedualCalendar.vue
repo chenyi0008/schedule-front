@@ -1,5 +1,8 @@
 <template>
-	<FullCalendar ref="calendar" :options="calendarOption" />
+	<div>
+		<FullCalendar ref="calendar" :options="calendarOption" />
+	</div>
+	
 </template>
 
 <script>
