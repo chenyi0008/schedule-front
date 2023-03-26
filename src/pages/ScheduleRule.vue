@@ -5,10 +5,18 @@
       type="primary"
       plain
       @click="dialogVisible=true"
-    >新增</el-button>
-    <!-- 添加数据对话框表单 -->
+    >新增普通规则</el-button>
+    
+    <el-button
+    class="mainButton"
+      type="primary"
+      plain
+      @click="anotherdialogVisible=true"
+    >新增职位规则</el-button>
+    
+    <!-- 添加普通规则对话框表单 -->
     <el-dialog
-      title="新增规则"
+      title="普通规则"
       :visible.sync="dialogVisible"
       width="50%"
     >
@@ -19,9 +27,9 @@
       >
       <template>
         <el-form-item label="规则类型">
-          <el-select v-model="form.ruleType" placeholder="请选择">
-    <el-option
-      v-for="item in options"
+          <el-select v-model="form.ruleType" placeholder="请选择" style="width:100%">
+    <el-option 
+      v-for="item in options1"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -29,9 +37,11 @@
   </el-select>
         </el-form-item>
         </template>
+
         <el-form-item label="数据">
           <el-input v-model="form.value"></el-input>
         </el-form-item>
+
         <el-form-item>
           <el-button
             type="primary"
@@ -41,6 +51,80 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+
+    <!-- 添加职位规则对话框表单 -->
+    <el-dialog
+      title="新增职位规则"
+      :visible.sync="anotherdialogVisible"
+      width="50%"
+    >
+      <el-form
+        ref="form"
+        :model="form"
+        label-width="80px"
+      >
+      <template>
+        <el-form-item label="职业规则">
+          <el-input v-model="input" placeholder="请输入内容"></el-input>
+        </el-form-item>
+        </template>
+
+
+        <template><div style="width:100%">
+          开店人员
+        <el-select v-model="value1" multiple placeholder="请选择" style="width:77%">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  </div>
+  </template>
+
+  <template><div style="width: 100%;">
+      值班人员
+        <el-select v-model="value2" multiple placeholder="请选择" style="width:77%">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  </div>
+  </template>
+
+  <template>
+    <div style="width:100%;">
+        关店人员
+        <el-select v-model="value3" multiple placeholder="请选择" style="width:77%">
+
+          <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
+  </template>
+
+        <el-form-item>
+          <el-button 
+            type="primary"
+            @click="addTable()"
+          >提交</el-button>
+          <el-button @click="anotherdialogVisible=false">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+    
+
+
+
+
 
         <!-- 编辑小组详情模态框 -->
         <el-dialog :title="infoDialogTitle" :visible.sync="ruleInfoDialogVisible">
@@ -111,13 +195,14 @@
 
 </template>
 
- 
+
 <script>
 import shopButton from "../components/shopButton.vue";
 import { getAllRule , postRule, deleteRule,putRule, } from "@/apis/rule";
 export default {
   data() {
     return {
+      input: "职位规则",
       Rules:[],
       ruleMenbers:[],
       curruntRuleId:"",
@@ -144,13 +229,16 @@ export default {
       },
       //添加数据的对话框是否展示的标记
       dialogVisible: false,
+      //添加另外一个数据的对话框是否展示的标记
+      anotherdialogVisible: false,
+
       form: {
         ruleType: "",
         value: "",
         id:null,
         storeId:"",
       },
-      options: [{
+      options1: [{
           value: '选项1',
           label: '开店规则'
         }, {
@@ -163,15 +251,41 @@ export default {
           value: '选项4',
           label: '值班规则'
         }, {
-          value: '选项5',
-          label: '职位规则'
-        },{
-        value: '选项6',
+        value: '选项5',
           label: '休息规则'
         }, 
       ],
         value: '',
 
+
+        options: [{
+          value: '选项1',
+          label: '店长'
+        }, {
+          value: '选项2',
+          label: '副店长'
+        }, {
+          value: '选项3',
+          label: '经理'
+        }, {
+          value: '选项4',
+          label: '副经理'
+        }, {
+          value: '选项5',
+          label: '导购员'
+        },
+        {
+          value: '选项6',
+          label: '收银员'
+        },
+        {
+          value: '选项7',
+          label: '店员'
+        }
+      ],
+        value1: [],
+        value2:[],
+        value3:[],
       currentPage: 4,
     };
   
@@ -330,5 +444,8 @@ export default {
   margin-bottom: 20px;
   margin-top: 20px;
   margin-left: 20px;
+}
+.div{
+  float: left;
 }
 </style>
