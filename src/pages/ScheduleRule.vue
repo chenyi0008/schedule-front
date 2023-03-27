@@ -6,14 +6,14 @@
       plain
       @click="dialogVisible=true"
     >新增普通规则</el-button>
-    
+
     <el-button
-    class="mainButton"
+      class="mainButton"
       type="primary"
       plain
       @click="anotherdialogVisible=true"
     >新增职位规则</el-button>
-    
+
     <!-- 添加普通规则对话框表单 -->
     <el-dialog
       title="普通规则"
@@ -25,17 +25,22 @@
         :model="form"
         label-width="80px"
       >
-      <template>
-        <el-form-item label="规则类型">
-          <el-select v-model="form.ruleType" placeholder="请选择" style="width:100%">
-    <el-option 
-      v-for="item in options1"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-        </el-form-item>
+        <template>
+          <el-form-item label="规则类型">
+            <el-select
+              v-model="form.ruleType"
+              placeholder="请选择"
+              style="width:100%"
+            >
+              <el-option
+                v-for="item in options1"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
         </template>
 
         <el-form-item label="数据">
@@ -63,91 +68,123 @@
         :model="form"
         label-width="80px"
       >
-      <template>
-        <el-form-item label="职业规则">
-          <el-input v-model="input" placeholder="请输入内容"></el-input>
-        </el-form-item>
+        <template>
+          <el-form-item label="职业规则">
+            <el-input
+              v-model="input"
+              placeholder="请输入内容"
+            ></el-input>
+          </el-form-item>
         </template>
 
+        <template>
+          <div style="width:100%">
+            开店人员
+            <el-select
+              v-model="value1"
+              multiple
+              placeholder="请选择"
+              style="width:77%"
+            >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </template>
 
-        <template><div style="width:100%">
-          开店人员
-        <el-select v-model="value1" multiple placeholder="请选择" style="width:77%">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-  </div>
-  </template>
+        <template>
+          <div style="width: 100%;">
+            值班人员
+            <el-select
+              v-model="value2"
+              multiple
+              placeholder="请选择"
+              style="width:77%"
+            >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </template>
 
-  <template><div style="width: 100%;">
-      值班人员
-        <el-select v-model="value2" multiple placeholder="请选择" style="width:77%">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-  </div>
-  </template>
+        <template>
+          <div style="width:100%;">
+            关店人员
+            <el-select
+              v-model="value3"
+              multiple
+              placeholder="请选择"
+              style="width:77%"
+            >
 
-  <template>
-    <div style="width:100%;">
-        关店人员
-        <el-select v-model="value3" multiple placeholder="请选择" style="width:77%">
-
-          <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-</div>
-  </template>
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </template>
 
         <el-form-item>
-          <el-button 
+          <el-button
             type="primary"
-            @click="addTable()"
+            @click="addPostionRule()"
           >提交</el-button>
           <el-button @click="anotherdialogVisible=false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
-    
 
-
-
-
-
-        <!-- 编辑小组详情模态框 -->
-        <el-dialog :title="infoDialogTitle" :visible.sync="ruleInfoDialogVisible">
+    <!-- 编辑小组详情模态框 -->
+    <el-dialog
+      :title="infoDialogTitle"
+      :visible.sync="ruleInfoDialogVisible"
+    >
       <el-form :model="curruntRule">
         <el-form-item
           v-if="infoDialogTitle != '新建小组'"
           label="规则类型"
           :label-width="formLabelWidth"
-
         >
-          <el-input v-model="curruntRule.ruleType" autocomplete="off"></el-input>
+          <el-input
+            v-model="curruntRule.ruleType"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="数据" :label-width="formLabelWidth">
-          <el-input v-model="curruntRule.value" autocomplete="off"></el-input>
-          </el-form-item>
+        <el-form-item
+          label="数据"
+          :label-width="formLabelWidth"
+        >
+          <el-input
+            v-model="curruntRule.value"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
+      <div
+        slot="footer"
+        class="dialog-footer"
+      >
         <el-button @click="ruleInfoDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitRuleInfo"> 提 交 </el-button>
+        <el-button
+          type="primary"
+          @click="submitRuleInfo"
+        > 提 交 </el-button>
       </div>
     </el-dialog>
-
-
 
     <!-- 桌面表单 -->
     <el-table
@@ -166,7 +203,7 @@
       </el-table-column>
       <el-table-column
         prop="value"
-        label="数据"
+        label="规则"
         align="center"
       >
       </el-table-column>
@@ -175,21 +212,21 @@
         label="操作"
         align="center"
       >
-      <template slot-scope="scope">
-              <el-button
-              @click="editRule(scope.row)"
-                type="primary"
-                class="edit"
-                plain
-              >编辑</el-button>
-              <el-button 
-              @click="deleteRule(scope.row.id)"
-                type="danger"
-                class="delete"
-                plain
-              >删除</el-button>
-              </template>
-           </el-table-column>
+        <template slot-scope="scope">
+          <el-button
+            @click="editRule(scope.row)"
+            type="primary"
+            class="edit"
+            plain
+          >编辑</el-button>
+          <el-button
+            @click="deleteRule(scope.row.id)"
+            type="danger"
+            class="delete"
+            plain
+          >删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 
@@ -198,22 +235,22 @@
 
 <script>
 import shopButton from "../components/shopButton.vue";
-import { getAllRule , postRule, deleteRule,putRule, } from "@/apis/rule";
+import { getAllRule, postRule, deleteRule, putRule } from "@/apis/rule";
 export default {
   data() {
     return {
       input: "职位规则",
-      Rules:[],
-      ruleMenbers:[],
-      curruntRuleId:"",
-      curruntRule:{
-        id:"",
-        name:"",
+      Rules: [],
+      ruleMenbers: [],
+      curruntRuleId: "",
+      curruntRule: {
+        id: "",
+        name: "",
       },
-      RuleMenberDialogVisible:false,
-      ruleInfoDialogVisible:false,
-      infoDialogTitle:"",
-      formLabelWidth:"",
+      RuleMenberDialogVisible: false,
+      ruleInfoDialogVisible: false,
+      infoDialogTitle: "",
+      formLabelWidth: "",
       //表格数据
       tableData: [],
       //复选框选中的数据集合
@@ -224,8 +261,15 @@ export default {
       searchData: {
         ruleType: "",
         value: "",
-        storeId:"",
-        id:null,
+        storeId: "",
+        id: null,
+      },
+
+      params: {
+        ruleType: "职位规则",
+        value: "",
+        storeId: 1,
+        id: null,
       },
       //添加数据的对话框是否展示的标记
       dialogVisible: false,
@@ -235,66 +279,74 @@ export default {
       form: {
         ruleType: "",
         value: "",
-        id:null,
-        storeId:"",
+        id: null,
+        storeId: 1,
       },
-      options1: [{
-          value: '选项1',
-          label: '开店规则'
-        }, {
-          value: '选项2',
-          label: '关店规则'
-        }, {
-          value: '选项3',
-          label: '客流规则'
-        }, {
-          value: '选项4',
-          label: '值班规则'
-        }, {
-        value: '选项5',
-          label: '休息规则'
-        }, 
-      ],
-        value: '',
-
-
-        options: [{
-          value: '选项1',
-          label: '店长'
-        }, {
-          value: '选项2',
-          label: '副店长'
-        }, {
-          value: '选项3',
-          label: '经理'
-        }, {
-          value: '选项4',
-          label: '副经理'
-        }, {
-          value: '选项5',
-          label: '导购员'
+      options1: [
+        {
+          value: "开店规则",
+          label: "开店规则",
         },
         {
-          value: '选项6',
-          label: '收银员'
+          value: "关店规则",
+          label: "关店规则",
         },
         {
-          value: '选项7',
-          label: '店员'
-        }
+          value: "客流规则",
+          label: "客流规则",
+        },
+        {
+          value: "值班规则",
+          label: "值班规则",
+        },
+        {
+          value: "休息规则",
+          label: "休息规则",
+        },
       ],
-        value1: [],
-        value2:[],
-        value3:[],
+      value: "",
+
+      options: [
+        {
+          value: "店长",
+          label: "店长",
+        },
+        {
+          value: "副店长",
+          label: "副店长",
+        },
+        {
+          value: "经理",
+          label: "经理",
+        },
+        {
+          value: "副经理",
+          label: "副经理",
+        },
+        {
+          value: "导购员",
+          label: "导购员",
+        },
+        {
+          value: "收银员",
+          label: "收银员",
+        },
+        {
+          value: "店员",
+          label: "店员",
+        },
+      ],
+      value1: [],
+      value2: [],
+      value3: [],
       currentPage: 4,
     };
-  
   },
   components: {
     shopButton,
   },
-    // 挂载初始化
-    mounted() {
+  // 挂载初始化
+  mounted() {
     var _this = this;
     getAllRule().then((res) => {
       _this.tableData = res.data.data;
@@ -302,7 +354,6 @@ export default {
     });
   },
   methods: {
-
     toggleSelection(rows) {
       if (rows) {
         rows.forEach((row) => {
@@ -318,13 +369,31 @@ export default {
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
-    },      
+    },
     handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      },
+      console.log(`当前页: ${val}`);
+    },
     //查询方法
     onSubmit() {
       console.log(this.searchData);
+    },
+
+    addPostionRule() {
+      let s1 = this.value1.join(",");
+      let s2 = this.value2.join(",");
+      let s3 = this.value3.join(",");
+      this.params.value = `开店:${s1}|  值班:${s2}|  关店:${s3}`;
+      this.params.value = this.params.value; //修复饮用错误
+      console.log(this.params);
+      postRule(this.params).then((res) => {
+        if (res.data.code == 1) {
+          //添加成功
+          this.$message.success(res.data.msg);
+          this.anotherdialogVisible = false;
+          //隐藏对话框
+          location.reload(); // Refresh the current page
+        }
+      });
     },
 
     //添加数据
@@ -337,10 +406,10 @@ export default {
           this.$message.success(res.data.msg);
           this.dialogVisible = false;
           //关闭窗口
-          
+          location.reload(); // Refresh the current page
         }
       });
-  },
+    },
     //完成删除
     deleteRule(scheduleRuleid) {
       this.$confirm("此操作将永久删除小组，是否继续？", "提示", {
@@ -355,7 +424,7 @@ export default {
                 type: "success",
                 message: "删除成功!",
               });
-              this.tableData = res.data.data;
+              location.reload(); // Refresh the current page
             } else throw new Error(res.data.msg);
           });
         })
@@ -366,12 +435,12 @@ export default {
           });
         });
     },
-    editRule(store){
-    this.infoDialohTitle="小组详情";
-    this.curruntRule = JSON.parse(JSON.stringify(store));
-    this.ruleInfoDialogVisible = true ;
+    editRule(store) {
+      this.infoDialohTitle = "小组详情";
+      this.curruntRule = JSON.parse(JSON.stringify(store));
+      this.ruleInfoDialogVisible = true;
     },
-    submitRuleInfo(){
+    submitRuleInfo() {
       if (this.infoDialogTitle === "新建小组") {
         postRule({ ...this.curruntRule, storeId: this.tableData })
           .then((res) => {
@@ -381,7 +450,7 @@ export default {
               type: "success",
             });
             this.ruleInfoDialogVisible = false;
-            this.tableData;
+            location.reload(); // Refresh the current page
           })
           .catch((err) => {
             this.$message({
@@ -391,7 +460,7 @@ export default {
             });
           });
       } else {
-        putRule({ ...this.curruntRule ,})
+        putRule({ ...this.curruntRule })
           .then((res) => {
             this.$message({
               showClose: true,
@@ -399,7 +468,7 @@ export default {
               type: "success",
             });
             this.ruleInfoDialogVisible = false;
-            this.tableData;
+            location.reload(); // Refresh the current page
           })
           .catch((err) => {
             this.$message({
@@ -407,14 +476,11 @@ export default {
               message: err,
               type: "error",
             });
-           });
+          });
       }
     },
-
-
-
-    
-}};
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -445,7 +511,7 @@ export default {
   margin-top: 20px;
   margin-left: 20px;
 }
-.div{
+.div {
   float: left;
 }
 </style>
