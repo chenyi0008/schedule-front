@@ -6,6 +6,8 @@
     <el-table
       ref="multipleTable"
       :data="showStaff"
+      :header-cell-style="{'text-align':'center'}"
+      :cell-style="{'text-align':'center'}"
       tooltip-effect="dark"
       style="width: 100%"
       @selection-change="handleSelectionChange"

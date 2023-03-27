@@ -6,6 +6,8 @@
       :data="groups"
       tooltip-effect="dark"
       style="width: 100%"
+      :header-cell-style="{'text-align':'center'}"
+      :cell-style="{'text-align':'center'}"
     >
       <!-- <el-table-column type="selection" width="55" /> -->
       <el-table-column sortable prop="id" label="小组编号" />
