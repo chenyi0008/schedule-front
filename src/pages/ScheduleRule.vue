@@ -305,7 +305,7 @@ export default {
         },
       ],
       value: "",
-
+      
       options: [
         {
           value: "店长",
@@ -351,6 +351,7 @@ export default {
     getAllRule().then((res) => {
       _this.tableData = res.data.data;
       _this.searchData = res.data;
+
     });
   },
   methods: {
@@ -377,7 +378,41 @@ export default {
     onSubmit() {
       console.log(this.searchData);
     },
+    analysis(ruleType, value) {
+      const strSlice = value.split(",");
+      const arr = new Array(10).fill(0);
 
+      for (let idx = 0; idx < strSlice.length; idx++) {
+        arr[idx] = parseFloat(strSlice[idx]);
+      }
+      switch (ruleType) {
+        case "开店规则":
+          return `表示开店${arr[0].toFixed(
+            2
+          )}个小时前需要有员工当值，当值员工数为门店面积除以${arr[1].toFixed(
+            2
+          )}`;
+        case "关店规则":
+          return `关店${arr[0].toFixed(
+            0
+          )}个半小时内需要有员工当值，人数 = 门店面积 ${arr[1].toFixed(
+            0
+          )} + ${arr[2].toFixed(0)}`;
+        case "客流规则":
+          return `表示客流量在${arr[0].toFixed(
+            0
+          )}人以上时，至少需要有${arr[1].toFixed(0)}个员工当值`;
+        case "值班规则":
+          return `表示如果没有客流量的时候，需要有${arr[0].toFixed(
+            0
+          )}个员工当值`;
+        case "休息规则":
+          return `表示员工每连续工作${arr[0].toFixed(
+            0
+          )}个小时后需要休息${arr[1].toFixed(0)}个小时`;
+      }
+      return "返回错误";
+    },
     addPostionRule() {
       let s1 = this.value1.join(",");
       let s2 = this.value2.join(",");
