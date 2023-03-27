@@ -233,4 +233,11 @@ export default {
 .fc-event-main-frame {
 	line-height: 30px;
 }
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 1.5em;
+    padding: 15px;
+}
+.fc-direction-ltr{
+	background-color: #fff;
+}
 </style>

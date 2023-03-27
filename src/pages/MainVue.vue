@@ -1,7 +1,7 @@
 <template>
   <div class="mainBox">
     <el-container class="fullScreen">
-      <el-aside width="240px">
+      <el-aside width="199px">
         <leftAside />
       </el-aside>
       <el-container>
@@ -91,6 +91,7 @@ export default {
   color: #333;
   text-align: center;
   line-height: 75px;
+  height: 10px;
 }
 
 .index {
