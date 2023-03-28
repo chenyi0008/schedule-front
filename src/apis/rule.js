@@ -31,9 +31,10 @@ export function getAllRule() {
   });
 }
 
-export function getRuleById(id) {
+export function getRuleById(params) {
   return request({
-    url: "rule/" + id,
+    url: "rule",
+    params,
     method: "get",
   });
 }
@@ -45,5 +46,3 @@ export function getRuleByStoreId(params) {
     params,
   });
 }
-
-

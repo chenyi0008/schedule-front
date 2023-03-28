@@ -4,33 +4,27 @@
       class="mainButton"
       type="primary"
       plain
-      @click="dialogVisible=true"
-    >新增普通规则</el-button>
+      @click="dialogVisible = true"
+      >新增普通规则</el-button
+    >
 
     <el-button
       class="mainButton"
       type="primary"
       plain
-      @click="anotherdialogVisible=true"
-    >新增职位规则</el-button>
+      @click="anotherdialogVisible = true"
+      >新增职位规则</el-button
+    >
 
     <!-- 添加普通规则对话框表单 -->
-    <el-dialog
-      title="普通规则"
-      :visible.sync="dialogVisible"
-      width="50%"
-    >
-      <el-form
-        ref="form"
-        :model="form"
-        label-width="80px"
-      >
+    <el-dialog title="普通规则" :visible.sync="dialogVisible" width="50%">
+      <el-form ref="form" :model="form" label-width="80px">
         <template>
           <el-form-item label="规则类型">
             <el-select
               v-model="form.ruleType"
               placeholder="请选择"
-              style="width:100%"
+              style="width: 100%"
             >
               <el-option
                 v-for="item in options1"
@@ -47,12 +41,34 @@
           <el-input v-model="form.value"></el-input>
         </el-form-item>
 
+        <template>
+          <div>
+            <el-card class="box-card">
+              <p>
+                提示:用户可自定义实现符合实际店铺的操作，用户未设置则为默认值。
+              </p>
+              <p>
+                开店规则:"1.5,23.5” 表示开店
+                1个半小时前要有员工当值,当值员工数为门店面积除以23.5
+              </p>
+              <p>
+                关店规则:例如："2,3,13” 表示关店 2
+                个半小时内需要有员工当值，人数 = 门店面积/13 + 3
+              </p>
+              <p>
+                客流规则:例如"3.8" 表示按照业务预测数据，每 3.8
+                个客流必须安排至少一个员工当值
+              </p>
+              <p>
+                值班规则:例如"1"表示如果没有客流量的时候，至少需要1个店员值班.
+              </p>
+              <p>休息规则:例如“2” 表示每连续工作 4 小时，休息 2 小时。</p>
+            </el-card>
+          </div>
+        </template>
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="addTable()"
-          >提交</el-button>
-          <el-button @click="dialogVisible=false">取消</el-button>
+          <el-button type="primary" @click="addTable()">提交</el-button>
+          <el-button @click="dialogVisible = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -63,28 +79,21 @@
       :visible.sync="anotherdialogVisible"
       width="50%"
     >
-      <el-form
-        ref="form"
-        :model="form"
-        label-width="80px"
-      >
+      <el-form ref="form" :model="form" label-width="80px">
         <template>
           <el-form-item label="职业规则">
-            <el-input
-              v-model="input"
-              placeholder="请输入内容"
-            ></el-input>
+            <el-input v-model="input" placeholder="请输入内容"></el-input>
           </el-form-item>
         </template>
 
         <template>
-          <div style="width:100%">
+          <div style="width: 100%">
             开店人员
             <el-select
               v-model="value1"
               multiple
               placeholder="请选择"
-              style="width:77%"
+              style="width: 77%"
             >
               <el-option
                 v-for="item in options"
@@ -98,13 +107,13 @@
         </template>
 
         <template>
-          <div style="width: 100%;">
+          <div style="width: 100%">
             值班人员
             <el-select
               v-model="value2"
               multiple
               placeholder="请选择"
-              style="width:77%"
+              style="width: 77%"
             >
               <el-option
                 v-for="item in options"
@@ -118,15 +127,14 @@
         </template>
 
         <template>
-          <div style="width:100%;">
+          <div style="width: 100%">
             关店人员
             <el-select
               v-model="value3"
               multiple
               placeholder="请选择"
-              style="width:77%"
+              style="width: 77%"
             >
-
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -137,22 +145,25 @@
             </el-select>
           </div>
         </template>
-
+        <template>
+          <el-card class="box-card">
+            <div>
+              <p>提示:排列的默认顺序是：“开店|值班|关店”</p>
+              <p>
+                用户可自定义实现符合实际店铺的操作，用户未设置则为班次没有限定职业。
+              </p>
+            </div>
+          </el-card>
+        </template>
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="addPostionRule()"
-          >提交</el-button>
-          <el-button @click="anotherdialogVisible=false">取消</el-button>
+          <el-button type="primary" @click="addPostionRule()">提交</el-button>
+          <el-button @click="anotherdialogVisible = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
 
     <!-- 编辑小组详情模态框 -->
-    <el-dialog
-      :title="infoDialogTitle"
-      :visible.sync="ruleInfoDialogVisible"
-    >
+    <el-dialog :title="infoDialogTitle" :visible.sync="ruleInfoDialogVisible">
       <el-form :model="curruntRule">
         <el-form-item
           v-if="infoDialogTitle != '新建小组'"
@@ -164,25 +175,13 @@
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item
-          label="数据"
-          :label-width="formLabelWidth"
-        >
-          <el-input
-            v-model="curruntRule.value"
-            autocomplete="off"
-          ></el-input>
+        <el-form-item label="规则" :label-width="formLabelWidth">
+          <el-input v-model="curruntRule.value" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
-      <div
-        slot="footer"
-        class="dialog-footer"
-      >
+      <div slot="footer" class="dialog-footer">
         <el-button @click="ruleInfoDialogVisible = false">取 消</el-button>
-        <el-button
-          type="primary"
-          @click="submitRuleInfo"
-        > 提 交 </el-button>
+        <el-button type="primary" @click="submitRuleInfo"> 提 交 </el-button>
       </div>
     </el-dialog>
 
@@ -194,51 +193,42 @@
       style="max-height: 490px"
       @selection-change="handleSelectionChange"
     >
-
-      <el-table-column
-        prop="ruleType"
-        label="规则类型"
-        align="center"
-      >
+      <el-table-column prop="ruleType" label="规则类型" align="center">
       </el-table-column>
-      <el-table-column
-        prop="value"
-        label="规则"
-        align="center"
-      >
+      <el-table-column label="规则" align="center">
+        <template slot-scope="scope">
+          {{ analysis(scope.row.ruleType, scope.row.value) }}
+        </template>
       </el-table-column>
-      <el-table-column
-        prop="control"
-        label="操作"
-        align="center"
-      >
+      <el-table-column prop="control" label="操作" align="center">
         <template slot-scope="scope">
           <el-button
             @click="editRule(scope.row)"
             type="primary"
             class="edit"
             plain
-          >编辑</el-button>
+            >编辑</el-button
+          >
           <el-button
             @click="deleteRule(scope.row.id)"
             type="danger"
             class="delete"
             plain
-          >删除</el-button>
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
   </div>
-
 </template>
-
 
 <script>
 import shopButton from "../components/shopButton.vue";
-import { getAllRule, postRule, deleteRule, putRule } from "@/apis/rule";
+import { postRule, deleteRule, putRule, getRuleById } from "@/apis/rule";
 export default {
   data() {
     return {
+      storeId:-1,
       input: "职位规则",
       Rules: [],
       ruleMenbers: [],
@@ -275,13 +265,16 @@ export default {
       dialogVisible: false,
       //添加另外一个数据的对话框是否展示的标记
       anotherdialogVisible: false,
-
+      
       form: {
         ruleType: "",
         value: "",
         id: null,
         storeId: 1,
       },
+
+      positionRuleValue: '',
+
       options1: [
         {
           value: "开店规则",
@@ -305,7 +298,7 @@ export default {
         },
       ],
       value: "",
-      
+
       options: [
         {
           value: "店长",
@@ -347,14 +340,29 @@ export default {
   },
   // 挂载初始化
   mounted() {
-    var _this = this;
-    getAllRule().then((res) => {
-      _this.tableData = res.data.data;
-      _this.searchData = res.data;
-
-    });
+  },
+  watch: {
+    "$store.state.storeId": {
+      handler(val) {
+        this.storeId = val;
+        this.getRules(val);
+        this.form.storeId = val;
+        this.params.storeId = val
+        console.log(val);
+      },
+      immediate: true,
+      deep: true,
+    },
   },
   methods: {
+    getRules(storeId) {
+      getRuleById({ storeId: storeId }).then((res) => {
+        this.tableData = res.data.data;
+        console.log(res.data);
+        this.searchData = res.data;
+      });
+    },
+
     toggleSelection(rows) {
       if (rows) {
         rows.forEach((row) => {
@@ -378,6 +386,25 @@ export default {
     onSubmit() {
       console.log(this.searchData);
     },
+    //添加方法
+    addPostionRule() {
+      const s1 = this.value1.join(",");
+      const s2 = this.value2.join(",");
+      const s3 = this.value3.join(",");
+      this.params.value = `开店:${s1}|  值班:${s2}|  关店:${s3}`;
+      this.positionRuleValue = this.params.value;
+      console.log(this.params);
+      postRule(this.params).then((res) => {
+        if (res.data.code == 1) {
+          //添加成功
+          this.$message.success(res.data.msg);
+          this.anotherdialogVisible = false;
+          //隐藏对话框..
+          location.reload(); // Refresh the current page
+        }
+      });
+    },
+
     analysis(ruleType, value) {
       const strSlice = value.split(",");
       const arr = new Array(10).fill(0);
@@ -387,49 +414,36 @@ export default {
       }
       switch (ruleType) {
         case "开店规则":
-          return `表示开店${arr[0].toFixed(
+          return `开店\n${arr[0].toFixed(
+            1
+          )}\n个小时前需要有员工当值，当值员工数为门店面积\n/\n${arr[1].toFixed(
             2
-          )}个小时前需要有员工当值，当值员工数为门店面积除以${arr[1].toFixed(
-            2
-          )}`;
+          )}\n`;
         case "关店规则":
-          return `关店${arr[0].toFixed(
-            0
-          )}个半小时内需要有员工当值，人数 = 门店面积 ${arr[1].toFixed(
-            0
-          )} + ${arr[2].toFixed(0)}`;
+        return `关店\n${arr[0].toFixed(
+            1
+          )}\n个小时内需要有\n${(arr[1] +arr[2]).toFixed(0)}\n名员工当值`;
+        
         case "客流规则":
-          return `表示客流量在${arr[0].toFixed(
+        return `客流量在\n${arr[0].toFixed(
             0
-          )}人以上时，至少需要有${arr[1].toFixed(0)}个员工当值`;
+          )}\n人以上时，至少需要有\n${arr[1].toFixed(0)}\n个员工当值`;
+        
+        case"职位规则":
+        return `${value}`;
+
         case "值班规则":
-          return `表示如果没有客流量的时候，需要有${arr[0].toFixed(
+          return `没有客流量的时候，需要有\n${arr[0].toFixed(
             0
-          )}个员工当值`;
+          )}\n个员工当值`;
         case "休息规则":
-          return `表示员工每连续工作${arr[0].toFixed(
+          return `表示员工每连续工作\n${arr[0].toFixed(
             0
-          )}个小时后需要休息${arr[1].toFixed(0)}个小时`;
+          )}\n个小时后需要休息\n${arr[1].toFixed(0)}\n个小时`;
       }
       return "返回错误";
     },
-    addPostionRule() {
-      let s1 = this.value1.join(",");
-      let s2 = this.value2.join(",");
-      let s3 = this.value3.join(",");
-      this.params.value = `开店:${s1}|  值班:${s2}|  关店:${s3}`;
-      this.params.value = this.params.value; //修复饮用错误
-      console.log(this.params);
-      postRule(this.params).then((res) => {
-        if (res.data.code == 1) {
-          //添加成功
-          this.$message.success(res.data.msg);
-          this.anotherdialogVisible = false;
-          //隐藏对话框
-          location.reload(); // Refresh the current page
-        }
-      });
-    },
+    
 
     //添加数据
     addTable() {
@@ -548,5 +562,16 @@ export default {
 }
 .div {
   float: left;
+}
+.text {
+  font-size: 14px;
+}
+
+.item {
+  padding: 18px 0;
+}
+
+.box-card {
+  width: 600px;
 }
 </style>

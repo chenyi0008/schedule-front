@@ -2,7 +2,8 @@ import axios from "axios";
 import storage from "@/storage";
 
 const service = axios.create({
-  baseURL: "http://113.125.103.168:8085/", // url = base url + request url
+  baseURL: "/api",
+  // baseURL: "http://113.125.103.168:8085/", // url = base url + request url
   timeout: 5000, // request timeout
 });
 
@@ -14,7 +15,7 @@ service.interceptors.request.use(
     //   const tokenType = token ? tokenInfo.tokenType.substring(0, 1).toUpperCase() + tokenInfo.tokenType.substring(1) + ' ' : null
     if (token) {
       config.headers.token = token;
-      // config.headers["Access-Control-Allow-Origin"] = "*";
+      // config.headers["Access-Control-Allow-Orgin"] = "*";
       // console.log(config.headers);
     }
     return config;
