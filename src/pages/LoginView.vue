@@ -25,7 +25,10 @@
 						:rules="rules"
 					>
 						<el-form-item label="账号" prop="username">
-							<el-input v-model="LoginForm.username"></el-input>
+							<el-input
+								v-model="LoginForm.username"
+								@keyup.enter.native="nextInput"
+							></el-input>
 						</el-form-item>
 						<el-form-item label="密码" prop="password">
 							<el-input
@@ -111,7 +114,13 @@ export default {
 				// } else this.$message(result.data.msg);
 			});
 		},
-
+		nextInput() {
+			try {
+				this.$refs.LoginFormRef.$children[1].$children[ 1].focus();
+			} catch (err) {
+				console.error(err);
+			}
+		},
 		reg() {
 			this.$router.push("/register");
 		},
