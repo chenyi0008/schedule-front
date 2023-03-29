@@ -425,9 +425,9 @@ export default {
           )}\n个小时内需要有\n${(arr[1] +arr[2]).toFixed(0)}\n名员工当值`;
         
         case "客流规则":
-        return `客流量在\n${arr[0].toFixed(
+        return `每 \n${arr[0].toFixed(
             0
-          )}\n人以上时，至少需要有\n${arr[1].toFixed(0)}\n个员工当值`;
+          )}\n 个客流，至少需要有\n1\n个员工当值`;
         
         case"职位规则":
         return `${value}`;
@@ -437,9 +437,7 @@ export default {
             0
           )}\n个员工当值`;
         case "休息规则":
-          return `表示员工每连续工作\n${arr[0].toFixed(
-            0
-          )}\n个小时后需要休息\n${arr[1].toFixed(0)}\n个小时`;
+          return `表示员工每连续工作\n4\n个小时后需要休息\n${arr[0].toFixed(0)}\n个小时`;
       }
       return "返回错误";
     },
