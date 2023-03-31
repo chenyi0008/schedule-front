@@ -14,31 +14,63 @@
           <div class="title">Register for</div>
           <div>MyAdmin</div>
         </div>
+
         <!-- s输入框 -->
         <div class="InputArea">
           <el-form
-            label-width="55px"
+            lable-position="left"
+            label-width="70px"
             ref="RegisterFormRef"
             :model="RegisterForm"
             :rules="rules"
           >
-            <el-form-item label="账号" prop="userName">
+            <el-form-item label="账号" prop="userName" v-show="showAct">
               <el-input v-model="RegisterForm.userName"></el-input>
             </el-form-item>
-            <el-form-item label="密码" prop="password">
+            <el-form-item label="密码" prop="password" v-show="showAct">
               <el-input
                 v-model="RegisterForm.password"
                 type="password"
               ></el-input>
             </el-form-item>
+
+            <!-- 邮箱验证码 -->
+            <el-form-item 
+            class="EmailText"
+            label="验证邮箱" 
+            prop="registerEmail" 
+            v-show="showEmail">
+              <el-input 
+              placeholder="请输入验证邮箱"
+              style="width: 265px;"
+              v-model="RegisterForm.registerEmail"
+              ></el-input>
+            </el-form-item>
+            
+            <el-form-item 
+            class="ACK"
+            label="验证码" 
+            style="width:350px"
+            prop="registerEmail" 
+            v-show="showEmail">
+              <el-input
+                placeholder="请输入验证码"
+                style="width: 130px;"
+                v-model="RegisterForm.ACK"
+              ></el-input>
+              <el-button @click="getACK" v-show="showEmail" class="getBut">获取验证码</el-button>
+            </el-form-item>
+            
           </el-form>
         </div>
-        <!-- 按钮 -->
+
+        <!-- 注册按钮 -->
         <div class="LoginBtn">
           <el-form>
             <el-form-item>
-              <el-button type="primary" @click="register" round>注册</el-button>
-              <el-button type="success" @click="back" round>返回</el-button>
+              <el-button type="primary" @click="switchToEmail" round>验证</el-button>
+              <el-button type="success" @click="backToRegister" v-show="showEmail" round>返回</el-button>
+              <el-button type="success" @click="back" v-show="showAct" round >返回 </el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -52,9 +84,13 @@ import { putRegister } from "@/apis/user";
 export default {
   data() {
     return {
+      showAct:true,
+      showEmail:false,
       RegisterForm: {
         userName: "",
         password: "",
+        registerEmail:"",
+        ACK:""
       },
       rules: {
         userName: [
@@ -78,20 +114,35 @@ export default {
           else if (res.data.msg == "注册成功") this.$router.push("/login");
           this.$message(res.data.msg);
         });
-        // const result  = await this.$axios.put('user',this.RegisterForm);
-        // console.log(result);
-        // if(result.status != 200) this.$message.error("注册失败");
-        // else if(result.data.msg == "注册成功") this.$router.push("/login");
-        // this.$message(result.data.msg);
       });
     },
     back() {
       this.$router.push("/login");
     },
+    switchToEmail(){
+      this.$refs.RegisterFormRef.validate(async (valid) => {
+        if (!valid) {
+          this.$alert("请完善注册信息");
+        if(valid)  {
+          this.showAct=false;
+          this.showEmail = true;
+        } 
+      }
+      })
+     
+    },
+    getACK(){
+
+    },
+    backToRegister(){
+      this.showAct=true;
+      this.showEmail = false;
+    }
   },
 };
 
 </script>
+
 <style lang="less" scoped>
 .LoginContainer {
   background-image: url(../assets/img/bg.png);
@@ -113,11 +164,6 @@ export default {
     float: left;
     width: 490px;
     height: 450px;
-
-    .registerPicture {
-      width: 110%;
-      height: 100%;
-    }
   }
   .LoginForm {
     float: right;
@@ -140,7 +186,7 @@ export default {
     }
 
     .InputArea {
-      padding-right: 30px;
+      padding-right: 60px;
       margin-top: 30px;
     }
 
@@ -154,6 +200,10 @@ export default {
       font-weight: bolder;
       font-style: initial;
       color:#10109b;
+  }
+  .getBut{
+    float: right;
+    margin-right: 15px;
   }
 }
 </style>

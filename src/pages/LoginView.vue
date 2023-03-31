@@ -19,7 +19,8 @@
 				<!-- s输入框 -->
 				<div class="InputArea">
 					<el-form
-						label-width="55px"
+					lable-position="left"
+						label-width="70px"
 						ref="LoginFormRef"
 						:model="LoginForm"
 						:rules="rules"
