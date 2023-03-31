@@ -17,50 +17,24 @@
 
         <!-- s输入框 -->
         <div class="InputArea">
-          <el-form
-            lable-position="left"
-            label-width="70px"
-            ref="RegisterFormRef"
-            :model="RegisterForm"
-            :rules="rules"
-          >
+          <el-form lable-position="left" label-width="70px" ref="RegisterFormRef" :model="RegisterForm" :rules="rules">
             <el-form-item label="账号" prop="userName" v-show="showAct">
               <el-input v-model="RegisterForm.userName"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password" v-show="showAct">
-              <el-input
-                v-model="RegisterForm.password"
-                type="password"
-              ></el-input>
+              <el-input v-model="RegisterForm.password" type="password"></el-input>
             </el-form-item>
 
             <!-- 邮箱验证码 -->
-            <el-form-item 
-            class="EmailText"
-            label="验证邮箱" 
-            prop="registerEmail" 
-            v-show="showEmail">
-              <el-input 
-              placeholder="请输入验证邮箱"
-              style="width: 265px;"
-              v-model="RegisterForm.registerEmail"
-              ></el-input>
+            <el-form-item class="EmailText" label="验证邮箱" prop="registerEmail" v-show="showEmail">
+              <el-input placeholder="请输入验证邮箱" style="width: 265px;" v-model="RegisterForm.registerEmail"></el-input>
             </el-form-item>
-            
-            <el-form-item 
-            class="ACK"
-            label="验证码" 
-            style="width:350px"
-            prop="registerEmail" 
-            v-show="showEmail">
-              <el-input
-                placeholder="请输入验证码"
-                style="width: 130px;"
-                v-model="RegisterForm.ACK"
-              ></el-input>
+
+            <el-form-item class="ACK" label="验证码" style="width:350px" prop="registerEmail" v-show="showEmail">
+              <el-input placeholder="请输入验证码" style="width: 130px;" v-model="RegisterForm.ACK"></el-input>
               <el-button @click="getACK" v-show="showEmail" class="getBut">获取验证码</el-button>
             </el-form-item>
-            
+
           </el-form>
         </div>
 
@@ -70,7 +44,7 @@
             <el-form-item>
               <el-button type="primary" @click="switchToEmail" round>验证</el-button>
               <el-button type="success" @click="backToRegister" v-show="showEmail" round>返回</el-button>
-              <el-button type="success" @click="back" v-show="showAct" round >返回 </el-button>
+              <el-button type="success" @click="back" v-show="showAct" round>返回 </el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -84,18 +58,18 @@ import { putRegister } from "@/apis/user";
 export default {
   data() {
     return {
-      showAct:true,
-      showEmail:false,
+      showAct: true,
+      showEmail: false,
       RegisterForm: {
         userName: "",
         password: "",
-        registerEmail:"",
-        ACK:""
+        registerEmail: "",
+        ACK: ""
       },
       rules: {
         userName: [
           { required: true, message: "请输入用户名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          { min: 5, max: 8, message: "长度在 3 到 5 个字符", trigger: "blur" },
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
@@ -119,23 +93,24 @@ export default {
     back() {
       this.$router.push("/login");
     },
-    switchToEmail(){
+    switchToEmail() {
       this.$refs.RegisterFormRef.validate(async (valid) => {
         if (!valid) {
           this.$alert("请完善注册信息");
-        if(valid)  {
-          this.showAct=false;
-          this.showEmail = true;
-        } 
-      }
+        }
+        if (valid) {
+            this.showAct = false;
+            this.showEmail = true;
+            console.log(this.showAct);
+          }
       })
-     
-    },
-    getACK(){
 
     },
-    backToRegister(){
-      this.showAct=true;
+    getACK() {
+
+    },
+    backToRegister() {
+      this.showAct = true;
       this.showEmail = false;
     }
   },
@@ -160,11 +135,13 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
   opacity: 85%;
+
   .LoginPic {
     float: left;
     width: 490px;
     height: 450px;
   }
+
   .LoginForm {
     float: right;
     width: 390px;
@@ -176,8 +153,9 @@ export default {
       font-size: 50px;
       font-weight: bolder;
       font-style: initial;
-      color:#10109b;
-      .logo{
+      color: #10109b;
+
+      .logo {
         padding-left: 90px;
         margin-top: -30px;
         margin-bottom: -20px;
@@ -195,13 +173,15 @@ export default {
       margin-left: 100px;
     }
   }
-  .title{
+
+  .title {
     font-size: 20px;
-      font-weight: bolder;
-      font-style: initial;
-      color:#10109b;
+    font-weight: bolder;
+    font-style: initial;
+    color: #10109b;
   }
-  .getBut{
+
+  .getBut {
     float: right;
     margin-right: 15px;
   }
