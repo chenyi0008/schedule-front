@@ -4,12 +4,19 @@
       class="mainButton"
       type="primary"
       plain
-      @click="dialogVisible = true"
-      >新增门店</el-button
-    >
+      @click="dialogVisible=true"
+    >新增</el-button>
     <!-- 添加数据对话框表单 -->
-    <el-dialog title="新增门店" :visible.sync="dialogVisible" width="50%">
-      <el-form ref="form" :model="form" label-width="80px">
+    <el-dialog
+      title="新增门店"
+      :visible.sync="dialogVisible"
+      width="50%"
+    >
+      <el-form
+        ref="form"
+        :model="form"
+        label-width="80px"
+      >
         <el-form-item label="名称">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
@@ -20,49 +27,67 @@
           <el-input v-model="form.area"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="addTable()">提交</el-button>
-          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button
+            type="primary"
+            @click="addTable()"
+          >提交</el-button>
+          <el-button @click="dialogVisible=false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
 
+    
+
     <!-- 对话框 -->
-    <el-form :inline="true" :model="searchData" class="demo-form-inline">
+    <el-form
+      :inline="true"
+      :model="searchData"
+      class="demo-form-inline"
+    >
       <el-form-item label="">
-        <el-input v-model="searchData.name" placeholder="名称"></el-input>
+        <el-input
+          v-model="searchData.name"
+          placeholder="名称"
+        ></el-input>
       </el-form-item>
       <el-form-item label="">
-        <el-input v-model="searchData.address" placeholder="地址"></el-input>
+        <el-input
+          v-model="searchData.address"
+          placeholder="地址"
+        ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button class="el-button1" type="primary" @click="onSubmit"
-          >查询</el-button
-        >
+        <el-button
+          class="el-button1"
+          type="primary"
+          @click="onSubmit"
+        >查询</el-button>
       </el-form-item>
     </el-form>
 
-    <!-- 编辑小组详情模态框 -->
-    <el-dialog :title="infoDialogTitle" :visible.sync="storeInfoDialogVisible">
+        <!-- 编辑小组详情模态框 -->
+        <el-dialog :title="infoDialogTitle" :visible.sync="storeInfoDialogVisible">
       <el-form :model="curruntStore">
         <el-form-item
           v-if="infoDialogTitle != '新建小组'"
           label="商店名称"
           :label-width="formLabelWidth"
+
         >
           <el-input v-model="curruntStore.name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="商店地址" :label-width="formLabelWidth">
-          <el-input
-            v-model="curruntStore.address"
-            autocomplete="off"
-          ></el-input>
+          <el-input v-model="curruntStore.address" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item
           v-if="infoDialogTitle != '新建小组'"
           label="商店面积"
           :label-width="formLabelWidth"
         >
-          <el-input v-model="curruntStore.size" autocomplete="off"></el-input>
+          <el-input
+            v-model="curruntStore.size"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -79,10 +104,18 @@
       style="max-height: 490px"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column prop="name" label="名称" align="center">
+      <el-table-column
+        prop="name"
+        label="名称"
+        align="center"
+      >
       </el-table-column>
 
-      <el-table-column prop="address" label="地址" align="center">
+      <el-table-column
+        prop="address"
+        label="地址"
+        align="center"
+      >
       </el-table-column>
 
       <el-table-column
@@ -91,44 +124,48 @@
         align="center"
       ></el-table-column>
 
-      <el-table-column prop="control" label="操作" align="center">
-        <template slot-scope="scope">
+      <el-table-column
+        prop="control"
+        label="操作"
+        align="center"
+      >
+      <template slot-scope="scope">
           <el-button
             @click="editStore(scope.row)"
             type="primary"
             class="edit"
             plain
-            >编辑</el-button
-          >
+          >编辑</el-button>
           <el-button
             @click="deleteStore(scope.row.id)"
             type="danger"
             class="delete"
             plain
-            >删除</el-button
-          >
+          >删除</el-button>
         </template>
+
       </el-table-column>
     </el-table>
-
-    <!-- 分页查询
+    
+    
+    <!-- 分页查询 -->
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="currentPage"
-      :page-sizes="[2, 4, 6]"
+      :page-sizes="[2,4,6]"
       :page-size="50"
       layout="total, sizes, prev, pager, next, jumper"
       :total="totalCount"
-    > -->
-    
-    <!-- </el-pagination> -->
+    >
+    </el-pagination>
   </div>
 </template>
 
 <script>
 import shopButton from "../components/shopButton.vue";
 import {
+  getAllStore,
   postStore,
   deleteStore,
   getStoreById,
@@ -143,20 +180,21 @@ export default {
   data() {
     return {
       //每页显示的条数
-      pageSize: 5,
+      pageSize:5,
       //总记录数
-      totalCount: 100,
-      stores: [],
+      totalCount:100,
+      storeId:-1,
+      stores:[],
       storeMenbers: [],
-      currentStoreId: "",
-      curruntStore: {
-        id: "",
-        name: "",
+      currentStoreId:"",
+      curruntStore:{
+        id:"",
+        name:"",
       },
-      storeMenberDialogVisible: false,
-      storeInfoDialogVisible: false,
-      infoDialogTitle: "",
-      formLabelWidth: "",
+      storeMenberDialogVisible:false,
+      storeInfoDialogVisible:false,
+      infoDialogTitle:"",
+      formLabelWidth:"",
       //表格数据
       tableData: [],
       //复选框选中数据集合
@@ -181,41 +219,21 @@ export default {
     };
   },
   mounted() {
-    this.fetchData(
-      this.currentPage,
-      this.pageSize,
-      this.storeName,
-      this.address,
-      this.storeId
-    );
+    this.fetchData(this.currentPage, this.pageSize,this.storeName,this.address);
   },
-  watch: {
-    "$store.state.storeId": {
-      handler(val) {
-        console.log("val", val);
-        this.getStores(val);
-      },
-      immediate: true,
-      deep: true,
-    },
-  },
+  
   methods: {
-    getStores(id) {
-      getStoreById(id).then((res) => {
-        console.log("this.tableData", res.data);
-        this.tableData = [res.data.data];
-      });
-    },
+    fetchData(page, pageSize,storeName,address) {
 
-    fetchData(page, pageSize, storeName, address) {
-      getStoreByPage({ page, pageSize, storeName, address }).then((res) => {
-        //设置表格数据
-        // this.tableData = res.data.data.records;
-        this.searchData = res.data;
-        //设置总记录数
-        this.totalCount = res.data.data.total;
-      });
-    },
+    getStoreByPage({page, pageSize,storeName,address}).then((res) => {
+      
+      //设置表格数据
+      this.tableData = res.data.data.records;
+      this.searchData = res.data;
+      //设置总记录数
+      this.totalCount = res.data.data.total
+    });
+  },
     toggleSelection(rows) {
       if (rows) {
         rows.forEach((row) => {
@@ -230,32 +248,35 @@ export default {
       this.multipleSelection = val;
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      // console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.fetchData(val,this.pageSize);
     },
     handleCurrentChange(val) {
-      this.currentPage = val;
-      this.fetchData(val, this.pageSize);
-    },
+    this.currentPage = val;
+    this.fetchData(val, this.pageSize);
+  },
 
     //查询方法
     onSubmit() {
-      const page = 1; // 第一页
-      const pageSize = 10; // 每页显示10条数据
-      const storeName = this.searchData.name; // 从表单中获取店铺名称
-      const address = this.searchData.address; // 从表单中获取地址
-      // 调用分页查询函数
-      getStoreByPage({ page, pageSize, storeName, address }).then((res) => {
-        // 设置表格数据
-        // this.tableData = res.data.data.records;
-        // 将获取的数据赋值给一个新的变量
-        const searchData = res.data;
-        // 将新的变量赋值给页面显示的数据变量
-        this.searchData = searchData;
-        // 设置总记录数
-        this.totalCount = res.data.data.total;
-      });
-    },
+  const page = 1; // 第一页
+  const pageSize = 5; // 每页显示10条数据
+  const storeName = this.searchData.name; // 从表单中获取店铺名称
+  const address = this.searchData.address; // 从表单中获取地址
+  // 调用分页查询函数
+  getStoreByPage({ page, pageSize, storeName, address }).then((res) => {
+    // 设置表格数据
+    this.tableData = res.data.data.records;
+    // 将获取的数据赋值给一个新的变量
+    const searchData = res.data;
+    // 将新的变量赋值给页面显示的数据变量
+    this.searchData = searchData;
+    // 设置总记录数
+    this.totalCount = res.data.data.total;
+  });
+}
 
+,
     //提交新数据
     addTable() {
       // console.log(this.form)
@@ -267,8 +288,8 @@ export default {
           this.$message.success(res.data.msg);
           this.dialogVisible = false;
           //关闭窗口
+          location.reload(); // Refresh the current page
         }
-        location.reload();
       });
     },
     //完成删除
@@ -297,13 +318,13 @@ export default {
         });
     },
     //编辑商店
-    editStore(store) {
-      this.infoDialohTitle = "小组详情";
-      this.curruntStore = JSON.parse(JSON.stringify(store));
-      this.storeInfoDialogVisible = true;
+    editStore(store){
+    this.infoDialohTitle="小组详情";
+    this.curruntStore = JSON.parse(JSON.stringify(store));
+    this.storeInfoDialogVisible = true ;
     },
-    submitStoreInfo() {
-      if (this.infoDialogTitle === "新建商店") {
+    submitStoreInfo(){
+      if (this.infoDialogTitle === "新建小组") {
         postStore({ ...this.curruntStore, storeId: this.tableData })
           .then((res) => {
             this.$message({
@@ -322,7 +343,7 @@ export default {
             });
           });
       } else {
-        putStore({ ...this.curruntStore })
+        putStore({ ...this.curruntStore ,})
           .then((res) => {
             this.$message({
               showClose: true,
@@ -338,7 +359,7 @@ export default {
               message: err,
               type: "error",
             });
-          });
+           });
       }
     },
   },
@@ -346,9 +367,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-table {
-  margin-top: -20px;
-}
 .el-input {
   width: 120px;
   margin-bottom: 20px;
@@ -376,7 +394,4 @@ export default {
   margin-top: 20px;
   margin-left: 20px;
 }
-.el-pagination {
-  padding: 20px 5px;
-}
-</style>
+</style> 
