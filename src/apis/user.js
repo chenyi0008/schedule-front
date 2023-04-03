@@ -8,19 +8,21 @@ export function postLogin(data) {
   });
 }
 
-export function putRegisterByEmail(data) {
+export function putRegisterByEmail(data,params) {
   return request({
-    url: "user/email",
+    url: "/user/email",
     method: "put",
     data,
+    params:{code:params},
   });
 }
 
-export function postACK(data){
+export function sendMsg(data){
   return request({
-    url:"user/sendMsg",
+    url:"/user/sendMsg",
     method:"post",
     data,
+
   });
 }
 

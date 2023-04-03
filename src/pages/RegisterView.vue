@@ -17,10 +17,10 @@
 
         <!-- 输入框 -->
         <div class="InputArea">
-          <el-form v-show="showAct" lable-position="left" label-width="75px" ref="RegisterFormRef" :model="RegisterForm"
+          <el-form v-show="showAct" lable-position="left" label-width="70px" ref="RegisterFormRef" :model="RegisterForm"
             :rules="userInfoRules">
-            <el-form-item label="账号" prop="userName">
-              <el-input v-model="RegisterForm.userName"></el-input>
+            <el-form-item label="邮箱" prop="username">
+              <el-input v-model="RegisterForm.username"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
               <el-input v-model="RegisterForm.password" type="password"></el-input>
@@ -29,15 +29,15 @@
 
           <!-- 邮箱验证码 -->
           <el-form v-show="showEmail" lable-position="left" label-width="75px" ref="RegisterEmailFormRef"
-            :model="RegisterForm" :rules="emailInfoRules">
+            :model="RegisterForm" >
             <el-form-item class="EmailText" label="邮箱" prop="registerEmail" v-show="showEmail">
-              <el-input placeholder="请输入验证邮箱" style="width: 265px;" v-model="RegisterForm.registerEmail"></el-input>
+              <el-input disabled placeholder="验证邮箱" style="width: 265px;" v-model="RegisterForm.username"></el-input>
             </el-form-item>
 
             <el-form-item class="ACK" label="验证码" style="width:350px" prop="registerEmail" v-show="showEmail">
-              <el-input placeholder="请输入验证码" style="width: 130px;" v-model="RegisterForm.ACK"></el-input>
+              <el-input placeholder="请输入验证码" style="width: 130px;" v-model="code"></el-input>
               <el-button v-if="flag" @click="getACK" v-show="showEmail" class="getBut">获取验证码</el-button>
-              <el-button v-if="!flag" class="getBut" :disabled=false>剩余{{ second }}s</el-button>
+              <el-button v-if="!flag" class="getBut" disabled >剩余{{ second }}s</el-button>
             </el-form-item>
 
           </el-form>
@@ -47,8 +47,8 @@
         <div class="LoginBtn">
           <el-form>
             <el-form-item>
-              <el-button type="primary" @click="register" v-show="showEmail" round>验证并注册</el-button>
-              <el-button type="primary" @click="switchToEmail" v-show="showAct" round>验证邮箱</el-button>
+              <el-button type="primary" class="checkBut" @click="register" v-show="showEmail" round>验证并注册</el-button>
+              <el-button type="primary" class="checkBut" @click="switchToEmail" v-show="showAct" round>验证邮箱</el-button>
               <el-button type="success" @click="backToRegister" v-show="showEmail" round>返回</el-button>
               <el-button type="success" @click="back" v-show="showAct" round>返回 </el-button>
             </el-form-item>
@@ -61,7 +61,7 @@
 
 <script>
 import { putRegisterByEmail } from "@/apis/user";
-import { postACK } from "@/apis/user";
+import { sendMsg } from "@/apis/user";
 
 export default {
   data() {
@@ -71,32 +71,14 @@ export default {
       second: 60, //获取验证码间隔时间60s
       flag: true,
       RegisterForm: {
-        // userInfo:{
-        //   userName: "12345",
-        //   password: "123456",
-        // },
-        // emailInfo:{
-        //   registerEmail: "abc@qq.com",
-        //   ACK: "",
-        // },
-        userName: "12345",
+        username: "1257942126@qq.com",
         password: "123456",
-        registerEmail: "abc@qq.com",
-        ACK: "",
       },
+      code:'123456',
       userInfoRules: {
-        userName: [
-          { required: true, message: "请输入用户名称", trigger: "blur" },
-          { min: 5, max: 8, message: "长度在 5 到 8 个字符", trigger: "blur" },
-        ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 5, max: 18, message: "长度在 5 到 18 个字符", trigger: "blur" },
-        ],
-      },
-      emailInfoRules: {
-        registerEmail: [
-          { required: true, message: "请填入您的邮箱", trigger: "blur" },
+        username: [
+          { required: true, message: "请输入注册邮箱", trigger: "blur" },
+          { min: 5, message: "最少五个字符", trigger: "blur" },
           {
             validator: function (rule, value, callback) {
               if (
@@ -110,38 +92,20 @@ export default {
               }
             },
             trigger: "blur",
-          }
+          }        
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          { min: 5, max: 18, message: "长度在 5 到 18 个字符", trigger: "blur" },
         ],
       },
-      // finalCheckRules:{
-      //   registerEmail:[
-      //     {required:true, message:"请填入您的邮箱" ,trigger: "blur" },
-      //     {
-      //       validator: function(rule, value, callback) {
-      //         if (
-      //           /^\w{1,64}@[a-z0-9\-]{1,256}(\.[a-z]{2,6}){1,2}$/i.test(
-      //             value
-      //           ) == false
-      //         ) {
-      //           callback(new Error("邮箱格式错误"));
-      //         } else {
-      //           callback();
-      //         }
-      //       },
-      //       trigger:"blur",
-      //     }
-      //   ], 
-      //   ACk:[
-      //   { required: true, message: "请输入密码", trigger: "blur" },
-      //   ]
-      // }
     };
   },
   methods: {
     register() {
       this.$refs.RegisterEmailFormRef.validate(async (valid) => {
         if (!valid) return;
-        putRegisterByEmail(this.RegisterForm).then((res) => {
+        putRegisterByEmail(this.RegisterForm,this.code).then((res) => {
           console.log(res);
           if (res.status != 200) this.$message.error("注册失败");
           else if (res.data.msg == "注册成功") this.$router.push("/login");
@@ -171,11 +135,11 @@ export default {
     getACK() {
       this.$refs.RegisterEmailFormRef.validate(async (valid) => {
         if (!valid) return;
-        postACK(this.RegisterForm).then((res) => {
+        sendMsg(this.RegisterForm).then((res) => {
           console.log(res);
           if (res.status != 200) this.$message.error("发送失败");
-          else if (res.data.msg == "发送成功") this.$router.push("/login");
-          this.$message(res.data.msg);
+          else if (res.data.data == "验证码发送成功") 
+          this.$message.success(res.data.data);
         })
       });
       var that = this;
@@ -266,6 +230,12 @@ export default {
   .getBut {
     float: right;
     margin-right: 15px;
+  }
+  .checkBut{
+    margin-left: -29px;
+  }
+  .el-input.is-disabled .el-input__inner {
+    color: #777b82;
   }
 }
 </style>
