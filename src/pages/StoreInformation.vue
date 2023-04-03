@@ -101,7 +101,6 @@
       ref="multipleTable"
       :data="tableData"
       tooltip-effect="dark"
-      style="max-height: 490px"
       @selection-change="handleSelectionChange"
     >
       <el-table-column
@@ -153,8 +152,8 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="currentPage"
-      :page-sizes="[2,4,6]"
-      :page-size="50"
+      :page-sizes="[5,10,15]"
+      :page-size="9999"
       layout="total, sizes, prev, pager, next, jumper"
       :total="totalCount"
     >
@@ -165,10 +164,8 @@
 <script>
 import shopButton from "../components/shopButton.vue";
 import {
-  getAllStore,
   postStore,
   deleteStore,
-  getStoreById,
   getStoreByPage,
   putStore,
 } from "@/apis/store";
@@ -246,21 +243,22 @@ export default {
     //分页查询
     handleSelectionChange(val) {
       this.multipleSelection = val;
+      this.fetchData(this.currentPage, this.pageSize, this.storeName, this.address);
     },
     handleSizeChange(val) {
       // console.log(`每页 ${val} 条`);
       this.pageSize = val;
-      this.fetchData(val,this.pageSize);
+      this.fetchData(this.currentPage, this.pageSize, this.storeName, this.address);
     },
     handleCurrentChange(val) {
     this.currentPage = val;
-    this.fetchData(val, this.pageSize);
+    this.fetchData(this.currentPage, this.pageSize, this.storeName, this.address);
   },
 
     //查询方法
     onSubmit() {
   const page = 1; // 第一页
-  const pageSize = 5; // 每页显示10条数据
+  const pageSize = 10; // 每页显示10条数据
   const storeName = this.searchData.name; // 从表单中获取店铺名称
   const address = this.searchData.address; // 从表单中获取地址
   // 调用分页查询函数
