@@ -10,18 +10,17 @@
     <el-dialog
       title="新增门店"
       :visible.sync="dialogVisible"
-      width="50%"
-      custom-class="my-dialog"
+      width="40%"
     >
       <el-form
         ref="form"
         :model="form"
         label-width="80px"
       >
-        <el-form-item label="名称">
-          <el-input v-model="form.name"></el-input>
+        <el-form-item label="名称" :label-width="formLabelWidth">
+          <el-input v-model="form.name" ></el-input>
         </el-form-item>
-        <el-form-item label="地址">
+        <el-form-item label="地址" :label-width="formLabelWidth">
           <el-input v-model="form.address"></el-input>
         </el-form-item>
         <el-form-item label="面积">
@@ -191,7 +190,7 @@ export default {
       storeMenberDialogVisible:false,
       storeInfoDialogVisible:false,
       infoDialogTitle:"",
-      formLabelWidth:"",
+      formLabelWidth:"100",
       //表格数据
       tableData: [],
       //复选框选中数据集合
@@ -366,7 +365,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-input {
+.demo-form-inline .el-input {
   width: 120px;
   margin-bottom: 20px;
   margin-top: 20px;

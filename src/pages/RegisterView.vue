@@ -15,24 +15,28 @@
           <div>MyAdmin</div>
         </div>
 
-        <!-- s输入框 -->
+        <!-- 输入框 -->
         <div class="InputArea">
-          <el-form lable-position="left" label-width="70px" ref="RegisterFormRef" :model="RegisterForm" :rules="rules">
-            <el-form-item label="账号" prop="userName" v-show="showAct">
-              <el-input v-model="RegisterForm.userName"></el-input>
+          <el-form v-show="!showEmailCheck" lable-position="left" label-width="70px" ref="RegisterFormRef" :model="RegisterForm"
+            :rules="userInfoRules">
+            <el-form-item label="邮箱" prop="username">
+              <el-input v-model="RegisterForm.username"></el-input>
             </el-form-item>
-            <el-form-item label="密码" prop="password" v-show="showAct">
+            <el-form-item label="密码" prop="password">
               <el-input v-model="RegisterForm.password" type="password"></el-input>
             </el-form-item>
+          </el-form>
 
-            <!-- 邮箱验证码 -->
-            <el-form-item class="EmailText" label="验证邮箱" prop="registerEmail" v-show="showEmail">
-              <el-input placeholder="请输入验证邮箱" style="width: 265px;" v-model="RegisterForm.registerEmail"></el-input>
+          <!-- 邮箱验证码 -->
+          <el-form v-show="showEmailCheck" lable-position="left" label-width="75px" ref="RegisterEmailFormRef"
+            :model="RegisterForm" >
+            <el-form-item class="EmailText" label="邮箱" prop="registerEmail" >
+              <el-input disabled placeholder="验证邮箱" style="width: 265px;" v-model="RegisterForm.username"></el-input>
             </el-form-item>
-
-            <el-form-item class="ACK" label="验证码" style="width:350px" prop="registerEmail" v-show="showEmail">
-              <el-input placeholder="请输入验证码" style="width: 130px;" v-model="RegisterForm.ACK"></el-input>
-              <el-button @click="getACK" v-show="showEmail" class="getBut">获取验证码</el-button>
+            <el-form-item  class="ACK" label="验证码" style="width:350px" prop="registerEmail" >
+              <el-input placeholder="请输入验证码" style="width: 135px;" v-model="code"></el-input>
+              <el-button v-if="flag" class="getBut" type="primary" plain @click="getACK"  >获取验证码</el-button>
+              <el-button  v-if="!flag"  class="getBut" type="primary" plain disabled >剩余{{ second }}s</el-button>
             </el-form-item>
 
           </el-form>
@@ -42,9 +46,10 @@
         <div class="LoginBtn">
           <el-form>
             <el-form-item>
-              <el-button type="primary" @click="switchToEmail" round>验证</el-button>
-              <el-button type="success" @click="backToRegister" v-show="showEmail" round>返回</el-button>
-              <el-button type="success" @click="back" v-show="showAct" round>返回 </el-button>
+              <el-button type="primary" class="checkBut" @click="register" v-show="showEmailCheck" round>验证并注册</el-button>
+              <el-button type="primary" class="checkBut" @click="switchToEmail" v-show="!showEmailCheck" round>验证邮箱</el-button>
+              <el-button type="success" @click="backToRegister" v-show="showEmailCheck" round>返回</el-button>
+              <el-button type="success" @click="back" v-show="!showEmailCheck" round>返回 </el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -54,65 +59,113 @@
 </template>
 
 <script>
-import { putRegister } from "@/apis/user";
+import { putRegisterByEmail } from "@/apis/user";
+import { sendMsg } from "@/apis/user";
+
 export default {
   data() {
     return {
-      showAct: true,
-      showEmail: false,
-      RegisterForm: {
-        userName: "",
-        password: "",
-        registerEmail: "",
-        ACK: ""
+      showEmailCheck: false,
+      second: 60, //获取验证码间隔时间60s
+      flag: true,
+      startCnt : 0,
+
+      code:'123456',//验证码
+
+      RegisterForm: {//用户信息
+        username: "12576@qq.com",
+        password: "123456",
       },
-      rules: {
-        userName: [
-          { required: true, message: "请输入用户名称", trigger: "blur" },
-          { min: 5, max: 8, message: "长度在 3 到 5 个字符", trigger: "blur" },
+      
+      userInfoRules: {
+        username: [
+          { required: true, message: "请输入注册邮箱", trigger: "blur" },
+          { min: 5,  message: "请至少输入5个字符", trigger: "blur" },
+          {
+            validator: function (rule, value, callback) {
+              if (
+                /^\w{1,64}@[a-z0-9\-]{1,256}(\.[a-z]{2,6}){1,2}$/i.test(
+                  value
+                ) == false
+              ) {
+                callback(new Error("邮箱格式错误"));
+              } else {
+                callback();
+              }
+            },
+            trigger: "blur",
+          }        
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 5, max: 8, message: "长度在 5 到 8 个字符", trigger: "blur" },
+          { min: 5, max: 18, message: "长度在 5 到 18 个字符", trigger: "blur" },
         ],
       },
     };
   },
   methods: {
     register() {
-      this.$refs.RegisterFormRef.validate(async (valid) => {
+      this.$refs.RegisterEmailFormRef.validate(async (valid) => {
         if (!valid) return;
-        putRegister(this.RegisterForm).then((res) => {
+        putRegisterByEmail(this.RegisterForm,this.code).then((res) => {
           console.log(res);
           if (res.status != 200) this.$message.error("注册失败");
-          else if (res.data.msg == "注册成功") this.$router.push("/login");
-          this.$message(res.data.msg);
+          else if (res.data.code == 1) 
+          {
+            this.$router.push("/login");
+            this.$message.success(res.data.msg);
+          }
+          else this.$message.warning(res.data.msg);
         });
       });
     },
+    
     back() {
       this.$router.push("/login");
     },
+
     switchToEmail() {
       this.$refs.RegisterFormRef.validate(async (valid) => {
         if (!valid) {
-          this.$alert("请完善注册信息");
+          this.$message.warning("请完善注册信息");
+          console.log(valid);
         }
         if (valid) {
-            this.showAct = false;
-            this.showEmail = true;
-            console.log(this.showAct);
-          }
+          this.showEmailCheck = true;
+        }
       })
 
     },
     getACK() {
+      this.$refs.RegisterEmailFormRef.validate(async (valid) => {
+        if (!valid) return;
+        
+        sendMsg(this.RegisterForm).then((res) => {
+          // console.log(res);
+          if (res.status != 200) this.$message.error("发送失败");
+          else if (res.data.code == 1) {
+            this.$message.success(res.data.data);
+          }
+          else if (res.data.code == 0) this.$message.warning(res.data.msg);
+        }) 
+      });
+      var that = this;
+      console.log(that.startCnt);
+      if (that.startCnt&&that.flag) {
+        that.flag = false;
+        var interval = window.setInterval(function () {
+          if (that.second-- <= 0) {
+            that.second = 60;
+            that.flag = true;
+            window.clearInterval(interval);
+          }
+        }, 1000);
+      }
 
     },
     backToRegister() {
-      this.showAct = true;
-      this.showEmail = false;
-    }
+      this.showEmailCheck = false;
+    },
   },
 };
 
@@ -183,7 +236,15 @@ export default {
 
   .getBut {
     float: right;
-    margin-right: 15px;
+    margin-right: 10px;
+  }
+  .checkBut{
+    margin-left: -29px;
+  }
+  ::v-deep .el-input.is-disabled .el-input__inner {
+    color: #687386;
+    border-color: #bcbfc5;
+    
   }
 }
 </style>

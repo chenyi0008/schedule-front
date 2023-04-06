@@ -48,7 +48,9 @@
     </el-table>
 
     <!-- 查看小组详情模态框 -->
-    <el-dialog title="小组成员" :visible.sync="groupMenberDialogVisible">
+    <el-dialog title="小组成员" 
+    :visible.sync="groupMenberDialogVisible"
+    width="40%">
       <el-table height="500px" :data="groupMenbers">
         <el-table-column property="id" label="员工编号"></el-table-column>
         <el-table-column property="name" label="姓名"></el-table-column>
@@ -69,7 +71,9 @@
     </el-dialog>
 
     <!-- 编辑小组详情模态框 -->
-    <el-dialog :title="infoDialogTitle" :visible.sync="groupInfoDialogVisible">
+    <el-dialog :title="infoDialogTitle" 
+    width="40%"
+    :visible.sync="groupInfoDialogVisible">
       <el-form :model="curruntGroup">
         <el-form-item
           v-if="infoDialogTitle != '新建小组'"
