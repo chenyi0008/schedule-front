@@ -171,10 +171,7 @@
         <template>
           <el-card class="box-card">
             <div>
-              <p>提示:排列的默认顺序是：“开店|值班|关店”</p>
-              <p>
-                用户可自定义实现符合实际店铺的操作，用户未设置则为班次没有限定职业。
-              </p>
+              <p>提示:用户可自定义设置指定类型的班次由指定职位的员工进行值班，用户未设置则默认为所有类型的班次没有限定职位。</p>
             </div>
           </el-card>
         </template>
@@ -182,7 +179,7 @@
           <el-button
             type="text"
             @click="open"
-          >提交预览x</el-button>
+          >提交预览</el-button>
           <el-button
             type="primary"
             @click="addPostionRule()"
@@ -312,7 +309,7 @@ export default {
       },
 
       params: {
-        ruleType: "职位规则",
+        ruleType: "",
         value: "",
         storeId: 1,
         id: null,

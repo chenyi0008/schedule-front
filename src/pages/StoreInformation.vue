@@ -11,6 +11,7 @@
       title="新增门店"
       :visible.sync="dialogVisible"
       width="50%"
+      custom-class="my-dialog"
     >
       <el-form
         ref="form"
@@ -24,7 +25,7 @@
           <el-input v-model="form.address"></el-input>
         </el-form-item>
         <el-form-item label="面积">
-          <el-input v-model="form.area"></el-input>
+          <el-input v-model="form.size"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -36,7 +37,7 @@
       </el-form>
     </el-dialog>
 
-    
+
 
     <!-- 对话框 -->
     <el-form
@@ -66,13 +67,12 @@
     </el-form>
 
         <!-- 编辑小组详情模态框 -->
-        <el-dialog :title="infoDialogTitle" :visible.sync="storeInfoDialogVisible">
+        <el-dialog :title="infoDialogTitle" :visible.sync="storeInfoDialogVisible" custom-class="my-dialog">
       <el-form :model="curruntStore">
         <el-form-item
           v-if="infoDialogTitle != '新建小组'"
           label="商店名称"
           :label-width="formLabelWidth"
-
         >
           <el-input v-model="curruntStore.name" autocomplete="off"></el-input>
         </el-form-item>
@@ -285,6 +285,7 @@ export default {
           //添加成功
           this.$message.success(res.data.msg);
           this.dialogVisible = false;
+          console.log(this.form)
           //关闭窗口
           location.reload(); // Refresh the current page
         }
@@ -391,5 +392,13 @@ export default {
   margin-bottom: 20px;
   margin-top: 20px;
   margin-left: 20px;
+}
+
+.demo-form-inline{
+  float:right;
+}
+
+.my-dialog{
+  border-radius: 20px;
 }
 </style> 
