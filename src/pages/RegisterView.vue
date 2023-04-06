@@ -80,7 +80,7 @@ export default {
       userInfoRules: {
         username: [
           { required: true, message: "请输入注册邮箱", trigger: "blur" },
-          { min: 5, message: "最少五个字符", trigger: "blur" },
+          { min: 5,  message: "请至少输入5个字符", trigger: "blur" },
           {
             validator: function (rule, value, callback) {
               if (

@@ -60,6 +60,7 @@
     <el-dialog
       :title="infoDialogTitle"
       :visible.sync="employeeInfoDialogVisible"
+      width="40%"
     >
       <el-form :model="curruntEmployee">
         <el-form-item
@@ -69,7 +70,8 @@
         >
           <el-input v-model="curruntEmployee.id" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="员工姓名" :label-width="formLabelWidth">
+        <el-form-item label="员工姓名" 
+        :label-width="formLabelWidth">
           <el-input
             v-model="curruntEmployee.name"
             autocomplete="off"

@@ -76,9 +76,8 @@ export default {
 						trigger: "blur",
 					},
 					{
-						min: 3,
-						max: 5,
-						message: "长度在 3 到 5 个字符",
+						min: 5,
+						message: "请至少输入 5 个字符",
 						trigger: "blur",
 					},
 				],
@@ -102,22 +101,11 @@ export default {
 						this.$router.push("/main");
 					} else this.$message(res.data.msg);
 				});
-				// console.log(window);
-				// console.log(this);
-				// const result = await this.$axios.post("user", this.LoginForm);
-				// if (result.data.data) {
-				//   window.sessionStorage.setItem("token", result.data.data);
-				// }
-				// if (result.status != 200) his.$message.error("登陆失败");
-				// else if (result.data.msg ==t "登录成功") {
-				//   this.$message.success(result.data.msg);
-				//   this.$router.push("/main");
-				// } else this.$message(result.data.msg);
 			});
 		},
 		nextInput() {
 			try {
-				this.$refs.LoginFormRef.$children[1].$children[ 1].focus();
+				this.$refs.LoginFormRef.$children[1].$children[1].focus();
 			} catch (err) {
 				console.error(err);
 			}

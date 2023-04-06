@@ -5,7 +5,7 @@
     </el-row>
   </template>
     
-    <style>
+    <style scoped>
   .el-row {
     float: right;
   }

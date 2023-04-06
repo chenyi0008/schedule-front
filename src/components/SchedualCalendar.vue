@@ -220,7 +220,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .fc-license-message {
 	display: none;
 }
