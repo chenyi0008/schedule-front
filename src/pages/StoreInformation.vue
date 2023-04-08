@@ -10,7 +10,7 @@
     <el-dialog
       title="新增门店"
       :visible.sync="dialogVisible"
-      width="40%"
+      width="50%"
     >
       <el-form
         ref="form"

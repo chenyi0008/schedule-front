@@ -28,6 +28,7 @@
         <template>
           <el-form-item label="规则类型">
             <el-select
+              @change="ruleTypeChange"
               v-model="form.ruleType"
               placeholder="请选择"
               style="width: 100%"
@@ -54,23 +55,7 @@
                 提示:用户可自定义实现符合实际店铺的操作，用户未设置则为默认值。
               </p>
               <p>
-                开店规则:"1.5,23.5” 表示开店
-                1个半小时前要有员工当值,当值员工数为门店面积除以23.5
-              </p>
-              <p>
-                关店规则:例如："2,3,13” 表示关店 2
-                个半小时内需要有员工当值，人数 = 门店面积/13 + 3
-              </p>
-              <p>
-                客流规则:例如"3.8" 表示按照业务预测数据，每 3.8
-                个客流必须安排至少一个员工当值
-              </p>
-              <p>
-                值班规则:例如"1"表示如果没有客流量的时候，至少需要1个店员值班.
-              </p>
-              <p>
-                休息规则:例如“2” 表示每连续工作 4 小时，休息 2
-                小时。
+                {{ this.p }}
               </p>
             </el-card>
           </div>
@@ -133,6 +118,7 @@
           <div style="width: 100%">
             值班人员
             <el-select
+              @change="ruleChange()"
               v-model="value2"
               multiple
               placeholder="请选择"
@@ -281,6 +267,7 @@ import { postRule, deleteRule, putRule, getRuleById } from "@/apis/rule";
 export default {
   data() {
     return {
+      p: "",
       storeId: -1,
       input: "职位规则",
       Rules: [],
@@ -413,6 +400,27 @@ export default {
         console.log(res.data);
         this.searchData = res.data;
       });
+    },
+
+    ruleTypeChange(val) {
+      console.log(val)
+      switch (val) {
+        case "开店规则":
+          this.p= `开店\n1.5\n个小时前需要有员工当值，当值员工数为门店面积\n23.5\n`
+          break;
+        case "关店规则":
+        this.p= `关店\n3\n个小时内需要有\n8\n名员工当值`
+        break;
+        case "客流规则":
+        this.p= `每 \n4\n 个客流，至少需要有\n8\n个员工当值`
+        break;
+        case "值班规则":
+        this.p= `没有客流量的时候，需要有\n8\n个员工当值`
+        break;
+        case "休息规则":
+        this.p= `表示员工每连续工作\n4\n个小时后需要休息\n8\n个小时`
+        break;
+      }
     },
 
     toggleSelection(rows) {
