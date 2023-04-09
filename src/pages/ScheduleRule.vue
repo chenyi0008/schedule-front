@@ -50,7 +50,7 @@
 
         <template>
           <div>
-            <el-card class="box-card">
+            <el-card class="box-card" >
               <p>
                 提示:用户可自定义实现符合实际店铺的操作，用户未设置则为默认值。
               </p>
@@ -384,6 +384,7 @@ export default {
     "$store.state.storeId": {
       handler(val) {
         this.storeId = val;
+        console.log(this.storeId)
         this.getRules(val);
         this.form.storeId = val;
         this.params.storeId = val;
@@ -406,19 +407,19 @@ export default {
       console.log(val)
       switch (val) {
         case "开店规则":
-          this.p= `开店\n1.5\n个小时前需要有员工当值，当值员工数为门店面积\n23.5\n`
+          this.p= `例子:开店\n1.5\n个小时前需要有员工当值，当值员工数为门店面积\n23.5\n`
           break;
         case "关店规则":
-        this.p= `关店\n3\n个小时内需要有\n8\n名员工当值`
+        this.p= `例子:关店\n3\n个小时内需要有\n8\n名员工当值`
         break;
         case "客流规则":
-        this.p= `每 \n4\n 个客流，至少需要有\n8\n个员工当值`
+        this.p= `例子:每 \n4\n 个客流，至少需要有\n8\n个员工当值`
         break;
         case "值班规则":
-        this.p= `没有客流量的时候，需要有\n8\n个员工当值`
+        this.p= `例子:没有客流量的时候，需要有\n8\n个员工当值`
         break;
         case "休息规则":
-        this.p= `表示员工每连续工作\n4\n个小时后需要休息\n8\n个小时`
+        this.p= `例子:表示员工每连续工作\n4\n个小时后需要休息\n8\n个小时`
         break;
       }
     },
@@ -645,7 +646,8 @@ export default {
 }
 
 .box-card {
-  margin: 0 auto;
-  width: 600px;
+  height: 70%;
+  width: 100%;
+  margin-bottom: 20px;
 }
 </style>
