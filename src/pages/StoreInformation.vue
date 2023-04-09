@@ -400,4 +400,8 @@ export default {
 .my-dialog{
   border-radius: 20px;
 }
+
+.el-pagination{
+  margin-top: 50px;
+}
 </style> 
