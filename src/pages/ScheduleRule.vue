@@ -52,9 +52,6 @@
           <div>
             <el-card class="box-card">
               <p>
-                提示:用户可自定义实现符合实际店铺的操作，用户未设置则为默认值。
-              </p>
-              <p>
                 {{ this.p }}
               </p>
             </el-card>
@@ -407,7 +404,7 @@ export default {
       console.log(val);
       switch (val) {
         case "开店规则":
-          this.p = `例子:输入1.5，23.5表示开店\n1.5\n个小时前需要有员工当值，当值员工数为门店面积\n23.5\n`;
+          this.p = `例子:输入1.5,23.5表示开店\n1.5\n个小时前需要有员工当值，当值员工数为门店面积/\n23.5\n`;
           break;
         case "关店规则":
           this.p = `例子:输入8表示关店\n3\n个小时内需要有\n8\n名员工当值`;
@@ -477,7 +474,7 @@ export default {
         case "开店规则":
           return `开店\n${arr[0].toFixed(
             1
-          )}\n个小时前需要有员工当值，当值员工数为门店面积\n/\n${arr[1].toFixed(
+          )}\n个小时前需要有员工当值，当值员工数为门店面积/${arr[1].toFixed(
             2
           )}\n`;
         case "关店规则":
