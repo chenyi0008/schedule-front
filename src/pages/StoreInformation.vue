@@ -16,6 +16,7 @@
         ref="form"
         :model="form"
         label-width="80px"
+        class="edit-form"
       >
         <el-form-item label="名称" :label-width="formLabelWidth">
           <el-input v-model="form.name" ></el-input>
@@ -23,7 +24,7 @@
         <el-form-item label="地址" :label-width="formLabelWidth">
           <el-input v-model="form.address"></el-input>
         </el-form-item>
-        <el-form-item label="面积">
+        <el-form-item label="面积" :label-width="formLabelWidth">
           <el-input v-model="form.size"></el-input>
         </el-form-item>
         <el-form-item>
@@ -409,4 +410,9 @@ export default {
   border-radius: 30px 30px 30px 30px;
   box-shadow:4px 4px 15px #635d5d;
 }
+.edit-form{
+  border-radius: 30px 30px 30px 30px;
+
+}
+
 </style> 
