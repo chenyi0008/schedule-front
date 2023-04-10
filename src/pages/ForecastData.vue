@@ -187,6 +187,10 @@ p {
 	padding: 0px !important;
 }
 
+.el-calendar{
+  border-radius: 30px 30px 30px 30px;
+  box-shadow:4px 4px 15px #635d5d;
+}
 /* 
 /deep/ .el-calendar-table .el-calendar-day {
   width: 60px;

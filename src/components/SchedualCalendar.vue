@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<FullCalendar ref="calendar" :options="calendarOption" />
+		<FullCalendar ref="calendar" :options="calendarOption" class="fullcalendar"/>
 	</div>
 	
 </template>
@@ -239,5 +239,12 @@ export default {
 }
 .fc-direction-ltr{
 	background-color: #fff;
+}
+.fullcalendar
+{
+	
+  border-radius: 30px 30px 30px 30px;
+  box-shadow:4px 4px 15px #635d5d;
+
 }
 </style>
