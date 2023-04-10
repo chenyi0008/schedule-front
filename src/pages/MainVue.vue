@@ -6,12 +6,12 @@
       </el-aside>
       <el-container>
         <el-container>
-          <el-header class="background-picture">
+          <el-header>
             <ChoiceStore class="index" ref="store" />
 
-            <p style="color:white">员工后台管理系统</p>
+            <p>员工后台管理系统</p>
           </el-header>
-          <el-main class="background-picture">
+          <el-main>
             <!-- <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div> -->
             <router-view />
 
@@ -104,10 +104,10 @@ main {
   height: 100%;
 }
 
-.background-picture {
-  background-image: url("../assets/img/background2.png");
-  background-size: cover;
-}
+// .background-picture {
+//   background-image: url("../assets/img/background2.png");
+//   background-size: cover;
+// }
 .background-picture {
   background-image: url("../assets/img/background2.png");
   background-size: cover;
