@@ -63,6 +63,10 @@ export default {
 </script>
 
 <style scoped>
+::v-deep .el-menu {
+	border-right: solid 0px #e6e6e6;
+}
+
 ::v-deep .el-menu-item {
 	font-size: medium;
 	font-weight: 700;

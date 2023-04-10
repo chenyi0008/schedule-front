@@ -10,7 +10,7 @@
     <el-dialog
       title="新增门店"
       :visible.sync="dialogVisible"
-      width="50%"
+      width="40%"
     >
       <el-form
         ref="form"
@@ -25,7 +25,9 @@
           <el-input v-model="form.address"></el-input>
         </el-form-item>
         <el-form-item label="面积" :label-width="formLabelWidth">
-          <el-input v-model="form.size"></el-input>
+          <el-input v-model="form.size">
+            <i slot="suffix" class="dw">m²</i>
+          </el-input>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -366,6 +368,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.dw{
+		font-style:normal;
+		color: #000000;
+		font-weight: bold;
+		line-height: 45px;
+	}
 .demo-form-inline .el-input {
   width: 120px;
   margin-bottom: 20px;

@@ -19,8 +19,7 @@
       <el-table-column prop="telephone" label="电话" />
       <el-table-column prop="mailbox" label="邮箱" />
       <el-table-column
-        style="
-           {
+        style="{
             padding: 0;
           }
         "
@@ -60,7 +59,7 @@
     <el-dialog
       :title="infoDialogTitle"
       :visible.sync="employeeInfoDialogVisible"
-      width="40%"
+      width="30%"
     >
       <el-form :model="curruntEmployee">
         <el-form-item
@@ -77,11 +76,15 @@
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item label="职位" :label-width="formLabelWidth">
-          <el-input
-            v-model="curruntEmployee.role"
-            autocomplete="off"
-          ></el-input>
+        <el-form-item class="label" label="职位" :label-width="formLabelWidth">
+        <br>
+          <el-select class="option" v-model="curruntEmployee.role" placeholder="请选择">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :value="item.value">
+          </el-option>
+       </el-select>
         </el-form-item>
         <el-form-item label="电话" :label-width="formLabelWidth">
           <el-input
@@ -92,23 +95,6 @@
         <el-form-item label="邮箱" :label-width="formLabelWidth">
           <el-input
             v-model="curruntEmployee.mailbox"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="小组" :label-width="formLabelWidth">
-          <!-- 
-            
-            
-            
-            
-            这里应该放小组的下拉框
-          
-          
-          
-          
-          -->
-          <el-input
-            v-model="curruntEmployee.groupName"
             autocomplete="off"
           ></el-input>
         </el-form-item>
@@ -149,6 +135,11 @@ export default {
 
   data() {
     return {
+      options:[{
+        value:"店长",
+      },{
+        value:"店员"
+      }],
       storeId: -1,
       staffList: [],
       multipleTable: [],
@@ -281,5 +272,14 @@ export default {
 .el-table{
   border-radius: 30px 30px 30px 30px;
   box-shadow:4px 4px 15px #635d5d;
+}
+.lable{
+  
+  float: left;
+  clear:right;
+}
+.option{
+  float: left;
+  width: 100%;
 }
 </style>
