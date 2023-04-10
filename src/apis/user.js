@@ -13,6 +13,7 @@ export function putRegisterByEmail(data,params) {
     url: "/user/email",
     method: "put",
     data,
+    
     params:{code:params},
   });
 }
