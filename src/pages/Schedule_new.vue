@@ -117,9 +117,5 @@ export default {
 </script>
 
 <style scoped>
-.scheduleCalendar {
-  border-radius: 30px 30px 30px 30px;
-  box-shadow:4px 4px 15px #635d5d;
 
-}
 </style>
