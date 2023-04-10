@@ -11,7 +11,7 @@
 
             员工后台管理系统
           </el-header>
-          <el-main>
+          <el-main class="background-picture">
             <!-- <div style="float: left"><shopSearchbutton></shopSearchbutton><shopSearchbutton></shopSearchbutton><el-button type="primary" icon="el-icon-search">搜索</el-button></div><div style="float: right"><shopButton></shopButton></div> -->
             <router-view />
 
@@ -101,4 +101,10 @@ export default {
 main {
   height: 100%;
 }
+
+.background-picture {
+  background-image: url("../assets/img/backGround.png");
+  background-size: cover;
+}
+
 </style>
