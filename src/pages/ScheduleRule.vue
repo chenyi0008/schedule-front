@@ -513,7 +513,7 @@ export default {
         }
       );
 
-      console.log(this.ruleType, ...value);
+      // console.log(this.ruleType, ...value);
     },
 
     //添加数据
@@ -648,7 +648,7 @@ export default {
   margin-bottom: 20px;
 }
 .el-table{
-  border-radius: 30px 30px 30px 30px;
+  border-radius: 15px 15px 15px 15px;
   box-shadow:4px 4px 15px #635d5d;
 }
 </style>
