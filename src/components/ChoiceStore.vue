@@ -1,12 +1,13 @@
 <template>
   <div>
-    <label>当前门店 : </label>
+    <label  class="header">当前门店 : </label>
     <el-select v-model="storeId" placeholder="请选择门店">
       <el-option
         v-for="item in storeList"
         :key="item.id"
         :label="item.name"
         :value="item.id"
+        
       >
       </el-option>
     </el-select>
@@ -54,4 +55,11 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.header {
+  color:white
+
+}
+
+
+</style>
