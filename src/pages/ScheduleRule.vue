@@ -83,9 +83,9 @@
         label-width="80px"
       >
         <template>
-          <el-form-item label="职业规则">
+          <el-form-item label="职业规则" >
             <el-input
-              v-model="input"
+              v-model="params.ruleType"
               placeholder="请输入内容"
             ></el-input>
           </el-form-item>
@@ -115,7 +115,6 @@
           <div style="width: 100%">
             值班人员
             <el-select
-              @change="ruleChange()"
               v-model="value2"
               multiple
               placeholder="请选择"
@@ -159,10 +158,6 @@
           </el-card>
         </template>
         <el-form-item>
-          <el-button
-            type="text"
-            @click="open"
-          >提交预览</el-button>
           <el-button
             type="primary"
             @click="addPostionRule()"
@@ -293,7 +288,7 @@ export default {
       },
 
       params: {
-        ruleType: "",
+        ruleType: "职位规则",
         value: "",
         storeId: 1,
         id: null,
@@ -400,14 +395,14 @@ export default {
       });
     },
 
-    ruleTypeChange(val) {
-      console.log(val);
-      switch (val) {
+    ruleTypeChange(value) {
+      console.log(value);
+      switch (value) {
         case "开店规则":
           this.p = `例子:输入1.5,23.5表示开店\n1.5\n个小时前需要有员工当值，当值员工数为门店面积/\n23.5\n`;
           break;
         case "关店规则":
-          this.p = `例子:输入8表示关店\n3\n个小时内需要有\n8\n名员工当值`;
+          this.p = `例子:输入3,8表示关店\n3\n个小时内需要有\n8\n名员工当值`;
           break;
         case "客流规则":
           this.p = `例子:输入8表示每 \n4\n 个客流，至少需要有\n8\n个员工当值`;
@@ -464,6 +459,7 @@ export default {
     },
 
     analysis(ruleType, value) {
+      console.log(value)
       const strSlice = value.split(",");
       const arr = new Array(10).fill(0);
 
@@ -499,6 +495,7 @@ export default {
     },
 
     open() {
+      
       this.$alert(
         this.analysis(this.form.ruleType, this.form.value),
         "预提交以下内容",
@@ -512,9 +509,7 @@ export default {
           },
         }
       );
-
-      // console.log(this.ruleType, ...value);
-    },
+      },
 
     //添加数据
     addTable() {
