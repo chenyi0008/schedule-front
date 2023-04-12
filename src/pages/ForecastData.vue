@@ -1,9 +1,18 @@
 <template>
 	<div>
+		<uploadView class="upload"></uploadView>
+		<!-- <el-button
+      class="mainButton"
+      type="primary"
+      plain
+      @click="dialogVisible=true"
+	
+    >上传文件</el-button> -->
 		<!-- <h1>我是预测数据</h1> -->
 		<el-calendar v-model="calendarValue">
 			<!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
 			<template slot="dateCell" slot-scope="{ date, data }">
+				
 				<p
 					@click="selectDate(date)"
 					:class="data.isSelected ? 'is-selected' : ''"
@@ -32,6 +41,7 @@
 </template>
 <script>
 import DataInputFormVue from "@/components/DataInputForm.vue";
+import uploadView from "@/components/uploadView.vue";
 import { getSchedule, putSchedule } from "@/apis/flow";
 export default {
 	name: "forecastData",
@@ -42,6 +52,7 @@ export default {
 			currentDate: new Date(Date.now()),
 			currentDayData: "",
 			data: [],
+			dialogVisible: false,
 		};
 	},
 	mounted() {
@@ -138,6 +149,7 @@ export default {
 	},
 	components: {
 		DataInputFormVue,
+		uploadView,
 	},
 	computed: {
 		month() {
@@ -190,6 +202,14 @@ p {
 .el-calendar{
   border-radius: 15px 15px 15px 15px;
   box-shadow:4px 4px 15px #635d5d;
+}
+
+.upload {
+  float: left;
+  width: 120px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-left: 20px;
 }
 /* 
 /deep/ .el-calendar-table .el-calendar-day {
