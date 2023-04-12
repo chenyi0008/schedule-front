@@ -17,8 +17,7 @@
 				<el-menu-item index="group">员工分组</el-menu-item>
 				<el-menu-item index="forecastData">预测数据</el-menu-item>
 				<el-menu-item index="rule">排班规则</el-menu-item>
-				<el-menu-item index="schedule">排班</el-menu-item>
-
+				<el-menu-item index="schedule">生成排班</el-menu-item>
 			</el-menu-item-group>
 		</el-menu>
 
