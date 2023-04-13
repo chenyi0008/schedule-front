@@ -1,8 +1,11 @@
 <template>
 	<div>
-		<FullCalendar ref="calendar" :options="calendarOption" class="fullcalendar"/>
+		<FullCalendar
+			ref="calendar"
+			:options="calendarOption"
+			class="fullcalendar"
+		/>
 	</div>
-	
 </template>
 
 <script>
@@ -39,13 +42,13 @@ export default {
 				eventMouseEnter: this.handleEventMouseEnter, //日程悬浮事件
 				eventClick: this.handleEventMouseClick, //日程悬浮事件
 				headerToolbar: {
-					left: "prec,nexc newE",
+					left: "prec,nexc newE generation",
 					center: "title",
 					right: "timeGridaDay,timeGridaWeak",
 				},
 				customButtons: {
 					prec: {
-						text: "上一页",
+						text: "<",
 						click: () => {
 							this.$bus.$emit(
 								"handleCalendarPage",
@@ -56,7 +59,7 @@ export default {
 						},
 					},
 					nexc: {
-						text: "下一页",
+						text: ">",
 						click: () => {
 							this.$bus.$emit(
 								"handleCalendarPage",
@@ -71,6 +74,12 @@ export default {
 						click: () => {
 							// alert("add");
 							this.$bus.$emit("eidtSchedual", null, true);
+						},
+					},
+					generation: {
+						text: "生成排班",
+						click: () => {
+							this.$bus.$emit("generateSchedule");
 						},
 					},
 				},
@@ -220,7 +229,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 .fc-license-message {
 	display: none;
 }
@@ -234,17 +243,14 @@ export default {
 	line-height: 30px;
 }
 .fc .fc-toolbar.fc-header-toolbar {
-    margin-bottom: 1.5em;
-    padding: 15px;
+	margin-bottom: 1.5em;
+	padding: 15px;
 }
-.fc-direction-ltr{
+.fc-direction-ltr {
 	background-color: #fff;
 }
-.fullcalendar
-{
-	
-  border-radius: 30px 30px 30px 30px;
-  box-shadow:4px 4px 15px #635d5d;
-
+.fullcalendar {
+	border-radius: 30px 30px 30px 30px;
+	box-shadow: 4px 4px 15px #635d5d;
 }
 </style>

@@ -1,13 +1,19 @@
 <template>
 	<div>
-		<ScheduleCalendar :startDate="startDate" :events="events" class="scheduleCalendar"/>
-		<EditScheduleForm class="scheduleCalendar"/>
+		<ScheduleCalendar
+			:startDate="startDate"
+			:events="events"
+			class="scheduleCalendar"
+		/>
+		<EditScheduleForm class="scheduleCalendar" />
+		<GenerationSchedule class="scheduleCalendar" />
 	</div>
 </template>
 
 <script>
 import ScheduleCalendar from "@/components/SchedualCalendar.vue";
 import EditScheduleForm from "@/components/EditScheduleForm.vue";
+import GenerationSchedule from "@/components/GenerationSchedule.vue";
 import { getPlan } from "@/apis/plan";
 export default {
 	data() {
@@ -112,10 +118,9 @@ export default {
 	components: {
 		ScheduleCalendar,
 		EditScheduleForm,
+		GenerationSchedule,
 	},
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
