@@ -208,7 +208,7 @@ p {
   float: left;
   width: 120px;
   margin-bottom: 20px;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 20px;
 }
 /* 

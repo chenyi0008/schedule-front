@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
@@ -11,22 +10,37 @@
   :limit="3"
   :on-exceed="handleExceed"
   :file-list="fileList"
-  accept=".csv, text/csv, application/vnd.ms-excel"> <!-- add this line -->
-  <el-button size="small" type="primary">点击上传</el-button>
+
+  accept=".csv, text/csv, application/vnd.ms-excel"
+>
+  <el-button class="el-icon-upload" size="small" type="primary"></el-button>
 </el-upload>
+
   </div>
 </template>
 
 <script>
+import {postSchedule} from "../apis/common.js";
+// import {}   ;
+
 export default {
+
   name: "uploadView",
+  
   data() {
+
     return {
       fileList: [
       ],
     };
   },
   methods: {
+    postSchedule(storeId) {
+      postSchedule().then((res) => {
+        console.log(res);
+      });
+    },
+
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },

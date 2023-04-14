@@ -12,7 +12,6 @@
       <!-- <el-table-column type="selection" width="55" /> -->
       <el-table-column sortable prop="id" label="小组编号" />
       <el-table-column prop="name" label="小组名称" />
-      <el-table-column prop="storeId" label="所属门店" />
       <el-table-column label="查看成员">
         <template slot-scope="scope">
           <el-button

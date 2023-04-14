@@ -1,6 +1,11 @@
 <template>
   <div>
-    <el-button class="addNew" type="primary" plain @click="openDialog({ id: '' })">
+    <el-button
+      class="addNew"
+      type="primary"
+      plain
+      @click="openDialog({ id: '' })"
+    >
       新增员工
     </el-button>
     <el-table
@@ -14,10 +19,22 @@
     >
       <!-- <el-table-column type="selection" width="55" /> -->
       <!-- <el-table-column sortable prop="id" label="员工id" width="120" /> -->
-      <el-table-column prop="name" label="姓名" />
-      <el-table-column prop="role" label="职位" />
-      <el-table-column prop="telephone" label="电话" />
-      <el-table-column prop="mailbox" label="邮箱" />
+      <el-table-column
+        prop="name"
+        label="姓名"
+      />
+      <el-table-column
+        prop="role"
+        label="职位"
+      />
+      <el-table-column
+        prop="telephone"
+        label="电话"
+      />
+      <el-table-column
+        prop="mailbox"
+        label="邮箱"
+      />
       <el-table-column
         style="{
             padding: 0;
@@ -32,7 +49,10 @@
             placeholder="选择小组"
             @change="changeStaffGroup($event, scope.row.id)"
           >
-            <el-option label="无小组" :value="null" />
+            <el-option
+              label="无小组"
+              :value="null"
+            />
             <el-option
               v-for="group in groups"
               :key="group.id"
@@ -43,7 +63,10 @@
         </template>
       </el-table-column>
       <!-- <el-table-column prop="storeId" label="门店编号" width="120" /> -->
-      <el-table-column width="100px" label="编辑">
+      <el-table-column
+        width="100px"
+        label="编辑"
+      >
         <template slot-scope="scope">
           <el-button
             type="primary"
@@ -67,32 +90,52 @@
           label="员工编号"
           :label-width="formLabelWidth"
         >
-          <el-input v-model="curruntEmployee.id" autocomplete="off"></el-input>
+          <el-input
+            v-model="curruntEmployee.id"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="员工姓名" 
-        :label-width="formLabelWidth">
+        <el-form-item
+          label="员工姓名"
+          :label-width="formLabelWidth"
+        >
           <el-input
             v-model="curruntEmployee.name"
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item class="label" label="职位" :label-width="formLabelWidth">
-        <br>
-          <el-select class="option" v-model="curruntEmployee.role" placeholder="请选择">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :value="item.value">
-          </el-option>
-       </el-select>
+        <el-form-item
+          class="label"
+          label="职位"
+          :label-width="formLabelWidth"
+        >
+          <br>
+          <el-select
+            class="option"
+            v-model="curruntEmployee.role"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="电话" :label-width="formLabelWidth">
+        <el-form-item
+          label="电话"
+          :label-width="formLabelWidth"
+        >
           <el-input
             v-model="curruntEmployee.telephone"
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" :label-width="formLabelWidth">
+        <el-form-item
+          label="邮箱"
+          :label-width="formLabelWidth"
+        >
           <el-input
             v-model="curruntEmployee.mailbox"
             autocomplete="off"
@@ -109,7 +152,10 @@
           ></el-input>
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
+      <div
+        slot="footer"
+        class="dialog-footer"
+      >
         <el-button
           type="danger"
           v-if="infoDialogTitle != '新增员工'"
@@ -118,12 +164,15 @@
           删 除
         </el-button>
         <el-button @click="employeeInfoDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitEmpioyeeInfo">
+        <el-button
+          type="primary"
+          @click="submitEmpioyeeInfo"
+        >
           提 交
         </el-button>
       </div>
     </el-dialog>
-    
+
   </div>
 </template>
 <script>
@@ -135,11 +184,16 @@ export default {
 
   data() {
     return {
-      options:[{
-        value:"店长",
-      },{
-        value:"店员"
-      }],
+      options: [
+        { value: "店长" },
+        { value: "店员" },
+        { value: " 门店经理 " },
+        { value: "副经理" },
+        { value: "小组长" },
+        { value: "收银" },
+        { value: "导购" },
+        { value: "库房" },
+      ],
       storeId: -1,
       staffList: [],
       multipleTable: [],
@@ -183,6 +237,7 @@ export default {
       this.infoDialogTitle = curruntEmployee.id ? "编辑员工信息" : "新增员工";
       this.curruntEmployee = curruntEmployee;
       this.employeeInfoDialogVisible = true;
+      
     },
     updateEmployeeData() {
       putStaff(this.curruntEmployee).then((res) => {
@@ -269,16 +324,15 @@ export default {
   margin-left: 20px;
 }
 
-.el-table{
+.el-table {
   border-radius: 15px 15px 15px 15px;
-  box-shadow:4px 4px 15px #635d5d;
+  box-shadow: 4px 4px 15px #635d5d;
 }
-.lable{
-  
+.lable {
   float: left;
-  clear:right;
+  clear: right;
 }
-.option{
+.option {
   float: left;
   width: 100%;
 }

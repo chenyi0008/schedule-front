@@ -1,9 +1,10 @@
 import request from "@/utils/request";
 
-export function postSchedule(data) {
+export function postSchedule(storeId) {
   return request({
     url: "schedule",
     method: "post",
-    data,
+    storeId,
   });
 }
+
