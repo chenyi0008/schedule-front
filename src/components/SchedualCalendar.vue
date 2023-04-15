@@ -35,10 +35,10 @@ export default {
 				initialView: "timeGridaWeak",
 				locale: "zh-cn",
 				allDaySlot: false, //是否显示全天事件
-				slotMinTime: "09:00:00", //开始时间
+				slotMinTime: "08:00:00", //开始时间
 				slotMaxTime: "24:00:00", //结束时间
 				// eventMaxStack: 3, //事件最大堆叠数
-				contentHeight: 900,
+				contentHeight: 920,
 				eventMouseEnter: this.handleEventMouseEnter, //日程悬浮事件
 				eventClick: this.handleEventMouseClick, //日程悬浮事件
 				headerToolbar: {
@@ -240,13 +240,13 @@ export default {
 	height: 2.5em;
 }
 .fc-timegrid-slot {
-	line-height: 26px;
+	line-height: 25px;
 }
 .fc-event-main-frame {
 	line-height: 30px;
 }
 .fc .fc-toolbar.fc-header-toolbar {
-	margin-bottom: 1.5em;
+	margin-bottom: 0.5em;
 	padding: 15px;
 }
 .fc-direction-ltr {
