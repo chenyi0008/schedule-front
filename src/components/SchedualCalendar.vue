@@ -121,7 +121,7 @@ export default {
 			// let col = e.event.borderColor;
 			let eve = e.event._def.extendedProps;
 			// let category = e.event._def.extendedProps.category;
-
+			console.log(e.event);
 			tippy(e.el, {
 				content: `<div style='width: 260px;background-color:#FAFAFA;padding:5px;font-size:14px;z-index:99999;'>
                   <div style='display:flex;color: #666666;overflow: hidden;' class="${
@@ -161,7 +161,10 @@ export default {
 					.split(":")
 					.slice(0, 2)
 					.join(":")}</div>
-                </div>`,
+                </div>
+				<div>
+					----点击可编辑排班----
+				</div>`,
 				theme: "light", //主题选取
 				// trigger: 'click', //触发类型
 				// interactive: true, //可交互的 //别开，有层级Bug，而且依赖父组件也就是日程表的层级，不好改

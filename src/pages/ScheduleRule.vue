@@ -333,32 +333,28 @@ export default {
 
       options: [
         {
-          value: "店长",
-          label: "店长",
-        },
-        {
-          value: "副店长",
-          label: "副店长",
-        },
-        {
-          value: "经理",
-          label: "经理",
+          value: "门店经理",
+          label: "门店经理",
         },
         {
           value: "副经理",
           label: "副经理",
         },
         {
-          value: "导购员",
-          label: "导购员",
+          value: "小组长",
+          label: "小组长",
         },
         {
-          value: "收银员",
-          label: "收银员",
+          value: "收银",
+          label: "收银",
         },
         {
-          value: "店员",
-          label: "店员",
+          value: "导购",
+          label: "导购",
+        },
+        {
+          value: "库房",
+          label: "库房",
         },
       ],
       value1: [],
