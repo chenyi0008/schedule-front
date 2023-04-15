@@ -92,7 +92,11 @@ export default {
 				"--" +
 				this.formatTime(new Date(this.time[1]));
 			if (this.title == "新增排班") {
-				postPlan(this.form).then((res) => console.log(res.data));
+				localStorage.setItem("form", JSON.stringify(this.form));
+				postPlan({
+					...this.form,
+					storeId: this.$store.state.storeId,
+				}).then((res) => console.log(res.data));
 			}
 			putPlan(this.form).then((res) => {
 				console.log(res.data);

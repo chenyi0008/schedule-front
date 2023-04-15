@@ -2,7 +2,7 @@ import axios from "axios";
 import storage from "@/storage";
 
 const service = axios.create({
-	baseURL: "http://113.125.103.168:8085/", // url = base url + request url
+	baseURL: "http://10.33.14.8:8081/", // url = base url + request url
 	timeout: 5000, // request timeout
 });
 

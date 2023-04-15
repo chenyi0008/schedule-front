@@ -24,7 +24,7 @@
 		</div>
 		<ScheduleCalendar
 			:startDate="startDate"
-			:events="filterByGroup"
+			:events="checkRestTime"
 			class="scheduleCalendar"
 		/>
 		<EditScheduleForm class="scheduleCalendar" />
@@ -140,6 +140,17 @@ export default {
 				}
 			);
 		},
+		getRestTime(time) {
+			let end = time.split("--")[1];
+			let [eh, em] = end.split(":");
+			if (em == "30") {
+				eh++;
+				em = "00";
+			} else {
+				em = "30";
+			}
+			return [end, [eh, em].join(":")].join("--");
+		},
 	},
 	watch: {
 		"$store.state.storeId"(newStoreId) {
@@ -163,6 +174,18 @@ export default {
 			return this.filterEvents.filter((event) => {
 				return event.groupName == this.group;
 			});
+		},
+		checkRestTime() {
+			let eventList = this.filterByGroup;
+			this.filterByGroup.forEach((event) => {
+				if (event.flag == true) {
+					let restEvent = { ...event };
+					restEvent.time = this.getRestTime(restEvent.time);
+					restEvent.work = "休息";
+					eventList.push(restEvent);
+				}
+			});
+			return eventList;
 		},
 	},
 	components: {
