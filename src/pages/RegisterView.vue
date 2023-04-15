@@ -73,8 +73,8 @@ export default {
       code:'123456',//验证码
 
       RegisterForm: {//用户信息
-        username: "12576@qq.com",
-        password: "123456",
+        username: "",
+        password: "",
       },
       
       userInfoRules: {
