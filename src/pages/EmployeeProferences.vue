@@ -82,7 +82,7 @@
     <el-dialog
       :title="infoDialogTitle"
       :visible.sync="employeeInfoDialogVisible"
-      width="30%"
+      width="40%"
     >
       <el-form :model="curruntEmployee">
         <el-form-item
