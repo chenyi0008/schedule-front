@@ -11,9 +11,20 @@
 				<el-option label="库房" value="库房" />
 			</el-select>
 		</div>
+		<div class="group-filter">
+			<el-select v-model="group" placeholder="请选择分组">
+				<el-option label="请择选分组" value="" />
+				<el-option
+					v-for="aGroup in groups"
+					:key="aGroup.id"
+					:label="aGroup.name"
+					:value="aGroup.name"
+				/>
+			</el-select>
+		</div>
 		<ScheduleCalendar
 			:startDate="startDate"
-			:events="filterEvents"
+			:events="filterByGroup"
 			class="scheduleCalendar"
 		/>
 		<EditScheduleForm class="scheduleCalendar" />
@@ -26,6 +37,7 @@ import ScheduleCalendar from "@/components/SchedualCalendar.vue";
 import EditScheduleForm from "@/components/EditScheduleForm.vue";
 import GenerationSchedule from "@/components/GenerationSchedule.vue";
 import { getPlan } from "@/apis/plan";
+import { getGroupByStoreId } from "@/apis/group";
 export default {
 	data() {
 		return {
@@ -34,10 +46,13 @@ export default {
 			endDate: "",
 			events: [],
 			role: "",
+			group: "",
+			groups: [],
 		};
 	},
 	mounted() {
 		this.storeId = this.$store.state.storeId;
+		this.getGroups();
 		// 计算当周时间
 		let now = new Date();
 		const fix = this.fixNum;
@@ -118,11 +133,19 @@ export default {
 				endDate: formatDate(lastDay),
 			};
 		},
+		getGroups() {
+			getGroupByStoreId({ storeId: this.$store.state.storeId }).then(
+				(res) => {
+					this.groups = res.data.data;
+				}
+			);
+		},
 	},
 	watch: {
 		"$store.state.storeId"(newStoreId) {
 			this.storeId = newStoreId;
 			this.getSchedule(this.startDate, this.endDate);
+			this.getGroups();
 		},
 		startDate() {
 			this.getSchedule(this.startDate, this.endDate);
@@ -133,6 +156,12 @@ export default {
 			if (this.role === "") return this.events;
 			return this.events.filter((event) => {
 				return event.role == this.role;
+			});
+		},
+		filterByGroup() {
+			if (this.group === "") return this.filterEvents;
+			return this.filterEvents.filter((event) => {
+				return event.groupName == this.group;
 			});
 		},
 	},
@@ -149,5 +178,10 @@ export default {
 	position: absolute;
 	top: 95px;
 	left: 513px;
+}
+.group-filter {
+	position: absolute;
+	top: 95px;
+	right: 190px;
 }
 </style>
