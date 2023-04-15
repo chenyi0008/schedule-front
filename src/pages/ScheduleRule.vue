@@ -83,7 +83,7 @@
         label-width="80px"
       >
         <template>
-          <el-form-item label="职业规则" >
+          <el-form-item label="职业规则">
             <el-input
               v-model="params.ruleType"
               placeholder="请输入内容"
@@ -333,32 +333,28 @@ export default {
 
       options: [
         {
-          value: "店长",
-          label: "店长",
-        },
-        {
-          value: "副店长",
-          label: "副店长",
-        },
-        {
-          value: "经理",
-          label: "经理",
+          value: "门店经理",
+          label: "门店经理",
         },
         {
           value: "副经理",
           label: "副经理",
         },
         {
-          value: "导购员",
-          label: "导购员",
+          value: "小组长",
+          label: "小组长",
         },
         {
-          value: "收银员",
-          label: "收银员",
+          value: "收银",
+          label: "收银",
         },
         {
-          value: "店员",
-          label: "店员",
+          value: "导购",
+          label: "导购",
+        },
+        {
+          value: "库房",
+          label: "库房",
         },
       ],
       value1: [],
@@ -444,7 +440,7 @@ export default {
       const s1 = this.value1.join(",");
       const s2 = this.value2.join(",");
       const s3 = this.value3.join(",");
-      this.params.value = `开店:${s1}|  值班:${s2}|  关店:${s3}`;
+      this.params.value = `${s1}|${s2}|${s3}`;
       this.positionRuleValue = this.params.value;
       console.log(this.params);
       postRule(this.params).then((res) => {
@@ -459,7 +455,7 @@ export default {
     },
 
     analysis(ruleType, value) {
-      console.log(value)
+      console.log(value);
       const strSlice = value.split(",");
       const arr = new Array(10).fill(0);
 
@@ -495,7 +491,6 @@ export default {
     },
 
     open() {
-      
       this.$alert(
         this.analysis(this.form.ruleType, this.form.value),
         "预提交以下内容",
@@ -509,7 +504,7 @@ export default {
           },
         }
       );
-      },
+    },
 
     //添加数据
     addTable() {
@@ -642,8 +637,8 @@ export default {
   width: 100%;
   margin-bottom: 20px;
 }
-.el-table{
+.el-table {
   border-radius: 15px 15px 15px 15px;
-  box-shadow:4px 4px 15px #635d5d;
+  box-shadow: 4px 4px 15px #635d5d;
 }
 </style>

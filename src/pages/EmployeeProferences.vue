@@ -174,9 +174,7 @@ export default {
 	data() {
 		return {
 			options: [
-				{ value: "店长" },
-				{ value: "店员" },
-				{ value: " 门店经理 " },
+				{ value: "门店经理 " },
 				{ value: "副经理" },
 				{ value: "小组长" },
 				{ value: "收银" },
