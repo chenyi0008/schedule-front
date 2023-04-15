@@ -237,17 +237,18 @@ export default {
       this.infoDialogTitle = curruntEmployee.id ? "编辑员工信息" : "新增员工";
       this.curruntEmployee = curruntEmployee;
       this.employeeInfoDialogVisible = true;
-      
     },
     updateEmployeeData() {
       putStaff(this.curruntEmployee).then((res) => {
         console.log(res.data);
+        location.reload(); 
       });
     },
     addNewEmployee() {
       postStaff({ ...this.curruntEmployee, storeId: this.storeId }).then(
         (res) => {
           console.log(res.data);
+          location.reload(); 
         }
       );
       getStaffByPage({ page: 1, pageSize: 99999, storeId: this.storeId }).then(
@@ -259,6 +260,7 @@ export default {
     removeEmployee() {
       deleteStaff({ ids: this.curruntEmployee.id }).then((res) => {
         console.log(res.data);
+        location.reload(); 
       });
       this.employeeInfoDialogVisible = false;
       getStaffByPage({ page: 1, pageSize: 99999, storeId: this.storeId }).then(
@@ -274,6 +276,7 @@ export default {
       }
       this.addNewEmployee();
       this.employeeInfoDialogVisible = false;
+      location.reload(); 
     },
   },
   computed: {
