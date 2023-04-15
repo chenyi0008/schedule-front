@@ -12,7 +12,7 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item label="工作类型" :label-width="formLabelWidth">
-				<el-select v-model="form.region" placeholder="请选择工作类型">
+				<el-select v-model="form.work" placeholder="请选择工作类型">
 					<el-option label="准备工作" value="准备工作"></el-option>
 					<el-option label="值班工作" value="值班工作"></el-option>
 					<el-option label="收尾工作" value="收尾工作"></el-option>
@@ -112,8 +112,7 @@ export default {
 			const fix = this.fixNum;
 			var hour = now.getHours();
 			var minute = now.getMinutes();
-			var second = now.getSeconds();
-			return fix(hour) + ":" + fix(minute) + ":" + fix(second);
+			return hour + ":" + fix(minute);
 		},
 		fixNum(num) {
 			return num < 10 ? "0" + num : num;
