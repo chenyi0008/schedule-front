@@ -2,7 +2,7 @@
 	<el-dialog :title="title" :visible.sync="dialogFormVisible">
 		<el-form class="aa" :model="form">
 			<el-form-item label="员工" :label-width="formLabelWidth">
-				<el-select v-model="form.staff" placeholder="请选择员工">
+				<el-select v-model="form.staffId" placeholder="请选择员工">
 					<el-option
 						v-for="staff in $store.state.staffs"
 						:key="staff.id"
@@ -55,7 +55,7 @@ export default {
 			dialogFormVisible: false,
 			formLabelWidth: "100px",
 			title: "编辑排班",
-			form: {},
+			form: { staffId: "", staff: "" },
 			time: [new Date(), new Date()],
 			date: new Date(),
 		};
@@ -126,6 +126,12 @@ export default {
 				storeId: this.$store.state.storeId,
 			}).then((res) => {
 				this.$store.commit("updateStaffs", res.data.data);
+			});
+		},
+		"form.staffId"() {
+			const form = this.form;
+			this.$store.state.staffs.forEach((staff) => {
+				if (form.staffId == staff.id) form.staff = staff.name;
 			});
 		},
 	},
