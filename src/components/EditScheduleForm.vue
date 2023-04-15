@@ -2,7 +2,7 @@
 	<el-dialog :title="title" :visible.sync="dialogFormVisible">
 		<el-form class="aa" :model="form">
 			<el-form-item label="员工" :label-width="formLabelWidth">
-				<el-select v-model="form.staff" placeholder="请选择员工">
+				<el-select v-model="form.staffId" placeholder="请选择员工">
 					<el-option
 						v-for="staff in $store.state.staffs"
 						:key="staff.id"
@@ -12,7 +12,7 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item label="工作类型" :label-width="formLabelWidth">
-				<el-select v-model="form.region" placeholder="请选择工作类型">
+				<el-select v-model="form.work" placeholder="请选择工作类型">
 					<el-option label="准备工作" value="准备工作"></el-option>
 					<el-option label="值班工作" value="值班工作"></el-option>
 					<el-option label="收尾工作" value="收尾工作"></el-option>
@@ -55,7 +55,7 @@ export default {
 			dialogFormVisible: false,
 			formLabelWidth: "100px",
 			title: "编辑排班",
-			form: {},
+			form: { staffId: "", staff: "" },
 			time: [new Date(), new Date()],
 			date: new Date(),
 		};
@@ -112,8 +112,7 @@ export default {
 			const fix = this.fixNum;
 			var hour = now.getHours();
 			var minute = now.getMinutes();
-			var second = now.getSeconds();
-			return fix(hour) + ":" + fix(minute) + ":" + fix(second);
+			return hour + ":" + fix(minute);
 		},
 		fixNum(num) {
 			return num < 10 ? "0" + num : num;
@@ -127,6 +126,12 @@ export default {
 				storeId: this.$store.state.storeId,
 			}).then((res) => {
 				this.$store.commit("updateStaffs", res.data.data);
+			});
+		},
+		"form.staffId"() {
+			const form = this.form;
+			this.$store.state.staffs.forEach((staff) => {
+				if (form.staffId == staff.id) form.staff = staff.name;
 			});
 		},
 	},

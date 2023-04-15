@@ -1,8 +1,19 @@
 <template>
 	<div>
+		<div class="role-filter">
+			<el-select v-model="role" placeholder="请选择职位">
+				<el-option label="请选择职位" value="" />
+				<el-option label="门店经理" value="门店经理" />
+				<el-option label="副经理" value="副经理" />
+				<el-option label="小组长" value="小组长" />
+				<el-option label="收银" value="收银" />
+				<el-option label="导购" value="导购" />
+				<el-option label="库房" value="库房" />
+			</el-select>
+		</div>
 		<ScheduleCalendar
 			:startDate="startDate"
-			:events="events"
+			:events="filterEvents"
 			class="scheduleCalendar"
 		/>
 		<EditScheduleForm class="scheduleCalendar" />
@@ -22,11 +33,11 @@ export default {
 			startDate: "",
 			endDate: "",
 			events: [],
+			role: "",
 		};
 	},
 	mounted() {
 		this.storeId = this.$store.state.storeId;
-		this.getSchedule(this.startDate, this.endDate);
 		// 计算当周时间
 		let now = new Date();
 		const fix = this.fixNum;
@@ -70,6 +81,8 @@ export default {
 			const { startDate, endDate } = this.getCurrentWeak(firstDay);
 			this.startDate = startDate;
 			this.endDate = endDate;
+
+			this.getSchedule(this.startDate, this.endDate);
 		});
 	},
 	methods: {
@@ -115,6 +128,14 @@ export default {
 			this.getSchedule(this.startDate, this.endDate);
 		},
 	},
+	computed: {
+		filterEvents() {
+			if (this.role === "") return this.events;
+			return this.events.filter((event) => {
+				return event.role == this.role;
+			});
+		},
+	},
 	components: {
 		ScheduleCalendar,
 		EditScheduleForm,
@@ -123,4 +144,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.role-filter {
+	position: absolute;
+	top: 95px;
+	left: 513px;
+}
+</style>

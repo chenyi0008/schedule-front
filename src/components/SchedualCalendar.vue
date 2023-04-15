@@ -35,10 +35,10 @@ export default {
 				initialView: "timeGridaWeak",
 				locale: "zh-cn",
 				allDaySlot: false, //是否显示全天事件
-				slotMinTime: "09:00:00", //开始时间
+				slotMinTime: "08:00:00", //开始时间
 				slotMaxTime: "24:00:00", //结束时间
 				// eventMaxStack: 3, //事件最大堆叠数
-				contentHeight: 900,
+				contentHeight: 920,
 				eventMouseEnter: this.handleEventMouseEnter, //日程悬浮事件
 				eventClick: this.handleEventMouseClick, //日程悬浮事件
 				headerToolbar: {
@@ -122,6 +122,14 @@ export default {
 			let eve = e.event._def.extendedProps;
 			// let category = e.event._def.extendedProps.category;
 			console.log(e.event);
+			const skill = {
+				门店经理: "管理决策",
+				副经理: "沟通协调",
+				小组长: "领导协调",
+				收银: "收银服务",
+				导购: "推销解疑",
+				库房: "盘点调拨",
+			};
 			tippy(e.el, {
 				content: `<div style='width: 260px;background-color:#FAFAFA;padding:5px;font-size:14px;z-index:99999;'>
                   <div style='display:flex;color: #666666;overflow: hidden;' class="${
@@ -145,7 +153,8 @@ export default {
                   <div style='color: #666666;overflow: hidden;' class="${
 						eve.category == 1 ? "hidden" : ""
 					}"><span style='display:inline-block;width:6px;height:6px;background-color:#318DDE;border-radius:50%;margin:0 5px;'></span>员工技能：${
-					eve.skill
+					//eve.skill
+					skill[eve.role] || "无"
 				}</div>
                   <div style='color: #666666;overflow: hidden;' class="${
 						eve.category == 0 ? "hidden" : ""
@@ -240,13 +249,13 @@ export default {
 	height: 2.5em;
 }
 .fc-timegrid-slot {
-	line-height: 26px;
+	line-height: 25px;
 }
 .fc-event-main-frame {
 	line-height: 30px;
 }
 .fc .fc-toolbar.fc-header-toolbar {
-	margin-bottom: 1.5em;
+	margin-bottom: 0.5em;
 	padding: 15px;
 }
 .fc-direction-ltr {

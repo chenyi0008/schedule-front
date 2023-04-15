@@ -159,7 +159,7 @@
 				</el-button>
 			</div>
 		</el-dialog>
-		<EmployeePreferenceVue />
+		<EmployeePreferenceVue ref="preference" />
 	</div>
 </template>
 <script>
@@ -275,11 +275,7 @@ export default {
 			location.reload();
 		},
 		showPreference(curruntEmployee) {
-			this.infoDialogTitle = curruntEmployee.id
-				? "编辑员工信息"
-				: "新增员工";
-			this.curruntEmployee = curruntEmployee;
-			this.employeeInfoDialogVisible = true;
+			this.$refs.preference.editPreference(curruntEmployee.id);
 		},
 	},
 	computed: {

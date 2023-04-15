@@ -146,7 +146,7 @@ export default {
 
 <style lang="less" scoped>
 ::v-deep .el-dialog {
-	transform: scale(0.7);
+	// transform: scale(0.9);
 }
 .container {
 	width: 100%;

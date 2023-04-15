@@ -1,18 +1,9 @@
 <template>
 	<div>
-		<uploadView class="upload"></uploadView>
-		<!-- <el-button
-      class="mainButton"
-      type="primary"
-      plain
-      @click="dialogVisible=true"
-	
-    >上传文件</el-button> -->
-		<!-- <h1>我是预测数据</h1> -->
+		<uploadView class="upload" />
 		<el-calendar v-model="calendarValue">
 			<!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
 			<template slot="dateCell" slot-scope="{ date, data }">
-				
 				<p
 					@click="selectDate(date)"
 					:class="data.isSelected ? 'is-selected' : ''"
@@ -199,17 +190,17 @@ p {
 	padding: 0px !important;
 }
 
-.el-calendar{
-  border-radius: 15px 15px 15px 15px;
-  box-shadow:4px 4px 15px #635d5d;
+.el-calendar {
+	border-radius: 15px 15px 15px 15px;
+	box-shadow: 4px 4px 15px #635d5d;
 }
 
 .upload {
-  float: left;
-  width: 120px;
-  margin-bottom: 20px;
-  margin-top: 10px;
-  margin-left: 20px;
+	float: left;
+	width: 120px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-left: 20px;
 }
 /* 
 /deep/ .el-calendar-table .el-calendar-day {

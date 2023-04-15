@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<div class="inPageLogo" @click="loginIn">
-			<img src="../assets/img/avatar.svg" alt=""/> MyAdmin
+			<img src="../assets/img/avatar.svg" alt="" /> MyAdmin
 		</div>
 		<el-menu
-			default-active="store"
+			:default-active="this.$route.path.split('/')[2]"
 			class="el-menu-vertical-demo"
 			@open="handleOpen"
 			background-color="#01182e"
@@ -51,9 +51,9 @@ export default {
 		handleOpen(key, keyPath) {
 			console.log(key, keyPath);
 		},
-		loginIn(){
+		loginIn() {
 			this.$router.push("/login");
-		}
+		},
 	},
 
 	data() {
