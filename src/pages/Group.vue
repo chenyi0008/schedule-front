@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button class="newGroup" type="primary" plain @click="createGroup">新 建 小 组</el-button>
+    <el-button class="newGroup" type="primary" plain @click="createGroup">新建小组</el-button>
     <el-table
       ref="multipleTable"
       :data="groups"
