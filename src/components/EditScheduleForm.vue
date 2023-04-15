@@ -2,14 +2,21 @@
 	<el-dialog :title="title" :visible.sync="dialogFormVisible">
 		<el-form class="aa" :model="form">
 			<el-form-item label="员工" :label-width="formLabelWidth">
-				<el-input
-					v-model="form.staff"
-					autocomplete="off"
-					placeholder="请选择员工"
-				></el-input>
+				<el-select v-model="form.staff" placeholder="请选择员工">
+					<el-option
+						v-for="staff in $store.state.staffs"
+						:key="staff.id"
+						:label="staff.name"
+						:value="staff.id"
+					></el-option>
+				</el-select>
 			</el-form-item>
 			<el-form-item label="工作类型" :label-width="formLabelWidth">
-				<el-input v-model="form.work" autocomplete="off"></el-input>
+				<el-select v-model="form.region" placeholder="请选择工作类型">
+					<el-option label="准备工作" value="准备工作"></el-option>
+					<el-option label="值班工作" value="值班工作"></el-option>
+					<el-option label="收尾工作" value="收尾工作"></el-option>
+				</el-select>
 			</el-form-item>
 			<el-form-item label="开始时间" :label-width="formLabelWidth">
 				<el-time-picker
@@ -41,6 +48,7 @@
 
 <script>
 import { postPlan, putPlan } from "@/apis/plan";
+import { getStaffByPage } from "@/apis/staff";
 export default {
 	data() {
 		return {
@@ -91,6 +99,7 @@ export default {
 			});
 			this.$bus.$emit("handleCalendarPage", "refresh", {});
 			this.dialogFormVisible = false;
+			location.reload();
 		},
 		formatDate(now) {
 			const fix = this.fixNum;
@@ -108,6 +117,17 @@ export default {
 		},
 		fixNum(num) {
 			return num < 10 ? "0" + num : num;
+		},
+	},
+	watch: {
+		dialogFormVisible() {
+			getStaffByPage({
+				page: 1,
+				pageSize: 99999,
+				storeId: this.$store.state.storeId,
+			}).then((res) => {
+				this.$store.commit("updateStaffs", res.data.data);
+			});
 		},
 	},
 };
