@@ -26,7 +26,6 @@ export default {
 	},
 	mounted() {
 		this.storeId = this.$store.state.storeId;
-		this.getSchedule(this.startDate, this.endDate);
 		// 计算当周时间
 		let now = new Date();
 		const fix = this.fixNum;
@@ -70,6 +69,8 @@ export default {
 			const { startDate, endDate } = this.getCurrentWeak(firstDay);
 			this.startDate = startDate;
 			this.endDate = endDate;
+
+			this.getSchedule(this.startDate, this.endDate);
 		});
 	},
 	methods: {
