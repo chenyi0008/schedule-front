@@ -45,7 +45,6 @@ export default {
 	methods: {
 		changeNav(pane) {
 			this.$emit("changeNav", pane.label);
-			// console.log(pane.label)
 			this.$router.push({ name: pane.name });
 		},
 		handleOpen(key, keyPath) {

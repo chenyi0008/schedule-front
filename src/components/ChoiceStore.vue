@@ -27,7 +27,6 @@ export default {
   },
   mounted() {
     getAllStore().then((res) => {
-      console.log(res.data.data);
       this.storeList = res.data.data;
       // this.storeId = storage.get("storeId")
       //   ? this.isExist(storage.get("storeId"))
@@ -46,10 +45,7 @@ export default {
   },
   watch: {
     storeId(newId) {
-      // console.log("newId", newId);
-      // storage.set("storeId", newId);
       this.$store.state.storeId = newId;
-      console.log("this.$store.state.storeId", this.$store.state.storeId);
     },
   },
 };

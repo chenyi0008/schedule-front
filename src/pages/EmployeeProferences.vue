@@ -232,7 +232,6 @@ export default {
 		},
 		updateEmployeeData() {
 			putStaff(this.curruntEmployee).then((res) => {
-				console.log(res.data);
 				location.reload();
 			});
 		},
@@ -253,7 +252,6 @@ export default {
 		},
 		removeEmployee() {
 			deleteStaff({ ids: this.curruntEmployee.id }).then((res) => {
-				console.log(res.data);
 				location.reload();
 			});
 			this.employeeInfoDialogVisible = false;

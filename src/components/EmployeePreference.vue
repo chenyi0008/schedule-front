@@ -200,7 +200,6 @@ export default {
 			this.createPreferenceVisible = !this.createPreferenceVisible;
 		},
 		createPreference() {
-			console.log(this.value);
 			if (this.isEdit) {
 				putPreference({
 					...this.form,
@@ -227,7 +226,6 @@ export default {
 			this.form.preferenceType = "";
 		},
 		changePreference(row) {
-			console.log("index", row);
 			this.form.preferenceType = row.preferenceType;
 			const value = row.value;
 			switch (row.preferenceType) {

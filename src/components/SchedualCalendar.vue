@@ -121,7 +121,6 @@ export default {
 			// let col = e.event.borderColor;
 			let eve = e.event._def.extendedProps;
 			// let category = e.event._def.extendedProps.category;
-			// console.log(e);
 			const skill = {
 				门店经理: "管理决策",
 				副经理: "沟通协调",
@@ -188,9 +187,6 @@ export default {
 			});
 		},
 		handleEventMouseClick(e) {
-			// console.log({ ...e.event._def.extendedProps, name: e.event.title });
-			console.log(e.event._def.extendedProps.event);
-
 			this.$bus.$emit(
 				"eidtSchedual",
 				e.event._def.extendedProps.event,
