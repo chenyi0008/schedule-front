@@ -393,19 +393,19 @@ export default {
     ruleTypeChange(value) {
       switch (value) {
         case "开店规则":
-          this.p = `例子:输入1.5,23.5表示开店\n1.5\n个小时前需要有员工当值，当值员工数为门店面积/\n23.5\n`;
+          this.p = `例子:输入1,100表示开店\n1\n个小时前需要有员工当值，当值员工数为门店面积/\n100\n`;
           break;
         case "关店规则":
-          this.p = `例子:"2,3,13" 表示关店 2 个半小时内需要有员工当值，人数 = 门店面积/13 + 3`;
+          this.p = `例子:"2,1,80" 表示关店 2 个半小时内需要有员工当值，人数 = 门店面积/80 + 1`;
           break;
         case "客流规则":
-          this.p = `例子:输入8表示每 \n4\n 个客流，至少需要有\n8\n个员工当值`;
+          this.p = `例子:输入3.8表示每 \n3.8\n 个客流，至少需要安排一个员工当值`;
           break;
         case "值班规则":
-          this.p = `例子:输入8表示没有客流量的时候，需要有\n8\n个员工当值`;
+          this.p = `例子:输入1表示没有客流量的时候，需要有\n1\n个员工当值`;
           break;
         case "休息规则":
-          this.p = `例子:输入8表示员工每连续工作\n4\n个小时后需要休息\n8\n个小时`;
+          this.p = `例子:输入1表示员工每连续工作\n4\n个小时后需要休息\n1\n个小时`;
           break;
       }
     },
@@ -468,10 +468,12 @@ export default {
         case "关店规则":
           return `关店\n${arr[0].toFixed(
             0
-          )}\n个半小时内需要有员工当值，人数=门店面积/\n${arr[2].toFixed(0)}\n + ${arr[1].toFixed(0)}`;
+          )}\n个半小时内需要有员工当值，人数=门店面积/\n${arr[2].toFixed(
+            0
+          )}\n + ${arr[1].toFixed(0)}`;
 
         case "客流规则":
-          return `每 \n4\n 个客流，至少需要有${arr[0].toFixed(0)}个员工当值`;
+          return `每${arr[0].toFixed(0)}个客流，至少需要有一个员工当值`;
 
         case "职位规则":
           return `${value}`;
@@ -492,7 +494,6 @@ export default {
         "预提交以下内容",
         {
           confirmButtonText: "确定",
-
         }
       );
     },
