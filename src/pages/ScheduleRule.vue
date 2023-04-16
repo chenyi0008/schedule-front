@@ -492,12 +492,7 @@ export default {
         "预提交以下内容",
         {
           confirmButtonText: "确定",
-          callback: (action) => {
-            this.$message({
-              type: "info",
-              message: `action: ${action}`,
-            });
-          },
+
         }
       );
     },
