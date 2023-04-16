@@ -176,7 +176,7 @@ export default {
 			});
 		},
 		checkRestTime() {
-			let eventList = this.filterByGroup;
+			let eventList = [...this.filterByGroup];
 			this.filterByGroup.forEach((event) => {
 				if (event.flag == true) {
 					let restEvent = { ...event };

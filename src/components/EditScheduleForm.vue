@@ -97,13 +97,17 @@ export default {
 					...this.form,
 					storeId: this.$store.state.storeId,
 				}).then((res) => console.log(res.data));
+			} else {
+				putPlan(this.form).then((res) => {
+					console.log(res.data);
+				});
 			}
-			putPlan(this.form).then((res) => {
-				console.log(res.data);
-			});
-			this.$bus.$emit("handleCalendarPage", "refresh", {});
+			setTimeout(
+				() => this.$bus.$emit("handleCalendarPage", "refresh", {}),
+				200
+			);
 			this.dialogFormVisible = false;
-			location.reload();
+			// location.reload();
 		},
 		formatDate(now) {
 			const fix = this.fixNum;
