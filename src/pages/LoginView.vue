@@ -92,7 +92,6 @@ export default {
 			this.$refs.LoginFormRef.validate(async (valid) => {
 				if (!valid) return;
 				postLogin(this.LoginForm).then(async (res) => {
-					console.log(res);
 					if (res.status != 200) this.$message.error("登陆失败");
 					else if (res.data.msg == "登录成功") {
 						this.$message.success(res.data.msg);

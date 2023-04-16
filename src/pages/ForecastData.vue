@@ -47,14 +47,12 @@ export default {
 		};
 	},
 	mounted() {
-		// console.log(this, this.calendarValue);
 		this.storeId = this.$store.state.storeId;
 		getSchedule({
 			storeId: this.$store.state.storeId,
 			startDate: this.dateFormart(new Date(), false, true),
 			endDate: this.dateFormart(new Date(), true, true),
 		}).then((res) => {
-			// console.log("get", res.data.data);
 			this.data = res.data.data;
 		});
 	},
@@ -68,13 +66,7 @@ export default {
 		findData() {
 			for (var i = 0; i < this.data.length; i++) {
 				var item = this.data[i];
-				// console.log(
-				// 	"compare",
-				// 	item.date,
-				// 	this.dateFormart(this.currentDate)
-				// );
 				if (item.date == this.dateFormart(this.currentDate)) {
-					// console.log("finding!!", item.value);
 					return item.value;
 				}
 			}
@@ -82,7 +74,6 @@ export default {
 			for (i = 0; i < 48; i++) {
 				defaultValue.push("0.0");
 			}
-			// console.log("new value", defaultValue.join(","));
 			return defaultValue.join(",");
 		},
 		getData(date) {
@@ -91,7 +82,6 @@ export default {
 				startDate: this.dateFormart(date, false, true),
 				endDate: this.dateFormart(date, true, true),
 			}).then((res) => {
-				// console.log("get", res.data.data);
 				this.data = res.data.data;
 			});
 		},
@@ -125,12 +115,10 @@ export default {
 				value: string,
 				id: null,
 			});
-			// console.log(this.dateFormart(date), string);
 		},
 		isExist(date) {
 			for (var i = 0; i < this.data.length; i++) {
 				var item = this.data[i];
-				// console.log(date);
 				if (item.date == date) {
 					return true;
 				}
@@ -151,7 +139,6 @@ export default {
 	},
 	watch: {
 		month(n) {
-			// console.log(n);
 			this.getData(n);
 		},
 		"$store.state.storeId"(newStoreId) {
@@ -161,7 +148,6 @@ export default {
 				startDate: this.dateFormart(new Date(), false, true),
 				endDate: this.dateFormart(new Date(), true, true),
 			}).then((res) => {
-				// console.log("get", res.data.data);
 				this.data = res.data.data;
 			});
 		},

@@ -243,7 +243,6 @@ export default {
 			);
 		},
 		handleSizeChange(val) {
-			// console.log(`每页 ${val} 条`);
 			this.pageSize = val;
 			this.fetchData(
 				this.currentPage,
@@ -285,7 +284,6 @@ export default {
 
 		//提交新数据
 		addTable() {
-			// console.log(this.form)
 			// 发送ajax请求，添加数据
 
 			postStore(this.form).then((res) => {
@@ -293,7 +291,6 @@ export default {
 					//添加成功
 					this.$message.success(res.data.msg);
 					this.dialogVisible = false;
-					console.log(this.form);
 					//关闭窗口
 					location.reload(); // Refresh the current page
 				}

@@ -116,7 +116,6 @@ export default {
 					if (res.data.data === null) alert(res.data.msg);
 					else {
 						this.events = res.data.data;
-						console.log(res.data.data);
 					}
 				})
 				.catch((err) => {

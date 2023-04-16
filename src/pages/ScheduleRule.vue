@@ -345,11 +345,9 @@ export default {
 		"$store.state.storeId": {
 			handler(val) {
 				this.storeId = val;
-				console.log(this.storeId);
 				this.getRules(val);
 				this.form.storeId = val;
 				this.params.storeId = val;
-				console.log(val);
 			},
 			immediate: true,
 			deep: true,
@@ -359,13 +357,11 @@ export default {
 		getRules(storeId) {
 			getRuleById({ storeId: storeId }).then((res) => {
 				this.tableData = res.data.data;
-				console.log(res.data);
 				this.searchData = res.data;
 			});
 		},
 
 		ruleTypeChange(value) {
-			console.log(value);
 			switch (value) {
 				case "开店规则":
 					this.p = `例子:输入1.5,23.5表示开店\n1.5\n个小时前需要有员工当值，当值员工数为门店面积/\n23.5\n`;
@@ -415,7 +411,6 @@ export default {
 			const s3 = this.value3.join(",");
 			this.params.value = `${s1}|${s2}|${s3}`;
 			this.positionRuleValue = this.params.value;
-			console.log(this.params);
 			postRule(this.params).then((res) => {
 				if (res.data.code == 1) {
 					//添加成功
@@ -428,7 +423,6 @@ export default {
 		},
 
 		analysis(ruleType, value) {
-			console.log(value);
 			const strSlice = value.split(",");
 			const arr = new Array(10).fill(0);
 
@@ -485,7 +479,6 @@ export default {
 
 		//添加数据
 		addTable() {
-			// console.log(this.form)
 			// 发送ajax请求，添加数据
 			postRule(this.form).then((res) => {
 				if (res.data.code == 1) {

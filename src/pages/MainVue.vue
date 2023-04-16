@@ -43,7 +43,6 @@ export default {
   },
   computed: {
     storeId() {
-      // console.log(this.$refs.store.storeId)
       return this.$refs.store.storeId;
     },
   },
@@ -57,7 +56,6 @@ export default {
   },
   methods: {
     changeLabel(label) {
-      console.log(label);
       this.activePage = label;
     },
   },
